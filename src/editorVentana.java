@@ -159,9 +159,7 @@ public class editorVentana extends javax.swing.JFrame {
 //              + from.length());
 //      }
 //    });
-    
-    
-    
+        
     public void agregar(String s) throws BadLocationException {
         areaTexto.insert(s, areaTexto.getCaretPosition());
     }
@@ -196,10 +194,6 @@ public class editorVentana extends javax.swing.JFrame {
     String prefijo = null;
     String sufijo = null;
     boolean compilado = false; // No podemos generar ni hacer nada si no se ha compilado
-    
-    
-    
-    /* Arreglo de palabras reservadas */
     
     /************************************************************************* */
     
@@ -1329,7 +1323,6 @@ private void areaTextoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST
            Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
        }
         
-        // PENDING y == 0 ? ++y : y;
         if(y == 0)
             ++y;
         
