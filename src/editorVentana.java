@@ -219,7 +219,6 @@ public class editorVentana extends javax.swing.JFrame {
     }
     
     public void resaltarEstructuras() {
-       // Checar esto según el idioma que esté usando el vato.
         if(idiomaCheck.isSelected()) // Español
             pattern = Pattern.compile("\\b(si|entonces|mientras|caracter|cadena|booleano|decimal|binario|romper|siguiente|analizar|caso|salir|inicio|fin|funcion|regresar|cierto|verdadero|imprimir)\\b"); 
          else

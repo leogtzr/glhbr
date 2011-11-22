@@ -35,13 +35,5 @@ public class Lexema
     public Parser.TokenType getTipoToken() {
         return this.tipoTokenLexema;
     }
-
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
-    
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
     
 }

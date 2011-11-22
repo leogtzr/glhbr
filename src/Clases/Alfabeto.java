@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Clases;
 
-/**
- *
- * @author leo
- */
 public class Alfabeto {
     public static final char SEMI = ';'; //59		/* Punto y coma (semicolon) */
     public static final char SPACE = ' '; //	   	    32		/*  Espacio  ' ' */
