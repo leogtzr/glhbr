@@ -95,7 +95,7 @@ public class Parser {
             
             // Llamar recursivamente a la función.
             for(int j = 0; j < MAXCHILDREN; j++)
-                printTree(tree.child[j]);
+                printTree(tree.hijos[j]);
             
             tree = tree.sibling;
             
@@ -208,7 +208,7 @@ public class Parser {
            // Código para salir del método o el programa
        } else {
            for(int i = 0; i < MAXCHILDREN; i++)
-               t.child[i] = null;
+               t.hijos[i] = null;
            t.sibling = null;
            
            t.nodeKind = NodeKind.StmtK;
@@ -227,7 +227,7 @@ public class Parser {
            // Código para salir del método o el programa
        } else {
            for(int i = 0; i < MAXCHILDREN; i++)
-               t.child[i] = null;
+               t.hijos[i] = null;
            
            t.sibling = null;
            t.nodeKind = NodeKind.ExpK;
@@ -325,14 +325,14 @@ public class Parser {
        NodoArbol t = newStmtNode(StmtKind.IfK);
        match(TokenType.IF);
        if(t != null)
-           t.child[0] = exp();
+           t.hijos[0] = exp();
        match(TokenType.THEN);
        if(t != null)
-           t.child[1] = stmt_sequence();
+           t.hijos[1] = stmt_sequence();
        if(token == TokenType.ELSE) {
            match(TokenType.ELSE);
            if(t != null)
-               t.child[2] = stmt_sequence();
+               t.hijos[2] = stmt_sequence();
        }
        
        // Cuidado Ver cómo va a terminar el IF
@@ -345,10 +345,10 @@ public class Parser {
        NodoArbol t = newStmtNode(StmtKind.RepeatK);
        match(TokenType.REPEAT);
        if(t != null)
-           t.child[0] = stmt_sequence();
+           t.hijos[0] = stmt_sequence();
        match(TokenType.UNTIL);
        if(t != null)
-           t.child[1] = exp();
+           t.hijos[1] = exp();
        
        return t;
        
@@ -363,7 +363,7 @@ public class Parser {
        match(TokenType.ID);
        match(TokenType.ASSIGN);
        if(t != null)
-           t.child[0] = exp();
+           t.hijos[0] = exp();
            
        return t;
    }
@@ -381,7 +381,7 @@ public class Parser {
        NodoArbol t = newStmtNode(StmtKind.WriteK);
        match(TokenType.WRITE);
        if(t != null)
-           t.child[0] = exp();
+           t.hijos[0] = exp();
        return t;
    }
    
@@ -391,14 +391,14 @@ public class Parser {
            NodoArbol p = newExpNode(ExpKind.OpK);
            
            if(p != null) {
-               p.child[0] = t;
+               p.hijos[0] = t;
                p.op = token;
                t = p;
            }
            
            match(token);
            if(t != null)
-               t.child[1] = simple_exp();
+               t.hijos[1] = simple_exp();
            
        }
        return t;
@@ -409,11 +409,11 @@ public class Parser {
        while((token == TokenType.PLUS) || (token == TokenType.MINUS)) {
            NodoArbol p = newExpNode(ExpKind.OpK);
            if(p != null) {
-               p.child[0] = t;
+               p.hijos[0] = t;
                p.op = token;
                t = p;
                match(token);
-               t.child[1] = term();
+               t.hijos[1] = term();
            }
        }
        return t;
@@ -424,11 +424,11 @@ public class Parser {
        while((token == TokenType.TIMES) || (token == TokenType.OVER)) {
            NodoArbol p = newExpNode(ExpKind.OpK);
            if(p != null) {
-               p.child[0] = t;
+               p.hijos[0] = t;
                p.op = token;
                t = p;
                match(token);
-               p.child[1] = factor();
+               p.hijos[1] = factor();
            }
        }
        return t;

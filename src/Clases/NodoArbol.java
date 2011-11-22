@@ -5,13 +5,13 @@ import Clases.Parser.*;
 public class NodoArbol {
     
     public NodoArbol() {
-        child = new NodoArbol[3];
-        child[0] = null;
-        child[1] = null;
-        child[2] = null;
+        hijos = new NodoArbol[3];
+        hijos[0] = null;
+        hijos[1] = null;
+        hijos[2] = null;
     }
     
-    public NodoArbol []child; /* Maximo de tres hijos MAXHIJOS */
+    public NodoArbol []hijos; /* Maximo de tres hijos MAXHIJOS */
     public NodoArbol sibling;   /* El nodo hermano */
     int lineno;                 /* Número de línea donde se encuentra el nodo */
     
