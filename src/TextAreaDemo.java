@@ -94,7 +94,6 @@ public class TextAreaDemo extends JFrame
         pack();
         
     }
-    // Listener methods
     
     public void changedUpdate(DocumentEvent ev) {
     }
@@ -172,16 +171,6 @@ public class TextAreaDemo extends JFrame
                 textArea.replaceSelection("\n");
             }
         }
-    }
-   
-    public static void main(String args[]) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                //Turn off metal's use of bold fonts
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-                new TextAreaDemo().setVisible(true);
-            }
-        });
     }
     
 }
