@@ -3,6 +3,7 @@ package Clases;
 public class Etiqueta {
     // Se definen las constantes para los tipos en los tokens o lexemas.
     // IDEA Ver si nos sirve esto, sino borrarlo
+    /*
     public final static int
             SUMA                = 1,                   // + 
             RESTA               = 2,                  // -
@@ -28,5 +29,7 @@ public class Etiqueta {
             COMPARACION         = 22,
             OR                  = 23,
             AND                 = 24;
+     
+     */
             
 }
