@@ -1,4 +1,3 @@
-// Leo Gutiérrez Ramírez.
 package Clases;
 
 public class Lexema
@@ -8,7 +7,6 @@ public class Lexema
     private Parser.TokenType tipoTokenLexema;
     private int numeroLinea = 0;
     
-    // Pendiente, se usa este constructor?
     public Lexema(String valor, Parser.TokenType etiqueta)
     {
         this.valor = valor;

@@ -12,7 +12,7 @@ public class NodoArbol {
     }
     
     public NodoArbol []hijos; /* Maximo de tres hijos MAXHIJOS */
-    public NodoArbol sibling;   /* El nodo hermano */
+    public NodoArbol hermano;   /* El nodo hermano */
     int lineno;                 /* Número de línea donde se encuentra el nodo */
     
     NodeKind nodeKind;    /* Sentencia o expresión */

@@ -97,7 +97,7 @@ public class Parser {
             for(int j = 0; j < MAXCHILDREN; j++)
                 printTree(tree.hijos[j]);
             
-            tree = tree.sibling;
+            tree = tree.hermano;
             
         }
         
@@ -209,7 +209,7 @@ public class Parser {
        } else {
            for(int i = 0; i < MAXCHILDREN; i++)
                t.hijos[i] = null;
-           t.sibling = null;
+           t.hermano = null;
            
            t.nodeKind = NodeKind.StmtK;
            t.stmt = kind;
@@ -229,7 +229,7 @@ public class Parser {
            for(int i = 0; i < MAXCHILDREN; i++)
                t.hijos[i] = null;
            
-           t.sibling = null;
+           t.hermano = null;
            t.nodeKind = NodeKind.ExpK;
            t.exp = kind;
            t.lineno = lineno;
@@ -272,7 +272,7 @@ public class Parser {
                if(t == null)
                    t = p = q;
                else {       /* Ahora p ya no puede ser NULL */
-                   p.sibling = q;
+                   p.hermano = q;
                    p = q;
                }
                    
