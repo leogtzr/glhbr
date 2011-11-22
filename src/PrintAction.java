@@ -147,7 +147,7 @@ private void updateStatus(int pageIndex) {
 
         public PrintingMessageBox(Frame owner, final PrinterJob pj) {    //constructor de la clase PrintingMessageBox
         }
-
+        
         public void setStatusMsg(String statusMsg){    //establece el texto de la etiqueta lbStatusMsg
         }
     }
