@@ -1,13 +1,6 @@
 /*
  * License GPL v3.
- * Esta clase contiene todas las palabras reservadas del lenguaje.
- * 
- * 
- */
-/**
- *
- * @author Leo Gutiérrez R. <leogutierrezramirez@gmail.com> ITCH II
- */
+ * Esta clase contiene todas las palabras reservadas del lenguaje.  */
 public class palabrasReservadas {
 // reservadas.length contiene el número de palabras...
     // TODO cambiar por palabras reservadas propias de nuestro lenguaje...
