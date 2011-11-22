@@ -8,7 +8,6 @@ import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
 import javax.swing.AbstractAction;
 import javax.swing.InputMap;
-import Clases.Etiqueta.*;
 import Clases.Lexema;
 import Clases.Reservadas;
 import Clases.Parser.*;
