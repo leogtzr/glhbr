@@ -1,10 +1,11 @@
+/* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
+/* Nov 20, 2011 */
+
 package Clases;
 
 import java.util.ArrayList;
 import Clases.Parser.*;
 
-/* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
-/* Nov 20, 2011 */
 public class Parser {
     
     public static enum TokenType {
@@ -491,22 +492,3 @@ public class Parser {
                    );
    }   
 }
-
-// TreeNode. Nuestro prototipo de nodo.
-/*
-class NodoArbol {
-    
-    public NodoArbol []child; // Maximo de tres hijos MAXHIJOS
-    public NodoArbol sibling;   // El nodo hermano
-    int lineno;                 // Número de línea donde se encuentra el nodo
-    
-    NodeKind nodeKind;    // Sentencia o expresión 
-    StmtKind stmt; // Tipo de sentencia
-    ExpKind exp;  // Tipo de expresion
-    TokenType op;      // Tipo de operador
-    int valor;
-    String nombre;
-    ExpType type;         // Para verificación de tipo de expresiones
-
-}
-*/
