@@ -213,7 +213,7 @@ public class Analizador {
                         palabras.add(new Lexema(operador, TokenType.LT).setLineNo(nLineas));
                         //System.out.printf("\nOperador (MENOR IGUAL) : [%s] ---> %d\n", operador, nLineas);
                     } else {        // Menor igual...
-                        palabras.add(new Lexema(operador, TokenType.LEQ).setLineNo(nLineas));
+                        palabras.add(new Lexema(operador, TokenType.LT).setLineNo(nLineas));
                         //System.out.printf("\nOperador final : [%s] ---> %d\n", operador, nLineas);
                         operador = "";
                         continue;

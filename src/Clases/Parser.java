@@ -314,7 +314,6 @@ public class Parser {
                
            default:
                syntaxError("Token inesperado --> ");
-               // Abstraer tokenString.
                printToken(token, tokenString);
                token = getToken();
                break;
