@@ -1454,8 +1454,7 @@ private void copiarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GE
 }//GEN-LAST:event_copiarMenuItemActionPerformed
 
 private void imprimirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirMenuItemActionPerformed
-    /*boolean result = false;
-    result = */PrintAction.print(areaTexto, this);
+    PrintAction.print(areaTexto, this); // PrintAction devuelve un truee, analizar para ver si se imprimió bien.
 }//GEN-LAST:event_imprimirMenuItemActionPerformed
 
 private void resaltarareaTextoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resaltarareaTextoBtnActionPerformed
