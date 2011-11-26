@@ -376,7 +376,6 @@ public class editorVentana extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         idiomaCheck = new javax.swing.JCheckBox();
         replaceBtn = new javax.swing.JButton();
-        recorrerBtn = new javax.swing.JButton();
         menu = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         nuevoMenuItem = new javax.swing.JMenuItem();
@@ -669,13 +668,6 @@ public class editorVentana extends javax.swing.JFrame {
         replaceBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 replaceBtnActionPerformed(evt);
-            }
-        });
-
-        recorrerBtn.setText("RecorrerArrayList");
-        recorrerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recorrerBtnActionPerformed(evt);
             }
         });
 
@@ -993,9 +985,7 @@ public class editorVentana extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(replaceBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(recorrerBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
                 .addComponent(idiomaCheck)
                 .addContainerGap())
         );
@@ -1005,8 +995,7 @@ public class editorVentana extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idiomaCheck)
-                    .addComponent(replaceBtn)
-                    .addComponent(recorrerBtn))
+                    .addComponent(replaceBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1465,8 +1454,8 @@ private void copiarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GE
 }//GEN-LAST:event_copiarMenuItemActionPerformed
 
 private void imprimirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirMenuItemActionPerformed
-    boolean result = false;
-    result = PrintAction.print(areaTexto, this);
+    /*boolean result = false;
+    result = */PrintAction.print(areaTexto, this);
 }//GEN-LAST:event_imprimirMenuItemActionPerformed
 
 private void resaltarareaTextoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resaltarareaTextoBtnActionPerformed
@@ -1627,15 +1616,6 @@ private void syntaxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GE
 //    AnalizadorSintactico.Analizar(palabras);    
 }//GEN-LAST:event_syntaxMenuItemActionPerformed
 
-private void recorrerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recorrerBtnActionPerformed
-
-    // Sino se ha compilado, lanzará un JavaNullException, cuidado.
-    for(int i = 0; i < palabras.size(); i++) {
-        JOptionPane.showMessageDialog(this, palabras.get(i).getValor());
-    }
-    
-}//GEN-LAST:event_recorrerBtnActionPerformed
-
 private void aceptarTabBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarTabBtnActionPerformed
     
     if(!isNumeric(tabSizeTxt.getText()))
@@ -1744,7 +1724,6 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenu menuFormato;
     private javax.swing.JMenuItem nuevoMenuItem;
     private javax.swing.JPopupMenu popup;
-    private javax.swing.JButton recorrerBtn;
     private javax.swing.JMenuItem rehacerMenuItem;
     private javax.swing.JButton replaceBtn;
     private javax.swing.JMenuItem salirMenuItem;
