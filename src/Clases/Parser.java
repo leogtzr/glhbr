@@ -385,7 +385,7 @@ public class Parser {
    }
    
    public NodoArbol exp() {
-       NodoArbol t = simple_exp();
+       NodoArbol t = simple_expresion();
        if((token == TokenType.LT) || (token == TokenType.EQ)) {
            NodoArbol p = newExpNode(ExpKind.OpK);
            
@@ -397,13 +397,13 @@ public class Parser {
            
            coincidir(token);
            if(t != null)
-               t.hijos[1] = simple_exp();
+               t.hijos[1] = simple_expresion();
            
        }
        return t;
    }
    
-   public NodoArbol simple_exp() {
+   public NodoArbol simple_expresion() {
        NodoArbol t = termino();
        while((token == TokenType.PLUS) || (token == TokenType.MINUS)) {
            NodoArbol p = newExpNode(ExpKind.OpK);
