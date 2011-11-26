@@ -1521,7 +1521,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         Parser syntax = new Parser(palabras);
         //syntax.recorrer();
         NodoArbol arbolSintactico = syntax.parse();
-        Parser.printTree(arbolSintactico);
+        Parser.imprimirArbol(arbolSintactico);
         //Parser.printTree(arbolSintactico);
         
 }//GEN-LAST:event_compilarMenuItemActionPerformed

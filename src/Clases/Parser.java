@@ -44,7 +44,7 @@ public class Parser {
             System.out.print(" ");
     }
     
-    public static void printTree(NodoArbol tree) {
+    public static void imprimirArbol(NodoArbol tree) {
         
         indent();
         while(tree != null) {
@@ -94,7 +94,7 @@ public class Parser {
             
             // Llamar recursivamente a la función.
             for(int j = 0; j < MAXCHILDREN; j++)
-                printTree(tree.hijos[j]);
+                imprimirArbol(tree.hijos[j]);
             
             tree = tree.hermano;
             
