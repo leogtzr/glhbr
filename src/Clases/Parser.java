@@ -46,7 +46,6 @@ public class Parser {
     
     public static void printTree(NodoArbol tree) {
         
-        int i;
         indent();
         while(tree != null) {
             printSpaces();
@@ -244,7 +243,7 @@ public class Parser {
        // Código para salir.
    }
    
-   public void match(TokenType expected) {
+   public void coincidir(TokenType expected) {
        if(token == expected) {
            
            token = getToken();
@@ -263,10 +262,11 @@ public class Parser {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       while(/*(token != TokenType.ENDFILE) && (token != TokenType.END) &&  */(token != TokenType.ELSE) && (token != TokenType.UNTIL) && (indice < this.palabras.size())) {
+       while(/*(token != TokenType.ENDFILE) && (token != TokenType.END) &&  */(token != TokenType.ELSE) && (token != TokenType.UNTIL) && ((indice + 1) < this.palabras.size())) {
+           
            
            NodoArbol q;
-           match(TokenType.SEMI);
+           coincidir(TokenType.SEMI);
            q = statement();
            if(q != null) {
                if(t == null)
@@ -322,30 +322,30 @@ public class Parser {
    
    NodoArbol if_stmt() {
        NodoArbol t = newStmtNode(StmtKind.IfK);
-       match(TokenType.IF);
+       coincidir(TokenType.IF);
        if(t != null)
            t.hijos[0] = exp();
-       match(TokenType.THEN);
+       coincidir(TokenType.THEN);
        if(t != null)
            t.hijos[1] = stmt_sequence();
        if(token == TokenType.ELSE) {
-           match(TokenType.ELSE);
+           coincidir(TokenType.ELSE);
            if(t != null)
                t.hijos[2] = stmt_sequence();
        }
        
        // Cuidado Ver cómo va a terminar el IF
-       match(TokenType.END);
+       coincidir(TokenType.END);
        return t;
        
    }
    
    public NodoArbol repeat_stmt() {
        NodoArbol t = newStmtNode(StmtKind.RepeatK);
-       match(TokenType.REPEAT);
+       coincidir(TokenType.REPEAT);
        if(t != null)
            t.hijos[0] = stmt_sequence();
-       match(TokenType.UNTIL);
+       coincidir(TokenType.UNTIL);
        if(t != null)
            t.hijos[1] = exp();
        
@@ -359,8 +359,8 @@ public class Parser {
        if((t != null) && (token == TokenType.ID))
            // Cuidado con esto!
            t.nombre = tokenString;
-       match(TokenType.ID);
-       match(TokenType.ASSIGN);
+       coincidir(TokenType.ID);
+       coincidir(TokenType.ASSIGN);
        if(t != null)
            t.hijos[0] = exp();
            
@@ -369,16 +369,16 @@ public class Parser {
    
    public NodoArbol read_stmt() {
        NodoArbol t = newStmtNode(StmtKind.ReadK);
-       match(TokenType.READ);
+       coincidir(TokenType.READ);
        if((t != null) && (token == TokenType.ID))
            t.nombre = tokenString;
-       match(TokenType.ID);
+       coincidir(TokenType.ID);
        return t;
    }
    
    public NodoArbol write_stmt() {
        NodoArbol t = newStmtNode(StmtKind.WriteK);
-       match(TokenType.WRITE);
+       coincidir(TokenType.WRITE);
        if(t != null)
            t.hijos[0] = exp();
        return t;
@@ -395,7 +395,7 @@ public class Parser {
                t = p;
            }
            
-           match(token);
+           coincidir(token);
            if(t != null)
                t.hijos[1] = simple_exp();
            
@@ -411,7 +411,7 @@ public class Parser {
                p.hijos[0] = t;
                p.op = token;
                t = p;
-               match(token);
+               coincidir(token);
                t.hijos[1] = term();
            }
        }
@@ -426,7 +426,7 @@ public class Parser {
                p.hijos[0] = t;
                p.op = token;
                t = p;
-               match(token);
+               coincidir(token);
                p.hijos[1] = factor();
            }
        }
@@ -440,18 +440,18 @@ public class Parser {
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM))
                    t.valor = Integer.parseInt(tokenString);
-               match(TokenType.NUM);
+               coincidir(TokenType.NUM);
                break;
            case ID:
                t = newExpNode(ExpKind.IdK);
                if((t != null) && (token == TokenType.ID))
                    t.nombre = tokenString;
-               match(TokenType.ID);
+               coincidir(TokenType.ID);
                break;
            case LPARENT:
-               match(TokenType.LPARENT);
+               coincidir(TokenType.LPARENT);
                t = exp();
-               match(TokenType.RPARENT);
+               coincidir(TokenType.RPARENT);
                break;
            default:
                syntaxError("Token inesperado ---> ");

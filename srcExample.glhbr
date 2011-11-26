@@ -9,7 +9,7 @@ write d;
 read x;
 
 if x < 12 then
-	read x;
-	write x;
-end;
+	y = y + 1
+end
 
+read x;
