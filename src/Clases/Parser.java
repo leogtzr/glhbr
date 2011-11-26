@@ -324,7 +324,7 @@ public class Parser {
        NodoArbol t = newStmtNode(StmtKind.IfK);
        coincidir(TokenType.IF);
        if(t != null)
-           t.hijos[0] = exp();
+           t.hijos[0] = expresion();
        coincidir(TokenType.THEN);
        if(t != null)
            t.hijos[1] = stmt_sequence();
@@ -347,7 +347,7 @@ public class Parser {
            t.hijos[0] = stmt_sequence();
        coincidir(TokenType.UNTIL);
        if(t != null)
-           t.hijos[1] = exp();
+           t.hijos[1] = expresion();
        
        return t;
        
@@ -362,7 +362,7 @@ public class Parser {
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)
-           t.hijos[0] = exp();
+           t.hijos[0] = expresion();
            
        return t;
    }
@@ -380,11 +380,11 @@ public class Parser {
        NodoArbol t = newStmtNode(StmtKind.WriteK);
        coincidir(TokenType.WRITE);
        if(t != null)
-           t.hijos[0] = exp();
+           t.hijos[0] = expresion();
        return t;
    }
    
-   public NodoArbol exp() {
+   public NodoArbol expresion() {
        NodoArbol t = simple_expresion();
        if((token == TokenType.LT) || (token == TokenType.EQ)) {
            NodoArbol p = newExpNode(ExpKind.OpK);
@@ -450,7 +450,7 @@ public class Parser {
                break;
            case LPARENT:
                coincidir(TokenType.LPARENT);
-               t = exp();
+               t = expresion();
                coincidir(TokenType.RPARENT);
                break;
            default:
