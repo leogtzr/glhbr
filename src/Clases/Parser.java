@@ -29,7 +29,7 @@ public class Parser {
         Void, Integer, Boolean
     };
     
-    public static void indent() {
+    public static void indentar() {
         // indentno declarada más abajo.
         indentno += 2;
     }
@@ -46,7 +46,7 @@ public class Parser {
     
     public static void imprimirArbol(NodoArbol tree) {
         
-        indent();
+        indentar();
         while(tree != null) {
             imprimirEspacios();
             if(tree.nodeKind == NodeKind.StmtK) {
