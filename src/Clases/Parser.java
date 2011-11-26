@@ -1,6 +1,5 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
-
 package Clases;
 
 import java.util.ArrayList;

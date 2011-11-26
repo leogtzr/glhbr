@@ -1504,6 +1504,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         
         String kaka = Analizador.getLexForm(palabras, idiomaCheck.isSelected() == true ? true : false);
     
+        /*
         areaLexico.setText(kaka);
         
         verTablaDeSimbolos(); // Aquí se vacía toda la información:
@@ -1513,6 +1514,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
             verTablaSimbolos.setResizable(true);
             verTablaSimbolos.setVisible(true);
         this.setVisible(true);
+         * */
         
         // Creamos nuestro analizador sintáctico apartir de nuestros lexemas.
         Parser.indentno = 0;

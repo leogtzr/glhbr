@@ -10,4 +10,6 @@ read x;
 
 if x < 12 then
 	read x;
-end
+	write x;
+end;
+
