@@ -2,7 +2,6 @@
 // FIXME Expresiones de resaltado.
 // FIXME Problemas con UNDO al abrir un archivo.
 // Agregado de palabras a la lista por idioma y en el menú Abrir.
-// PENDING Ver qué onda con la variable (indentno) static para la indentación del árbol al imprimir...
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
