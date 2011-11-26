@@ -377,7 +377,6 @@ public class editorVentana extends javax.swing.JFrame {
         idiomaCheck = new javax.swing.JCheckBox();
         replaceBtn = new javax.swing.JButton();
         recorrerBtn = new javax.swing.JButton();
-        verChingaderasBtn = new javax.swing.JButton();
         menu = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         nuevoMenuItem = new javax.swing.JMenuItem();
@@ -677,13 +676,6 @@ public class editorVentana extends javax.swing.JFrame {
         recorrerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recorrerBtnActionPerformed(evt);
-            }
-        });
-
-        verChingaderasBtn.setText("Ver chingaderas");
-        verChingaderasBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verChingaderasBtnActionPerformed(evt);
             }
         });
 
@@ -1003,9 +995,7 @@ public class editorVentana extends javax.swing.JFrame {
                 .addComponent(replaceBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(recorrerBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                .addComponent(verChingaderasBtn)
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
                 .addComponent(idiomaCheck)
                 .addContainerGap())
         );
@@ -1016,8 +1006,7 @@ public class editorVentana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idiomaCheck)
                     .addComponent(replaceBtn)
-                    .addComponent(recorrerBtn)
-                    .addComponent(verChingaderasBtn))
+                    .addComponent(recorrerBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1670,24 +1659,6 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
    this.setVisible(true);
 }//GEN-LAST:event_tabSizeMenuItemActionPerformed
 
-private void verChingaderasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verChingaderasBtnActionPerformed
-            
-    // Función clear a lo bruto:
-        for(int i = 0; i < 30; i++)
-            System.out.println("\n");
-        
-        for(int i = 0; i < palabras.size(); i++)
-            System.out.println(palabras.get(i).getValor());
-/*            texto += areaTablaSimbolos.getText() + "{" + "\n" + "\tLexema: [" + 
-                    palabras.get(i).getValor() + "]\n\tTipo: " +  palabras.get(i).getTipo() +
-                    "\n\tReservado : " + Reservadas.esReservada(palabras.get(i).getValor(), idiomaCheck.isSelected() ? true : false) + "\n}\n";
-        
-        areaTablaSimbolos.setText(texto); */
-
-            
-        
-}//GEN-LAST:event_verChingaderasBtnActionPerformed
-
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1784,7 +1755,6 @@ private void verChingaderasBtnActionPerformed(java.awt.event.ActionEvent evt) {/
     private javax.swing.JDialog tabSizeDialog;
     private javax.swing.JMenuItem tabSizeMenuItem;
     private javax.swing.JTextField tabSizeTxt;
-    private javax.swing.JButton verChingaderasBtn;
     private javax.swing.JMenuItem verDatosMenuItem;
     private javax.swing.JDialog verTablaSimbolos;
     private javax.swing.JMenuItem whileCodeMenuItem;

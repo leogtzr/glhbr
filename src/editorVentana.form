@@ -762,9 +762,7 @@
               <Component id="replaceBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="recorrerBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="168" max="32767" attributes="0"/>
-              <Component id="verChingaderasBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace pref="344" max="32767" attributes="0"/>
               <Component id="idiomaCheck" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -778,7 +776,6 @@
                   <Component id="idiomaCheck" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="replaceBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="recorrerBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="verChingaderasBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="620" max="32767" attributes="0"/>
@@ -874,14 +871,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recorrerBtnActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="verChingaderasBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ver chingaderas"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verChingaderasBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
