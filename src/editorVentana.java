@@ -675,11 +675,6 @@ public class editorVentana extends javax.swing.JFrame {
 
         menuArchivo.setMnemonic('A');
         menuArchivo.setText("Archivo");
-        menuArchivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuArchivoActionPerformed(evt);
-            }
-        });
 
         nuevoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         nuevoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tp_new.png"))); // NOI18N
@@ -1459,9 +1454,6 @@ private void imprimirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void resaltarareaTextoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resaltarareaTextoBtnActionPerformed
 }//GEN-LAST:event_resaltarareaTextoBtnActionPerformed
-
-private void menuArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArchivoActionPerformed
-}//GEN-LAST:event_menuArchivoActionPerformed
 
 private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compilarMenuItemActionPerformed
         
