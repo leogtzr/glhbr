@@ -620,7 +620,7 @@ public class editorVentana extends javax.swing.JFrame {
         estadoDeLinea.setText("Abra o cree un nuevo archivo");
 
         areaTexto.setColumns(20);
-        areaTexto.setFont(new java.awt.Font("Courier New", 1, 13));
+        areaTexto.setFont(new java.awt.Font("FreeMono", 1, 13)); // NOI18N
         areaTexto.setRows(5);
         areaTexto.setTabSize(2);
         areaTexto.setToolTipText("Ingrese su texto");
