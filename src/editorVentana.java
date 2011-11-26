@@ -112,8 +112,7 @@ public class editorVentana extends javax.swing.JFrame {
             updateLog(e, "removed from");
         }
         @Override
-        public void changedUpdate(DocumentEvent e) {}
-        
+        public void changedUpdate(DocumentEvent e) {}        
         public void updateLog(DocumentEvent e, String action) {}
      
     }
@@ -169,9 +168,7 @@ public class editorVentana extends javax.swing.JFrame {
             super(color);
         }
     }
-    
     /* ************************************************************************ */
-
     public UndoManager undoManager = new UndoManager();
     Pattern pattern;
     Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(Color.cyan);
@@ -758,11 +755,6 @@ public class editorVentana extends javax.swing.JFrame {
 
         edicionMenu.setMnemonic('E');
         edicionMenu.setText("Edición");
-        edicionMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edicionMenuActionPerformed(evt);
-            }
-        });
 
         copiarMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         copiarMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tp_copy.png"))); // NOI18N
@@ -1530,9 +1522,6 @@ private void irAMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }
 }//GEN-LAST:event_irAMenuItemActionPerformed
-
-private void edicionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edicionMenuActionPerformed
-}//GEN-LAST:event_edicionMenuActionPerformed
 
 private void rehacerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rehacerMenuItemActionPerformed
         if(areaTexto.isEnabled() == false)
