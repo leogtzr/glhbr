@@ -38,7 +38,7 @@ public class Parser {
         indentno -= 2;
     }
     
-    public static void printSpaces() {
+    public static void imprimirEspacios() {
         for(int i = 0; i < indentno; i++)
             // Dirigir a un flujo...
             System.out.print(" ");
@@ -48,7 +48,7 @@ public class Parser {
         
         indent();
         while(tree != null) {
-            printSpaces();
+            imprimirEspacios();
             if(tree.nodeKind == NodeKind.StmtK) {
                 switch(tree.stmt) {
                     case IfK:
