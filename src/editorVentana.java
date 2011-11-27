@@ -1480,6 +1480,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         Parser.indentno = 0;
         Parser.tokenString = "";
         Parser syntax = new Parser(palabras);
+        Parser.lineno = 0;
         //syntax.recorrer();
         NodoArbol arbolSintactico = syntax.parse();
         Parser.imprimirArbol(arbolSintactico);
