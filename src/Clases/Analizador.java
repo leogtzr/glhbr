@@ -12,7 +12,6 @@ import Clases.Parser.*;
 
 public class Analizador {
     
-    // Manejamos esta cosa porque solo la mandamos llamar, aún no hay definido.
     private static int c;
     private static FileReader fr = null;
     private static String lexema = "";
@@ -65,8 +64,7 @@ public class Analizador {
                 lexema = "";
             }
             
-            /*
-                Si después de filtrar el identificador hallamos un número, buscamos por un literal numérico */
+            /*Si después de filtrar el identificador hallamos un número, buscamos por un literal numérico */
             
             if(Character.isDigit(c))
             {
@@ -99,7 +97,7 @@ public class Analizador {
                     {
                         lexema += Character.toString((char)c);
                         /* Hacer la comprobación de + ó - ó cadena vacía */
-                        c = fr.read(); //fgetc(inputFILE);
+                        c = fr.read();
                         /* Si lo que sigue es un operador + ó - */
                         if((c == PLUS_OP) || (c == MINUS_OP))
                         {
@@ -184,7 +182,7 @@ public class Analizador {
                 case DIVISION:
 
                     c = fr.read();
-                    if(c == DIVISION)   /* // */
+                    if(c == DIVISION)
                     {
                         //System.out.println("Comentario // ... " + nLineas);
                         while(c != '\n')   /* Simplemente ignorar */
@@ -228,10 +226,10 @@ public class Analizador {
                     if((char)c == IGUAL)
                     {
                         operador += Character.toString((char)c);
-                        palabras.add(new Lexema(operador, TokenType.GT).setLineNo(nLineas));
+                        palabras.add(new Lexema(operador, TokenType.GEQ).setLineNo(nLineas));
                         //System.out.printf("\nOperador final : [%s] ---> %d\n", operador, nLineas);
                     } else {
-                        palabras.add(new Lexema(operador, TokenType.GEQ).setLineNo(nLineas));
+                        palabras.add(new Lexema(operador, TokenType.GT).setLineNo(nLineas));
                         //System.out.printf("\nOperador final : [%s] ---> %d\n", operador, nLineas);
                         operador = "";
                         continue;
@@ -338,10 +336,6 @@ public class Analizador {
                     //dSystem.out.printf("\nOperador final : [%s] ---> %d\n", operador, nLineas);
                     operador = "";
                     break;
-
-                default:
-                    // TODO Leer hasta cualquier no digito ?
-                    //System.out.printf("Error lexicografico (No implementado aún) -> [%c] ---> %d\n", c, nLineas);
             }
             c = fr.read();
     }

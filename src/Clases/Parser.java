@@ -4,6 +4,7 @@ package Clases;
 
 import java.util.ArrayList;
 import Clases.Parser.*;
+import javax.swing.JOptionPane;
 
 public class Parser {
     
@@ -162,6 +163,9 @@ public class Parser {
            case LT:
                System.out.println("<");
                break;
+           case GT:
+               System.out.println(">");
+               break;
            case EQ:
                System.out.println("==");
                break;
@@ -265,7 +269,7 @@ public class Parser {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       while(/*(token != TokenType.ENDFILE) && */(token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
+       while(/*(token != TokenType.ENDFILE) && */(token != TokenType.FINBLOQUE) && (token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
            
            
            NodoArbol q;
@@ -383,12 +387,15 @@ public class Parser {
        NodoArbol t = newStmtNode(StmtKind.InfinitumK);
        coincidir(TokenType.INFINITO);
        
-       if(t != null)
-           t.hijos[0] = expresion();
+       //if(t != null)
+         //  t.hijos[0] = expresion();
+       JOptionPane.showMessageDialog(null, "Se queda en " + token);
        coincidir(TokenType.THEN);
+       JOptionPane.showMessageDialog(null, "Se queda en " + token);
        if(t != null)
-           t.hijos[1] = stmt_sequence();
-       coincidir(TokenType.END);
+           t.hijos[0] = stmt_sequence();
+       JOptionPane.showMessageDialog(null, "Se queda en " + token);
+       //coincidir(TokenType.END);
        
        return t;
        
@@ -427,7 +434,7 @@ public class Parser {
    
    public NodoArbol expresion() {
        NodoArbol t = simple_expresion();
-       if((token == TokenType.LT) || (token == TokenType.EQ)) {
+       if((token == TokenType.GT) || (token == TokenType.LT) || (token == TokenType.EQ)) {
            NodoArbol p = newExpNode(ExpKind.OpK);
            
            if(p != null) {
