@@ -1,6 +1,6 @@
 // FIXME Corregir errores con || y &&
 // FIXME Expresiones de resaltado.
-// FIXME Problemas con UNDO al abrir un archivo.
+// FIXME Problemas con UNDO al abrir un archivo. Falla sólo en Linux?
 // Agregado de palabras a la lista por idioma y en el menú Abrir.
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
@@ -190,7 +190,6 @@ public class editorVentana extends javax.swing.JFrame {
     private Mode mode = Mode.INSERT;
     String prefijo = null;
     String sufijo = null;
-    boolean compilado = false; // No podemos generar ni hacer nada si no se ha compilado
     
     /************************************************************************* */
     
@@ -1449,7 +1448,6 @@ private void resaltarareaTextoBtnActionPerformed(java.awt.event.ActionEvent evt)
 
 private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compilarMenuItemActionPerformed
         
-        compilado = true;
         areaTablaSimbolos.setText("");
         palabras = new ArrayList<Lexema>();
         palabras.clear();
