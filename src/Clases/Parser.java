@@ -193,8 +193,7 @@ public class Parser {
                System.out.println("Deconocido=" + token);
                break;
        }
-   }  // No Importante por ahora...
-   /***************************************************************************/
+   } 
    
    public NodoArbol newStmtNode(StmtKind kind) {
        NodoArbol t = new NodoArbol();
@@ -208,7 +207,6 @@ public class Parser {
            
            t.nodeKind = NodeKind.StmtK;
            t.stmt = kind;
-            // lineno debe ser la variable de número de línea global a usar en todo el proyecto.
            t.lineno = lineno;
        }
        
