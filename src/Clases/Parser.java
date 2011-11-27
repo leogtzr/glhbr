@@ -418,8 +418,10 @@ public class Parser {
    public NodoArbol write_stmt() {
        NodoArbol t = newStmtNode(StmtKind.WriteK);
        coincidir(TokenType.WRITE);
+       coincidir(TokenType.LPARENT);
        if(t != null)
            t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
        return t;
    }
    
