@@ -78,7 +78,18 @@ public class Reservadas {
     
     public static final String reservedWords[] = {
         /* Solo 8 por lo pronto */
-        "if", "then", "else", "end", "repetir", "hasta", "read", "write"
+        "if",
+        "then", 
+        "else", 
+        "end", 
+        "repetir", 
+        "hasta", 
+        "read", 
+        "write", 
+        "while",
+        "infinito",
+        "{",
+        "}"
     };
     
     public static final TokenType tokens[] = {
@@ -89,7 +100,11 @@ public class Reservadas {
         TokenType.REPETIR, 
         TokenType.HASTA, 
         TokenType.READ, 
-        TokenType.WRITE
+        TokenType.WRITE,
+        TokenType.WHILE,
+        TokenType.INFINITO,
+        TokenType.INIBLOQUE,
+        TokenType.FINBLOQUE
     };
     
     // Método que devuelve un TokenType.

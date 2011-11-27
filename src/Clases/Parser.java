@@ -9,7 +9,8 @@ public class Parser {
     
     public static enum TokenType {
        ENDFILE, ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, READ, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
-       MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, OR
+       MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, OR,
+       WHILE, INFINITO, INIBLOQUE, FINBLOQUE
     };
    
     public static enum NodeKind {
@@ -17,7 +18,7 @@ public class Parser {
      };
     
     public static enum StmtKind {
-        IfK, RepeatK, AssignK, ReadK, WriteK
+        IfK, RepeatK, AssignK, ReadK, WriteK, WhileK, InfinitumK
     };
     
     public static enum ExpKind {
@@ -66,6 +67,13 @@ public class Parser {
                     case WriteK:
                         System.out.println("Write");
                         break;
+                    case WhileK:
+                        System.out.println("While");
+                        break;
+                    case InfinitumK:
+                        System.out.println("Infinito");
+                        break;
+                    
                     default:
                         System.out.println("Nodo desconocido");
                 }
@@ -143,6 +151,8 @@ public class Parser {
            case HASTA:
            case READ:
            case WRITE:
+           case WHILE:
+           case INFINITO:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -189,7 +199,7 @@ public class Parser {
                System.out.println("Error: " + tokenString);
                break;
            default:
-               System.out.println("Deconocido=" + token);
+               System.out.println("Desconocido = " + token);
                break;
        }
    } 
@@ -255,7 +265,6 @@ public class Parser {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       // Si es uno de los siguientes nodos, no necesitamos el ;
        while(/*(token != TokenType.ENDFILE) && */(token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
            
            
@@ -305,6 +314,14 @@ public class Parser {
                t = write_stmt();
                break;
                
+           case WHILE:
+               // TODO Cambiar por while_stmt();
+               t = while_stmt();
+               break;
+           case INFINITO:
+               t = infinito_stmt();
+               break;
+               
            default:
                syntaxError("Token inesperado --> ");
                printToken(token, tokenString);
@@ -342,6 +359,36 @@ public class Parser {
        coincidir(TokenType.HASTA);
        if(t != null)
            t.hijos[1] = expresion();
+       
+       return t;
+       
+   }
+   
+   public NodoArbol while_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.WhileK);
+       coincidir(TokenType.WHILE);
+       
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.THEN);
+       if(t != null)
+           t.hijos[1] = stmt_sequence();
+       coincidir(token); // Depurar esto.
+       coincidir(TokenType.END);
+       return t;
+   }
+   
+   public NodoArbol infinito_stmt() {
+       
+       NodoArbol t = newStmtNode(StmtKind.InfinitumK);
+       coincidir(TokenType.INFINITO);
+       
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.THEN);
+       if(t != null)
+           t.hijos[1] = stmt_sequence();
+       coincidir(TokenType.END);
        
        return t;
        
