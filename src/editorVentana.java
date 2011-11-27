@@ -1529,7 +1529,6 @@ private void rehacerMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
         deshacerBtn.setEnabled(undoManager.canUndo());
         rehacerMenuItem.setEnabled(undoManager.canRedo());
-        
 }//GEN-LAST:event_rehacerMenuItemActionPerformed
 
 private void verDatosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verDatosMenuItemActionPerformed

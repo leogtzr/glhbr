@@ -89,7 +89,10 @@ public class Reservadas {
         "while",
         "infinito",
         "hacer",
-        "porsiempre"
+        "porsiempre",
+        "inicio",
+        "fin"
+            
     };
     
     public static final TokenType tokens[] = {
@@ -104,7 +107,9 @@ public class Reservadas {
         TokenType.WHILE,
         TokenType.INFINITO,
         TokenType.THEN,
-        TokenType.END
+        TokenType.END,
+        TokenType.INICIO,
+        TokenType.FINALIZAR
     };
     
     // Método que devuelve un TokenType.

@@ -9,7 +9,7 @@ public class Parser {
     public static enum TokenType {
        ENDFILE, ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, READ, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
        MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, OR,
-       WHILE, INFINITO, INIBLOQUE, FINBLOQUE
+       WHILE, INFINITO, INIBLOQUE, FINBLOQUE, INICIO, FINALIZAR
     };
    
     public static enum NodeKind {
@@ -258,7 +258,7 @@ public class Parser {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       while(/*(token != TokenType.ENDFILE) && */(token != TokenType.FINBLOQUE) && (token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
+       while(/*(token != TokenType.ENDFILE) && */(token != TokenType.FINALIZAR) && (token != TokenType.FINBLOQUE) && (token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
            
            
            NodoArbol q;
@@ -513,8 +513,15 @@ public class Parser {
        NodoArbol t = null;
        
        token = getToken();
+       coincidir(TokenType.INICIO);
+       System.out.println("Programa: " + tokenString);
+       coincidir(TokenType.ID);
        
        t = stmt_sequence();
+       //indice--;
+       //coincidir(TokenType.SEMI);
+       coincidir(TokenType.FINALIZAR);
+       //System.out.println("Esto mero : " + "[" + token + "] = " + indice + "[->" + palabras.get(indice - 1).getValor() + "\n");
        
        return t;
    }
