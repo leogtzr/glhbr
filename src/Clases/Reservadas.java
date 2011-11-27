@@ -88,8 +88,8 @@ public class Reservadas {
         "write", 
         "while",
         "infinito",
-        "then",
-        "end"
+        "hacer",
+        "porsiempre"
     };
     
     public static final TokenType tokens[] = {
