@@ -8,7 +8,7 @@ import Clases.Parser.*;
 public class Parser {
     
     public static enum TokenType {
-       ENDFILE, ERROR, IF, THEN, ELSE, END, REPEAT, UNTIL, READ, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
+       ENDFILE, ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, READ, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
        MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, OR
     };
    
@@ -40,7 +40,6 @@ public class Parser {
     
     public static void imprimirEspacios() {
         for(int i = 0; i < indentno; i++)
-            // Dirigir a un flujo...
             System.out.print(" ");
     }
     
@@ -140,8 +139,8 @@ public class Parser {
            case THEN:
            case ELSE:
            case END:
-           case REPEAT:
-           case UNTIL:
+           case REPETIR:
+           case HASTA:
            case READ:
            case WRITE:
                // Escribir en un archivo.
@@ -256,7 +255,7 @@ public class Parser {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       while(/*(token != TokenType.ENDFILE) && (token != TokenType.END) &&  */ (token != TokenType.ELSE) && (token != TokenType.UNTIL) && (indice < this.palabras.size())) {
+       while(/*(token != TokenType.ENDFILE) && (token != TokenType.END) &&  */ (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
            
            
            NodoArbol q;
@@ -285,7 +284,7 @@ public class Parser {
                t = if_stmt();
                break;
                
-           case REPEAT:
+           case REPETIR:
                
                t = repeat_stmt();
                break;
@@ -336,10 +335,10 @@ public class Parser {
    
    public NodoArbol repeat_stmt() {
        NodoArbol t = newStmtNode(StmtKind.RepeatK);
-       coincidir(TokenType.REPEAT);
+       coincidir(TokenType.REPETIR);
        if(t != null)
            t.hijos[0] = stmt_sequence();
-       coincidir(TokenType.UNTIL);
+       coincidir(TokenType.HASTA);
        if(t != null)
            t.hijos[1] = expresion();
        

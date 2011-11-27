@@ -78,7 +78,7 @@ public class Reservadas {
     
     public static final String reservedWords[] = {
         /* Solo 8 por lo pronto */
-        "if", "then", "else", "end", "repeat", "until", "read", "write"
+        "if", "then", "else", "end", "repetir", "hasta", "read", "write"
     };
     
     public static final TokenType tokens[] = {
@@ -86,8 +86,8 @@ public class Reservadas {
         TokenType.THEN, 
         TokenType.ELSE, 
         TokenType.END, 
-        TokenType.REPEAT, 
-        TokenType.UNTIL, 
+        TokenType.REPETIR, 
+        TokenType.HASTA, 
         TokenType.READ, 
         TokenType.WRITE
     };
