@@ -62,7 +62,8 @@ public class editorVentana extends javax.swing.JFrame {
                         resaltarEstructuras();
              }
                catch(InterruptedException e) {
-                      System.out.println("El negro se murió");
+                   JOptionPane.showMessageDialog(null, "Error en la clase Hilo");   
+                   System.exit(1);
                }
         }
     }
@@ -1451,7 +1452,6 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         compilado = true;
         areaTablaSimbolos.setText("");
         palabras = new ArrayList<Lexema>();
-        // Limpiamos antes de hacer nuestro desmadre.
         palabras.clear();
         
         try {
