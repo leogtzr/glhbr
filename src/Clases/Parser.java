@@ -376,7 +376,7 @@ public class Parser {
        if(t != null)
            t.hijos[1] = stmt_sequence();
        coincidir(token); // Depurar esto.
-       coincidir(TokenType.END);
+   //    coincidir(TokenType.END);
        return t;
    }
    
