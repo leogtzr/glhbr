@@ -319,7 +319,9 @@ public class Parser {
                // TODO Cambiar por while_stmt();
                t = while_stmt();
                break;
+               
            case INFINITO:
+               
                t = infinito_stmt();
                break;
                
@@ -383,16 +385,10 @@ public class Parser {
        
        NodoArbol t = newStmtNode(StmtKind.InfinitumK);
        coincidir(TokenType.INFINITO);
-       
-       //if(t != null)
-         //  t.hijos[0] = expresion();
-       JOptionPane.showMessageDialog(null, "Se queda en " + token);
        coincidir(TokenType.THEN);
-       JOptionPane.showMessageDialog(null, "Se queda en " + token);
        if(t != null)
            t.hijos[0] = stmt_sequence();
-       JOptionPane.showMessageDialog(null, "Se queda en " + token);
-       //coincidir(TokenType.END);
+       coincidir(TokenType.END);
        
        return t;
        
