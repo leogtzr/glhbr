@@ -190,14 +190,11 @@ public class Parser {
            case OVER:
                System.out.println("/");
                break;
-           case ENDFILE:
-               System.out.println("EOF");
-               break;
            case NUM:
-               System.out.println("Num, val=" + tokenString);
+               System.out.println("Num, valor=" + tokenString);
                break;
            case ID:
-               System.out.println("name=" + tokenString);
+               System.out.println("Nombre=" + tokenString);
                break;
            case ERROR:
                System.out.println("Error: " + tokenString);
