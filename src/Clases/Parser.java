@@ -110,10 +110,8 @@ public class Parser {
     public static int indentno = 0;
     private int indice = 0;
     
-    // Java Beans a esto.
     public static TokenType token;              // El token actual.
     public static String tokenString;
-    // JavaBeans a esto.
     public static int lineno = 0;
    
    // Just JavaBeans conventions...
