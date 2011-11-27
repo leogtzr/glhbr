@@ -1,7 +1,7 @@
 // ITCH II.
 // Analizador léxico. GLHBR
 package Clases;
-import static Clases.Alfabeto.*;
+//import static Clases.Alfabeto.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,22 +37,22 @@ public class Analizador {
         {
             switch(c)
             {
-                case SPACE:
+                case ' ':
                     c = fr.read();
                     continue;
-                case TAB:
+                case '\t':
                     c = fr.read();
                     continue;
-                case NEWLINE:
+                case '\n':
                     nLineas++;
                     c = fr.read();
                     continue;
             }
             
             /* A..Z | a..z Es probable que sea un identificador, comenzamos el scanner  */
-            if(Character.isLetter(c) || (c == GUION_BAJO))
+            if(Character.isLetter(c) || (c == '_'))
             {
-                while(Character.isLetter(c) || Character.isDigit(c) || (c == GUION_BAJO))
+                while(Character.isLetter(c) || Character.isDigit(c) || (c == '_'))
                 {
                     lexema += Character.toString((char)c);
                     c = fr.read();
@@ -75,7 +75,7 @@ public class Analizador {
                     c = fr.read();
                 }
                 /* digito+(digito+|e)(E(+|-|e)digito+|e) */
-                if((char)c == DOT)
+                if((char)c == '.')
                 {
                     /* Avanzamos después del punto */
                     c = fr.read();
@@ -93,13 +93,13 @@ public class Analizador {
                         c = fr.read(); // fgetc(inputFILE);
                     }
                     /* Hacer comprobacion de numero con notación científica */
-                    if((char)c == EXPONENCIAL)
+                    if((char)c == 'E')
                     {
                         lexema += Character.toString((char)c);
                         /* Hacer la comprobación de + ó - ó cadena vacía */
                         c = fr.read();
                         /* Si lo que sigue es un operador + ó - */
-                        if((c == PLUS_OP) || (c == MINUS_OP))
+                        if((c == '+') || (c == '-'))
                         {
                             lexema += Character.toString((char)c);
                             c = fr.read();
@@ -132,57 +132,57 @@ public class Analizador {
 
             switch(c)
             {
-                case SPACE: break;
+                case ' ': break;
 
-                case EXP:
+                case '^':
                     //System.out.printf("Operador (Exponenciación - ^) : %c ---> %d\n", c, nLineas);
                     palabras.add(new Lexema("^", TokenType.POW).setLineNo(nLineas));
                     break;
 
-                case L_PARENTESIS:
+                case '(':
                     palabras.add(new Lexema("(", TokenType.LPARENT).setLineNo(nLineas));
                     //System.out.printf("Delimitador (LParen - ( ) : %c ---> %d\n", c, nLineas);
                     break;
 
-                case R_PARENTESIS:
+                case ')':
                     palabras.add(new Lexema(")", TokenType.RPARENT).setLineNo(nLineas));
                     //System.out.printf("Delimitador (RParen - ) ) : %c ---> %d\n", c, nLineas);
                     break;
 
-                case SEMI:
+                case ';':
                     palabras.add(new Lexema(";", TokenType.SEMI).setLineNo(nLineas));
                     //System.out.printf("Identificador (SEMICOLON ; ) : %c ---> %d\n", c, nLineas);
                     indice++;
                     break;
 
-                case COMA:
+                case ',':
                     palabras.add(new Lexema(",", TokenType.COMA).setLineNo(nLineas));
                     //System.out.printf("Delimitador (COMA , ) : %c ---> %d\n", c, nLineas);
                     break;
 
-                case PLUS_OP:
+                case '+':
                     palabras.add(new Lexema("+", TokenType.PLUS).setLineNo(nLineas));
                     //System.out.printf("Operador (SUMA + ) : %c ---> %d\n", c, nLineas);
                     break;
 
-                case MINUS_OP:
+                case '-':
                     palabras.add(new Lexema("-", TokenType.MINUS).setLineNo(nLineas));
                     //System.out.printf("Operador (RESTA - ) : %c ---> %d\n", c, nLineas);
                     break;
 
-                case MULTIPLICACION:
+                case '*':
                     palabras.add(new Lexema("*", TokenType.TIMES).setLineNo(nLineas));
                     //System.out.printf("Operador (MULTIPLICACION * ) : %c ---> %d\n", c, nLineas);
                     break;
 
-                case NEWLINE:
+                case '\n':
                     nLineas++;
                     break;
 
-                case DIVISION:
+                case '/':
 
                     c = fr.read();
-                    if(c == DIVISION)
+                    if(c == '/')
                     {
                         //System.out.println("Comentario // ... " + nLineas);
                         while(c != '\n')   /* Simplemente ignorar */
@@ -196,16 +196,16 @@ public class Analizador {
 
                     break;
 
-                case MOD:
+                case '%':
                     palabras.add(new Lexema("%", TokenType.MOD).setLineNo(nLineas));
                     //System.out.printf("Operador (MODULO $) : %c ---> %d\n", c, nLineas);
                     break;
 
-                case MENOR:
+                case '<':
 
                     operador += Character.toString((char)c);
                     c = fr.read();
-                    if(c == IGUAL)
+                    if(c == '=')
                     {
                         operador += Character.toString((char)c);
                         palabras.add(new Lexema(operador, TokenType.LT).setLineNo(nLineas));
@@ -220,10 +220,10 @@ public class Analizador {
                     operador = "";
                     break;
 
-                case MAYOR:
+                case '>':
                     operador += Character.toString((char)c);
                     c = fr.read();
-                    if((char)c == IGUAL)
+                    if((char)c == '=')
                     {
                         operador += Character.toString((char)c);
                         palabras.add(new Lexema(operador, TokenType.GEQ).setLineNo(nLineas));
@@ -239,11 +239,11 @@ public class Analizador {
 
                 break;
 
-                case NOT:
+                case '!':
 
                     operador += Character.toString((char)c);
                     c = fr.read();
-                    if((char)c == IGUAL)
+                    if((char)c == '=')
                     {
                         operador += Character.toString((char)c);
                         palabras.add(new Lexema(operador, TokenType.NEQ).setLineNo(nLineas));
@@ -258,12 +258,12 @@ public class Analizador {
                     operador = "";
                     break;
 
-                    case IGUAL:
+                    case '=':
 
                     operador += Character.toString((char)c);
 
                     c = fr.read();
-                    if((c == MATCH) || (c == IGUAL))
+                    if((c == '?') || (c == '='))
                     {
                         operador += Character.toString((char)c);
                         //System.out.printf("\nOperador final : [%s] ---> %d\n", operador, nLineas);
@@ -279,14 +279,14 @@ public class Analizador {
                     break;
 
 
-                case DOBLEQUOTE:
+                case '"':
                     c = fr.read();
                     while(c != '"' )
                     {
                             /* Acumulamos */
                             switch(c)
                             {
-                                case NEWLINE:           /* Ignoramos el new line */
+                                case '\n':           /* Ignoramos el new line */
                                     nLineas++;
                                     break;
                                 default:
@@ -294,7 +294,7 @@ public class Analizador {
                             }
 
                             c = fr.read();
-                            if(c == IGUAL)
+                            if(c == '=')
                             {
                                 c = fr.read();
                                 break;
@@ -308,17 +308,17 @@ public class Analizador {
                     break;
 
                 /* Reconocer comentarios */
-                case GATO:
+                case '#':
                     //System.out.println("Comentario multilinea... ---> " + nLineas);
                     c = fr.read();
-                    while((c != GATO) && (c != -1))
+                    while((c != '#') && (c != -1))
                         c = fr.read();
                     break;
 
-                case AMPERSAND:
+                case '&':
                 operador += Character.toString((char)c);
                     c = fr.read();
-                    if(c == AMPERSAND)
+                    if(c == '&')
                         operador += Character.toString((char)c);
                 
                     palabras.add(new Lexema(operador, TokenType.AND).setLineNo(nLineas));
@@ -326,10 +326,10 @@ public class Analizador {
                     operador = "";
                     break;
                     
-                case OR:
+                case '|':
                 operador += Character.toString((char)c);
                     c = fr.read();
-                    if(c == OR)
+                    if(c == '|')
                         operador += Character.toString((char)c);
                 
                     palabras.add(new Lexema(operador, TokenType.OR).setLineNo(nLineas));

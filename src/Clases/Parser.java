@@ -3,7 +3,7 @@
 package Clases;
 
 import java.util.ArrayList;
-import Clases.Parser.*;
+//import Clases.Parser.*;
 
 public class Parser {
     
@@ -409,9 +409,11 @@ public class Parser {
    public NodoArbol read_stmt() {
        NodoArbol t = newStmtNode(StmtKind.ReadK);
        coincidir(TokenType.READ);
+       coincidir(TokenType.LPARENT);
        if((t != null) && (token == TokenType.ID))
            t.nombre = tokenString;
        coincidir(TokenType.ID);
+       coincidir(TokenType.RPARENT);
        return t;
    }
    
