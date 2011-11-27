@@ -1478,6 +1478,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         
         // Creamos nuestro analizador sintáctico apartir de nuestros lexemas.
         Parser.indentno = 0;
+        Parser.tokenString = "";
         Parser syntax = new Parser(palabras);
         //syntax.recorrer();
         NodoArbol arbolSintactico = syntax.parse();
