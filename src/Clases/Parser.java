@@ -134,8 +134,6 @@ public class Parser {
        return palabras;
    }
    
-   // Por si uncluyeramos un flag para ver el proceso.
-   /***************************************************************************/
    public static void printToken(TokenType token, String tokenString) {
        switch(token) {
            case IF:
