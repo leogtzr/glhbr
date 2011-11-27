@@ -120,8 +120,6 @@ public class Parser {
     public static String tokenString;
     public static int lineno = 0;
    
-   // Just JavaBeans conventions...
-
    public Parser() {
        palabras = null;
        indice = 0;
@@ -130,10 +128,6 @@ public class Parser {
    public Parser(ArrayList<Lexema> palabras) {
        this.palabras = palabras;
        indice = 0;
-   }
-   
-   public void setLexemas(ArrayList<Lexema> palabras) {
-       this.palabras = palabras;
    }
    
    public ArrayList<Lexema> getListaLexemas() {
@@ -524,7 +518,7 @@ public class Parser {
        
        return t;
    }
-   // Solo para ir viendo el comportamiento...
+   // Solo para ir viendo el comportamiento..., auxiliar para comprobación.
    public void recorrer() {
        for(int i = 0; i < this.palabras.size(); i++)
            System.out.println(this.palabras.get(i).getValor() + ": " + this.palabras.get(i).getLineNo() + " - " + 
