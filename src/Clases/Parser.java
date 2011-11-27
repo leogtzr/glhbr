@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Parser {
     
     public static enum TokenType {
-       ENDFILE, ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, READ, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
+       ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, READ, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
        MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, OR,
        WHILE, INFINITO, INIBLOQUE, FINBLOQUE, INICIO, FINALIZAR
     };
