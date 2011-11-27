@@ -55,7 +55,7 @@ public class Parser {
                         break;
                     
                     case RepeatK:
-                        System.out.println("Repeat");
+                        System.out.println("Repetir");
                         break;
                     case AssignK:
                         System.out.println("Asignado a: " + tree.nombre);
@@ -255,7 +255,8 @@ public class Parser {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       while(/*(token != TokenType.ENDFILE) && (token != TokenType.END) &&  */ (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
+       // Si es uno de los siguientes nodos, no necesitamos el ;
+       while(/*(token != TokenType.ENDFILE) && */(token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
            
            
            NodoArbol q;
