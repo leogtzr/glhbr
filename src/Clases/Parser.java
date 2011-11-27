@@ -256,7 +256,7 @@ public class Parser {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       while(/*(token != TokenType.ENDFILE) && (token != TokenType.END) &&  */ (token != TokenType.ELSE) && (token != TokenType.UNTIL) && ((indice + 1) < this.palabras.size())) {
+       while(/*(token != TokenType.ENDFILE) && (token != TokenType.END) &&  */ (token != TokenType.ELSE) && (token != TokenType.UNTIL) && (indice < this.palabras.size())) {
            
            
            NodoArbol q;

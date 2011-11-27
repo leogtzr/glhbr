@@ -121,7 +121,6 @@ public class Reservadas {
     
     // Devuelve el código Hash de una cadena.
     public int codigoHash(String s) {
-        // Qué hermosura.
         int v = 0;
         for(int i = 0; i < s.length(); v += (int)s.charAt(i));
         return v % palabrasIngles.length;
