@@ -302,7 +302,7 @@ public class Analizador {
 
                     }
                         //System.out.printf("Asignación de cadena : [%s] ---> %d\n", asignacionCadena, nLineas);
-                        palabras.add(new Lexema(asignacionCadena, TokenType.ID).setLineNo(nLineas));
+                        palabras.add(new Lexema(asignacionCadena, TokenType.CADENA).setLineNo(nLineas));
                         asignacionCadena = "";
 
                     break;

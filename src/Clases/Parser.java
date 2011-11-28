@@ -56,7 +56,9 @@ public class Parser {
        SALIR,
        FACTORIAL,
        RAIZ,
-       HEX          /* Funciones de conversión */
+       HEX,          /* Funciones de conversión */
+       CADENA
+       
     };
    
     public static enum NodeKind {
@@ -109,13 +111,13 @@ public class Parser {
             System.out.print(" ");
     }
     
-    public static void imprimirArbol(NodoArbol tree) {
+    public static void imprimirArbol(NodoArbol arbol) {
         
         indentar();
-        while(tree != null) {
+        while(arbol != null) {
             imprimirEspacios();
-            if(tree.nodeKind == NodeKind.StmtK) {
-                switch(tree.stmt) {
+            if(arbol.nodeKind == NodeKind.StmtK) {
+                switch(arbol.stmt) {
                     
                     case IfK:
                         System.out.println("If");
@@ -125,10 +127,10 @@ public class Parser {
                         System.out.println("Repetir");
                         break;
                     case AssignK:
-                        System.out.println("Asignado a: " + tree.nombre);
+                        System.out.println("Asignado a: " + arbol.nombre);
                         break;
                     case ReadK:
-                        System.out.println("Read: " + tree.nombre);
+                        System.out.println("Read: " + arbol.nombre);
                         break;
                     case WriteK:
                         System.out.println("Write");
@@ -176,24 +178,24 @@ public class Parser {
                         System.out.println("Raiz");
                         break;
                     case HexK:
-                        System.out.println("Hex");
+                        System.out.println("Hex : [" + arbol.nombre + "]");
                         break;
                         
                     default:
                         System.out.println("Nodo desconocido");
                 }
-            } else if(tree.nodeKind == NodeKind.ExpK) {
+            } else if(arbol.nodeKind == NodeKind.ExpK) {
                 
-                switch(tree.exp) {
+                switch(arbol.exp) {
                     case OpK:
                         System.out.print("op: ");
-                        printToken(tree.op, "\\0");
+                        printToken(arbol.op, "\\0");
                         break;
                     case ConstK:
-                        System.out.println("const: " + tree.valor);
+                        System.out.println("const: " + arbol.valor);
                         break;
                     case IdK:
-                        System.out.println("id: " + tree.nombre);
+                        System.out.println("id: " + arbol.nombre);
                         break;
                     default:
                         System.out.println("Nodo desconocido");
@@ -206,9 +208,9 @@ public class Parser {
             
             // Llamar recursivamente a la función.
             for(int j = 0; j < MAXCHILDREN; j++)
-                imprimirArbol(tree.hijos[j]);
+                imprimirArbol(arbol.hijos[j]);
             
-            tree = tree.hermano;
+            arbol = arbol.hermano;
             
         }
         
@@ -306,6 +308,10 @@ public class Parser {
            case ID:
                System.out.println("Nombre=" + tokenString);
                break;
+           case CADENA:
+               System.out.println("cadena=" + tokenString);
+               break;
+               
            case ERROR:
                System.out.println("Error: " + tokenString);
                break;
@@ -677,10 +683,10 @@ public class Parser {
        NodoArbol t = newStmtNode(StmtKind.HexK);
        coincidir(TokenType.HEX);
        coincidir(TokenType.LPARENT);
-       if(t != null)
-           t.hijos[0] = expresion();
+       //JOptionPane.showMessageDialog(null, t.hijos[0].valor);
+       t.nombre = tokenString;
+       coincidir(TokenType.CADENA);
        coincidir(TokenType.RPARENT);
-       
        return t;
    }
    
