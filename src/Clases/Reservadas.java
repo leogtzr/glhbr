@@ -101,7 +101,8 @@ public class Reservadas {
         "tangente",
         "ln",
         "clear",
-        "salir"
+        "salir",
+        "factorial"
             
     };
     
@@ -130,7 +131,8 @@ public class Reservadas {
         TokenType.TAN,
         TokenType.LN,
         TokenType.CLEAR,
-        TokenType.SALIR
+        TokenType.SALIR,
+        TokenType.FACTORIAL
         
     };
     

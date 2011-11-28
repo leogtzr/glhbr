@@ -53,7 +53,8 @@ public class Parser {
        TAN,
        LN,   /* Logaritmo natural. Fin de las funciones trigonométricas */
        CLEAR,
-       SALIR
+       SALIR,
+       FACTORIAL
     };
    
     public static enum NodeKind {
@@ -77,7 +78,8 @@ public class Parser {
         TanK,
         LnK,
         ClearK,
-        SalirK
+        SalirK,
+        FactorialK
     };
     
     public static enum ExpKind {
@@ -162,6 +164,9 @@ public class Parser {
                     case SalirK:
                         System.out.println("Salir");
                         break;
+                    case FactorialK:
+                        System.out.println("Factorial");
+                        break;
            
                     default:
                         System.out.println("Nodo desconocido");
@@ -245,6 +250,7 @@ public class Parser {
            case LN:
            case CLEAR:
            case SALIR:
+           case FACTORIAL:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -436,6 +442,9 @@ public class Parser {
            case SALIR:
                t = salir_stmt();
                break;
+           case FACTORIAL:
+               t = factorial_stmt();
+               break;
                
            case WHILE:
                // TODO Cambiar por while_stmt();
@@ -614,6 +623,17 @@ public class Parser {
    public NodoArbol salir_stmt() {
        NodoArbol t = newStmtNode(StmtKind.SalirK);
        coincidir(TokenType.SALIR);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   
+   public NodoArbol factorial_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.FactorialK);
+       coincidir(TokenType.FACTORIAL);
        coincidir(TokenType.LPARENT);
        if(t != null)
            t.hijos[0] = expresion();
