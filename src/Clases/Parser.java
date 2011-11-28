@@ -52,7 +52,8 @@ public class Parser {
        ABS, 
        TAN,
        LN,   /* Logaritmo natural. Fin de las funciones trigonométricas */
-       CLEAR
+       CLEAR,
+       SALIR
     };
    
     public static enum NodeKind {
@@ -75,7 +76,8 @@ public class Parser {
         AbsK,
         TanK,
         LnK,
-        ClearK
+        ClearK,
+        SalirK
     };
     
     public static enum ExpKind {
@@ -156,6 +158,9 @@ public class Parser {
                         break;
                     case ClearK:
                         System.out.println("Clear");
+                        break;
+                    case SalirK:
+                        System.out.println("Salir");
                         break;
            
                     default:
@@ -239,6 +244,7 @@ public class Parser {
            case TAN:
            case LN:
            case CLEAR:
+           case SALIR:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -427,6 +433,10 @@ public class Parser {
                clear_stmt();
                break;
                
+           case SALIR:
+               t = salir_stmt();
+               break;
+               
            case WHILE:
                // TODO Cambiar por while_stmt();
                t = while_stmt();
@@ -601,6 +611,16 @@ public class Parser {
        coincidir(TokenType.CLEAR);
    }
    
+   public NodoArbol salir_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.SalirK);
+       coincidir(TokenType.SALIR);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
    
    public NodoArbol assign_stmt() {
        

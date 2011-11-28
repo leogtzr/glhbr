@@ -100,7 +100,8 @@ public class Reservadas {
         "abs",
         "tangente",
         "ln",
-        "clear"
+        "clear",
+        "salir"
             
     };
     
@@ -128,7 +129,8 @@ public class Reservadas {
         TokenType.ABS,
         TokenType.TAN,
         TokenType.LN,
-        TokenType.CLEAR
+        TokenType.CLEAR,
+        TokenType.SALIR
         
     };
     
