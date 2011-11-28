@@ -122,7 +122,6 @@ public class Parser {
     }
     
     private ArrayList<Lexema> palabras = null;   
-    public static final int MAXRESERVED = 8;
     public static final int MAXCHILDREN = 3;
     public static int indentno = 0;
     private int indice = 0;
@@ -395,6 +394,19 @@ public class Parser {
        
        return t;
        
+   }
+   
+   public NodoArbol pow_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.PowK);
+       coincidir(TokenType.POW);
+       coincidir(TokenType.LPARENT);
+       //coincidir(TokenType.COMA);  /* Por lo pronto sin la coma: pow(x 1 * 2 + 34); */
+       coincidir(TokenType.ID);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
    }
    
    public NodoArbol assign_stmt() {
