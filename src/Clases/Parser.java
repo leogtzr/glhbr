@@ -55,7 +55,8 @@ public class Parser {
        CLEAR,
        SALIR,
        FACTORIAL,
-       RAIZ
+       RAIZ,
+       HEX          /* Funciones de conversión */
     };
    
     public static enum NodeKind {
@@ -80,7 +81,9 @@ public class Parser {
         LnK,
         ClearK,
         SalirK,
-        FactorialK, RaizK
+        FactorialK, 
+        RaizK,
+        HexK
     };
     
     public static enum ExpKind {
@@ -172,6 +175,9 @@ public class Parser {
                     case RaizK:
                         System.out.println("Raiz");
                         break;
+                    case HexK:
+                        System.out.println("Hex");
+                        break;
                         
                     default:
                         System.out.println("Nodo desconocido");
@@ -257,6 +263,7 @@ public class Parser {
            case SALIR:
            case FACTORIAL:
            case RAIZ:
+           case HEX:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -454,6 +461,10 @@ public class Parser {
            case RAIZ:
                t = raiz_stmt();
                break;
+           case HEX:
+               t = hex_stmt();
+               break;
+
                
            case WHILE:
                // TODO Cambiar por while_stmt();
@@ -662,6 +673,16 @@ public class Parser {
        return t;
    }
    
+   public NodoArbol hex_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.HexK);
+       coincidir(TokenType.HEX);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
    
    public NodoArbol assign_stmt() {
        
