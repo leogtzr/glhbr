@@ -81,7 +81,9 @@ public class Parser {
                     case InfinitumK:
                         System.out.println("Infinito");
                         break;
-                    
+                    case PowK:
+                        System.out.println("Pow");
+                        break;
                     default:
                         System.out.println("Nodo desconocido");
                 }
@@ -155,6 +157,7 @@ public class Parser {
            case WRITE:
            case WHILE:
            case INFINITO:
+           case POW:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;

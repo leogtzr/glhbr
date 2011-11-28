@@ -90,7 +90,8 @@ public class Reservadas {
         "hacer",
         "porsiempre",
         "inicio",
-        "fin"
+        "fin",
+        "pow"
             
     };
     
@@ -108,7 +109,8 @@ public class Reservadas {
         TokenType.THEN,
         TokenType.END,
         TokenType.INICIO,
-        TokenType.FINALIZAR
+        TokenType.FINALIZAR,
+        TokenType.POW
     };
     
     // Método que devuelve un TokenType.
