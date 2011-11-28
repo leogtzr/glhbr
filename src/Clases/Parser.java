@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Parser {
     
     public static enum TokenType {
-       ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, READ, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
+       ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, LEER, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
        MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, OR,
        WHILE, INFINITO, INIBLOQUE, FINBLOQUE, INICIO, FINALIZAR
     };
@@ -17,7 +17,16 @@ public class Parser {
      };
     
     public static enum StmtKind {
-        IfK, RepeatK, AssignK, ReadK, WriteK, WhileK, InfinitumK
+        IfK, 
+        RepeatK,
+        AssignK,
+        ReadK,
+        WriteK, 
+        WhileK, 
+        InfinitumK, 
+        PowK, /* Elevar una variable a un valor */
+        IncK,    /* Incrementar una variable */
+        DecK    /* Decrementar el valor de una variable a determinado valor */
     };
     
     public static enum ExpKind {
@@ -26,7 +35,7 @@ public class Parser {
     
     // Enumeración para verificación de Tipo.
     public static enum ExpType {
-        Void, Integer, Boolean
+        Void, Integer, Boolean, Binario
     };
     
     public static void indentar() {
@@ -142,7 +151,7 @@ public class Parser {
            case END:
            case REPETIR:
            case HASTA:
-           case READ:
+           case LEER:
            case WRITE:
            case WHILE:
            case INFINITO:
@@ -297,7 +306,7 @@ public class Parser {
                t = assign_stmt();
                break;
                
-           case READ:
+           case LEER:
                
                t = read_stmt();
                break;
@@ -401,7 +410,7 @@ public class Parser {
    
    public NodoArbol read_stmt() {
        NodoArbol t = newStmtNode(StmtKind.ReadK);
-       coincidir(TokenType.READ);
+       coincidir(TokenType.LEER);
        coincidir(TokenType.LPARENT);
        if((t != null) && (token == TokenType.ID))
            t.nombre = tokenString;

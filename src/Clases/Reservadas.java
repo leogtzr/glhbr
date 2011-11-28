@@ -1,5 +1,4 @@
 package Clases;
-
 import Clases.Parser.TokenType;
 
 public class Reservadas {
@@ -102,7 +101,7 @@ public class Reservadas {
         TokenType.END, 
         TokenType.REPETIR, 
         TokenType.HASTA, 
-        TokenType.READ, 
+        TokenType.LEER, 
         TokenType.WRITE,
         TokenType.WHILE,
         TokenType.INFINITO,
