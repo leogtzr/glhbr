@@ -54,7 +54,8 @@ public class Parser {
        LN,   /* Logaritmo natural. Fin de las funciones trigonométricas */
        CLEAR,
        SALIR,
-       FACTORIAL
+       FACTORIAL,
+       RAIZ
     };
    
     public static enum NodeKind {
@@ -79,7 +80,7 @@ public class Parser {
         LnK,
         ClearK,
         SalirK,
-        FactorialK
+        FactorialK, RaizK
     };
     
     public static enum ExpKind {
@@ -112,6 +113,7 @@ public class Parser {
             imprimirEspacios();
             if(tree.nodeKind == NodeKind.StmtK) {
                 switch(tree.stmt) {
+                    
                     case IfK:
                         System.out.println("If");
                         break;
@@ -167,7 +169,10 @@ public class Parser {
                     case FactorialK:
                         System.out.println("Factorial");
                         break;
-           
+                    case RaizK:
+                        System.out.println("Raiz");
+                        break;
+                        
                     default:
                         System.out.println("Nodo desconocido");
                 }
@@ -251,6 +256,7 @@ public class Parser {
            case CLEAR:
            case SALIR:
            case FACTORIAL:
+           case RAIZ:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -444,6 +450,9 @@ public class Parser {
                break;
            case FACTORIAL:
                t = factorial_stmt();
+               break;
+           case RAIZ:
+               t = raiz_stmt();
                break;
                
            case WHILE:
@@ -641,6 +650,18 @@ public class Parser {
        
        return t;
    }
+   
+   public NodoArbol raiz_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.RaizK);
+       coincidir(TokenType.RAIZ);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   
    
    public NodoArbol assign_stmt() {
        

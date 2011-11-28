@@ -102,7 +102,8 @@ public class Reservadas {
         "ln",
         "clear",
         "salir",
-        "factorial"
+        "factorial",
+        "raiz"
             
     };
     
@@ -132,7 +133,8 @@ public class Reservadas {
         TokenType.LN,
         TokenType.CLEAR,
         TokenType.SALIR,
-        TokenType.FACTORIAL
+        TokenType.FACTORIAL,
+        TokenType.RAIZ
         
     };
     
