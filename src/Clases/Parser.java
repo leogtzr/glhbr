@@ -51,7 +51,8 @@ public class Parser {
        COSENO,
        ABS, 
        TAN,
-       LN   /* Logaritmo natural */
+       LN,   /* Logaritmo natural. Fin de las funciones trigonométricas */
+       CLEAR
     };
    
     public static enum NodeKind {
@@ -73,7 +74,8 @@ public class Parser {
         CosenoK,
         AbsK,
         TanK,
-        LnK
+        LnK,
+        ClearK
     };
     
     public static enum ExpKind {
@@ -151,6 +153,9 @@ public class Parser {
                         break;
                     case LnK:
                         System.out.println("Ln");
+                        break;
+                    case ClearK:
+                        System.out.println("Clear");
                         break;
            
                     default:
@@ -233,6 +238,7 @@ public class Parser {
            case ABS:
            case TAN:
            case LN:
+           case CLEAR:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -417,6 +423,9 @@ public class Parser {
            case LN:
                t = ln_stmt();
                break;
+           case CLEAR:
+               clear_stmt();
+               break;
                
            case WHILE:
                // TODO Cambiar por while_stmt();
@@ -586,6 +595,10 @@ public class Parser {
        coincidir(TokenType.RPARENT);
        
        return t;
+   }
+   
+   public void clear_stmt() {
+       coincidir(TokenType.CLEAR);
    }
    
    

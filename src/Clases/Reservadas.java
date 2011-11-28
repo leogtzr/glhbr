@@ -99,7 +99,8 @@ public class Reservadas {
         "coseno",
         "abs",
         "tangente",
-        "ln"
+        "ln",
+        "clear"
             
     };
     
@@ -126,7 +127,8 @@ public class Reservadas {
         TokenType.COSENO,
         TokenType.ABS,
         TokenType.TAN,
-        TokenType.LN
+        TokenType.LN,
+        TokenType.CLEAR
         
     };
     
