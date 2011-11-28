@@ -83,7 +83,7 @@ public class Reservadas {
         "end", 
         "repetir", 
         "hasta", 
-        "read", 
+        "leer", 
         "write", 
         "while",
         "infinito",
