@@ -7,9 +7,48 @@ import java.util.ArrayList;
 public class Parser {
     
     public static enum TokenType {
-       ERROR, IF, THEN, ELSE, END, REPETIR, HASTA, LEER, WRITE, ID, NUM, ASSIGN, EQ, LT, PLUS,
-       MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, OR,
-       WHILE, INFINITO, INIBLOQUE, FINBLOQUE, INICIO, FINALIZAR
+       ERROR, 
+       IF, 
+       THEN, 
+       ELSE, 
+       END, 
+       REPETIR, 
+       HASTA, 
+       LEER, 
+       WRITE, 
+       ID, 
+       NUM, 
+       ASSIGN, 
+       EQ, 
+       LT, 
+       PLUS,
+       MINUS, 
+       TIMES, 
+       OVER, 
+       LPARENT, 
+       RPARENT, 
+       SEMI, 
+       POW, 
+       COMA, 
+       MOD, 
+       LEQ, 
+       GEQ, 
+       GT, 
+       NEQ, 
+       NOT, 
+       COMP, 
+       AND, 
+       OR,
+       WHILE, 
+       INFINITO, 
+       INIBLOQUE, 
+       FINBLOQUE, 
+       INICIO, 
+       FINALIZAR,
+       INC,
+       DEC,
+       SENO,
+       COSENO
     };
    
     public static enum NodeKind {
@@ -26,7 +65,9 @@ public class Parser {
         InfinitumK, 
         PowK, /* Elevar una variable a un valor */
         IncK,    /* Incrementar una variable */
-        DecK    /* Decrementar el valor de una variable a determinado valor */
+        DecK,    /* Decrementar el valor de una variable a determinado valor */
+        SenoK,
+        CosenoK
     };
     
     public static enum ExpKind {
@@ -83,6 +124,18 @@ public class Parser {
                         break;
                     case PowK:
                         System.out.println("Pow");
+                        break;
+                    case IncK:
+                        System.out.println("Inc");
+                        break;             
+                    case DecK:
+                        System.out.println("Dec");
+                        break;
+                    case SenoK:
+                        System.out.println("Seno");
+                        break;
+                    case CosenoK:
+                        System.out.println("Coseno");
                         break;
                     default:
                         System.out.println("Nodo desconocido");
@@ -157,6 +210,10 @@ public class Parser {
            case WHILE:
            case INFINITO:
            case POW:
+           case INC:
+           case DEC:
+           case SENO:
+           case COSENO:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -271,7 +328,6 @@ public class Parser {
        
        while(/*(token != TokenType.ENDFILE) && */(token != TokenType.FINALIZAR) && (token != TokenType.FINBLOQUE) && (token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
            
-           
            NodoArbol q;
            coincidir(TokenType.SEMI);
            q = statement();
@@ -317,7 +373,21 @@ public class Parser {
                
                t = write_stmt();
                break;
-               
+           case POW:
+               t = pow_stmt();
+               break;
+           case INC:
+               t = inc_stmt();
+               break;
+           case DEC:
+               t = dec_stmt();
+               break;
+           case SENO:
+               t = seno_stmt();
+               break;
+           case COSENO:
+               t = coseno_stmt();
+               break;
            case WHILE:
                // TODO Cambiar por while_stmt();
                t = while_stmt();
@@ -402,6 +472,56 @@ public class Parser {
        coincidir(TokenType.LPARENT);
        //coincidir(TokenType.COMA);  /* Por lo pronto sin la coma: pow(x 1 * 2 + 34); */
        coincidir(TokenType.ID);
+       coincidir(TokenType.COMA);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   
+   public NodoArbol inc_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.IncK);
+       coincidir(TokenType.INC);
+       coincidir(TokenType.LPARENT);
+       //coincidir(TokenType.COMA);  /* Por lo pronto sin la coma: pow(x 1 * 2 + 34); */
+       coincidir(TokenType.ID);
+       coincidir(TokenType.COMA);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   
+   public NodoArbol dec_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.IncK);
+       coincidir(TokenType.DEC);
+       coincidir(TokenType.LPARENT);
+       //coincidir(TokenType.COMA);  /* Por lo pronto sin la coma: pow(x 1 * 2 + 34); */
+       coincidir(TokenType.ID);
+       coincidir(TokenType.COMA);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   
+   public NodoArbol seno_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.SenoK);
+       coincidir(TokenType.SENO);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   public NodoArbol coseno_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.CosenoK);
+       coincidir(TokenType.COSENO);
+       coincidir(TokenType.LPARENT);
        if(t != null)
            t.hijos[0] = expresion();
        coincidir(TokenType.RPARENT);

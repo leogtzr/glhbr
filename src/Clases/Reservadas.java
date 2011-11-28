@@ -91,7 +91,12 @@ public class Reservadas {
         "porsiempre",
         "inicio",
         "fin",
-        "pow"
+        "pow",
+        ",",
+        "inc",
+        "dec",
+        "seno",
+        "coseno"
             
     };
     
@@ -110,7 +115,13 @@ public class Reservadas {
         TokenType.END,
         TokenType.INICIO,
         TokenType.FINALIZAR,
-        TokenType.POW
+        TokenType.POW,
+        TokenType.COMA,
+        TokenType.INC,
+        TokenType.DEC,
+        TokenType.SENO,
+        TokenType.COSENO
+        
     };
     
     // Método que devuelve un TokenType.
