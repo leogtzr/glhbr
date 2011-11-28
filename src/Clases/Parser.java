@@ -50,7 +50,8 @@ public class Parser {
        SENO,
        COSENO,
        ABS, 
-       TAN
+       TAN,
+       LN   /* Logaritmo natural */
     };
    
     public static enum NodeKind {
@@ -71,7 +72,8 @@ public class Parser {
         SenoK,
         CosenoK,
         AbsK,
-        TanK
+        TanK,
+        LnK
     };
     
     public static enum ExpKind {
@@ -147,7 +149,10 @@ public class Parser {
                     case TanK:
                         System.out.println("Tan");
                         break;
-            
+                    case LnK:
+                        System.out.println("Ln");
+                        break;
+           
                     default:
                         System.out.println("Nodo desconocido");
                 }
@@ -227,6 +232,7 @@ public class Parser {
            case COSENO:
            case ABS:
            case TAN:
+           case LN:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -408,6 +414,9 @@ public class Parser {
            case TAN:
                t = tan_stmt();
                break;
+           case LN:
+               t = ln_stmt();
+               break;
                
            case WHILE:
                // TODO Cambiar por while_stmt();
@@ -568,6 +577,16 @@ public class Parser {
        return t;
    }
    
+   public NodoArbol ln_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.LnK);
+       coincidir(TokenType.LN);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
    
    
    public NodoArbol assign_stmt() {
