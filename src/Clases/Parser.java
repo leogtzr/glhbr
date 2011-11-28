@@ -48,7 +48,9 @@ public class Parser {
        INC,
        DEC,
        SENO,
-       COSENO
+       COSENO,
+       ABS, 
+       TAN
     };
    
     public static enum NodeKind {
@@ -67,7 +69,9 @@ public class Parser {
         IncK,    /* Incrementar una variable */
         DecK,    /* Decrementar el valor de una variable a determinado valor */
         SenoK,
-        CosenoK
+        CosenoK,
+        AbsK,
+        TanK
     };
     
     public static enum ExpKind {
@@ -137,6 +141,13 @@ public class Parser {
                     case CosenoK:
                         System.out.println("Coseno");
                         break;
+                    case AbsK:
+                        System.out.println("Abs");
+                        break;
+                    case TanK:
+                        System.out.println("Tan");
+                        break;
+            
                     default:
                         System.out.println("Nodo desconocido");
                 }
@@ -214,6 +225,8 @@ public class Parser {
            case DEC:
            case SENO:
            case COSENO:
+           case ABS:
+           case TAN:
                // Escribir en un archivo.
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -388,13 +401,19 @@ public class Parser {
            case COSENO:
                t = coseno_stmt();
                break;
+           case ABS:
+               t = abs_stmt();
+               break;
+               
+           case TAN:
+               t = tan_stmt();
+               break;
+               
            case WHILE:
                // TODO Cambiar por while_stmt();
                t = while_stmt();
                break;
-               
            case INFINITO:
-               
                t = infinito_stmt();
                break;
                
@@ -528,6 +547,28 @@ public class Parser {
        
        return t;
    }
+   public NodoArbol abs_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.AbsK);
+       coincidir(TokenType.ABS);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   public NodoArbol tan_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.TanK);
+       coincidir(TokenType.TAN);
+       coincidir(TokenType.LPARENT);
+       if(t != null)
+           t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
+       
+       return t;
+   }
+   
+   
    
    public NodoArbol assign_stmt() {
        

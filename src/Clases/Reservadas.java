@@ -96,7 +96,9 @@ public class Reservadas {
         "inc",
         "dec",
         "seno",
-        "coseno"
+        "coseno",
+        "abs",
+        "tangente"
             
     };
     
@@ -120,7 +122,9 @@ public class Reservadas {
         TokenType.INC,
         TokenType.DEC,
         TokenType.SENO,
-        TokenType.COSENO
+        TokenType.COSENO,
+        TokenType.ABS,
+        TokenType.TAN
         
     };
     
