@@ -1176,9 +1176,6 @@ private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_abrirMenuItemActionPerformed
 
 private void guardarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMenuItemActionPerformed
-    //JOptionpaneText.showMessageDialog(this, "Item guardar ... Menú Archivo");
-    // Quiere guardar un documento que no existe, o no ha dado a Nuevo
-    //JOptionPane.showMessageDialog(this, f.getAbsoluteFile() + "|" + f.getPath() + "|" + f.getName());
     
     if(areaTexto.isEnabled() == false)
         return;
@@ -1462,8 +1459,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         
         String kaka = Analizador.getLexForm(palabras, idiomaCheck.isSelected() == true ? true : false);
     
-        /*
-        areaLexico.setText(kaka);
+        /* areaLexico.setText(kaka);
         
         verTablaDeSimbolos(); // Aquí se vacía toda la información:
             this.setVisible(false);
@@ -1472,12 +1468,15 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
             verTablaSimbolos.setResizable(true);
             verTablaSimbolos.setVisible(true);
         this.setVisible(true);
-         * */
+        */
         
         Parser.indentno = 0;
         Parser.tokenString = "";
         Parser syntax = new Parser(palabras);
         Parser.lineno = 0;
+        
+        ArrayList<String> syntaxErrors = syntax.getListaErrores();
+        
         NodoArbol arbolSintactico = syntax.parse();
         Parser.imprimirArbol(arbolSintactico);
         
