@@ -99,6 +99,8 @@ public class Parser {
         Void, Integer, Boolean, Binario
     };
     
+    private ArrayList<String> errores = null;
+    
     public static void indentar() {
         // indentno declarada más abajo.
         indentno += 2;
@@ -241,6 +243,10 @@ public class Parser {
    
    public ArrayList<Lexema> getListaLexemas() {
        return palabras;
+   }
+   
+   public ArrayList<String> getListaErrores() {
+       return errores;
    }
    
    public static void printToken(TokenType token, String tokenString) {

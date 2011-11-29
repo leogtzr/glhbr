@@ -18,7 +18,6 @@ public class Analizador {
     private static String operador = "";
     private static String asignacionCadena = "";
     private static int nLineas = 1;
-    private ArrayList<String> errores = null;
     
     public static int getLineas()
     {
