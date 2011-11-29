@@ -422,11 +422,12 @@ public class Parser {
        
    }
    
+   // PENDIENTE Indentar correctamente todo el código de esta función.
    public NodoArbol statement() {
        NodoArbol t = null;
        switch(token) {
+           
            case IF:
-               
                t = if_stmt();
                break;
                
@@ -439,8 +440,8 @@ public class Parser {
                
                t = assign_stmt();
                break;
-               
-           case BOOLEANO:           /* Hacer la comprobación para los tipos */
+               // PENDIENTE Hacer la comprobación para los tipos:
+           case BOOLEANO:
                 t = assign_boolean_stmt();
                break;
                
@@ -496,9 +497,9 @@ public class Parser {
                break;
     
            case WHILE:
-               // TODO Cambiar por while_stmt();
                t = while_stmt();
                break;
+               
            case INFINITO:
                t = infinito_stmt();
                break;

@@ -168,6 +168,7 @@ public class editorVentana extends javax.swing.JFrame {
             super(color);
         }
     }
+    
     /* ************************************************************************ */
     public UndoManager undoManager = new UndoManager();
     Pattern pattern;
@@ -610,7 +611,7 @@ public class editorVentana extends javax.swing.JFrame {
         estadoDeLinea.setText("Abra o cree un nuevo archivo");
 
         areaTexto.setColumns(20);
-        areaTexto.setFont(new java.awt.Font("FreeMono", 1, 13)); // NOI18N
+        areaTexto.setFont(new java.awt.Font("FreeMono", 1, 13));
         areaTexto.setRows(5);
         areaTexto.setTabSize(2);
         areaTexto.setToolTipText("Ingrese su texto");
@@ -955,15 +956,15 @@ public class editorVentana extends javax.swing.JFrame {
                 .addComponent(estadoDeLinea, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(replaceBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
                 .addComponent(idiomaCheck)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
