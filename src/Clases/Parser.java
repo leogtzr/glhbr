@@ -101,6 +101,14 @@ public class Parser {
     
     private ArrayList<String> errores = null;
     
+    	private boolean isBinary(String s) {
+		for(int i = 0; i < s.length(); i++)
+			if(s.charAt(i) != '0' && s.charAt(i) != '1')
+				return false;
+		return true;
+	}
+
+    
     public static void indentar() {
         // indentno declarada más abajo.
         indentno += 2;
@@ -183,6 +191,10 @@ public class Parser {
                         break;
                     case HexK:
                         System.out.println("Hex : [" + arbol.nombre + "]");
+                        break;
+                        
+                    case BooleanK:
+                        System.out.println("Asignado a: " + arbol.nombre);
                         break;
                         
                     default:
@@ -717,9 +729,10 @@ public class Parser {
    
    public NodoArbol assign_boolean_stmt() {
        NodoArbol t = newStmtNode(StmtKind.BooleanK);
+       
+       coincidir(TokenType.BOOLEANO);
        if(t != null)
            t.nombre = tokenString;
-       coincidir(TokenType.BOOLEANO);
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)

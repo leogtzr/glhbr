@@ -254,11 +254,8 @@ public class editorVentana extends javax.swing.JFrame {
                 Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
             }
        
-       // Operadores...
        pattern = Pattern.compile("(\\+|\\-|%|\\^|\\*|\\/|\\||\\&|;|\\<=?|\\>=?|=|!=?)"); 
        matcher = pattern.matcher(areaTexto.getText());
-       //hilite = areaTexto.getHighlighter();
-       //coloreado = null;
        coloreado = new MyHighlightPainter(Color.PINK);
        while( matcher.find() )
             try {
@@ -269,8 +266,6 @@ public class editorVentana extends javax.swing.JFrame {
        
        pattern = Pattern.compile("(#[\\w\\n\\s\\W\\d\\D\\.]*#)", Pattern.MULTILINE); 
        matcher = pattern.matcher(areaTexto.getText());
-       //hilite = areaTexto.getHighlighter();
-       //coloreado = null;
        coloreado = new MyHighlightPainter(Color.YELLOW);
        while( matcher.find() )
             try {
@@ -284,13 +279,9 @@ public class editorVentana extends javax.swing.JFrame {
     // Función para guardar en un archivo, devuelve true si se hizo el guardado,
     // false si no se hizo el guardado...
     public boolean guardarEnArchivo() {
-        // Lo que vamos a devolver...
         boolean devuelto = false;
         int estado = selectorDeArchivos.showSaveDialog(this);
-        // Si el usuario eligió que sí...
-        // Guardar la información contenida en el area de texto al archivo elegido.
         if(estado == JFileChooser.APPROVE_OPTION) {
-            // Obtenemos las propiedades del archivo...
             f = selectorDeArchivos.getSelectedFile();
             archivoAbierto = f.getName();
             directorioArchivo = f.getParent();
@@ -1101,7 +1092,7 @@ private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             //abre un flujo de datos desde el archivo seleccionado
             BufferedReader br = new BufferedReader(new FileReader(f));
             areaTexto.read(br, null);    //lee desde el flujo de datos hacia el area de edición
-            br.close();    //cierra el flujo de datos
+            br.close();
 
             //asigna el manejador de eventos para registrar los cambios en el nuevo documento actual
             setTitle("GLHBR - " + f.getName());
@@ -1125,33 +1116,28 @@ private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         // Y luego presentar el diálogo para que elija el archivo.
     } else {
         
-            f = selectorDeArchivos.getSelectedFile();    //se obtiene el archivo seleccionado
+            f = selectorDeArchivos.getSelectedFile();
             
             archivoAbierto = f.getName();
             directorioArchivo = f.getParent();
             
             try {
-                //abre un flujo de datos hacia el archivo asociado seleccionado
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                //escribe desde el flujo de datos hacia el archivo
                 areaTexto.write(bw);
-                bw.close();    //cierra el flujo
+                bw.close();
                 
-                //nuevo título de la ventana, 
                 setTitle(f.getName());
                 
                 archivoAbierto = null;
                 directorioArchivo = null;
                 
-                
          int state = selectorDeArchivos.showOpenDialog(this);
          if(state == JFileChooser.APPROVE_OPTION) {    //si elige abrir el archivo
             f = selectorDeArchivos.getSelectedFile();    //obtiene el archivo seleccionado
             try {
-            //abre un flujo de datos desde el archivo seleccionado
             BufferedReader br = new BufferedReader(new FileReader(f));
             areaTexto.read(br, null);    //lee desde el flujo de datos hacia el area de edición
-            br.close();    //cierra el flujo de datos
+            br.close();
 
             //asigna el manejador de eventos para registrar los cambios en el nuevo documento actual
             setTitle("GLHBR - " + f.getName());
@@ -1168,7 +1154,7 @@ private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             guardarComoMenuItem.setEnabled(true);
         }
                 //muestra la ubicación del archivo guardado
-            } catch(IOException ex) {    //en caso de que ocurra una excepción
+            } catch(IOException ex) {
                 JOptionPane.showMessageDialog(this,ex.getMessage(),ex.toString(),JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1237,7 +1223,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         int option = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?");
         
         switch (option) {
-            case JOptionPane.YES_OPTION:     //si elige que si
+            case JOptionPane.YES_OPTION:
                 
                 int state = selectorDeArchivos.showSaveDialog(this);
         
@@ -1260,7 +1246,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         }
                 
                 break;
-            case JOptionPane.CANCEL_OPTION:  //si elige cancelar
+            case JOptionPane.CANCEL_OPTION:
                 System.exit(0);             //se cancela esta operación
             case JOptionPane.NO_OPTION:
                 System.exit(0);
@@ -1324,7 +1310,7 @@ private void cerrarArchivoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                 BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 //escribe desde el flujo de datos hacia el archivo
                 areaTexto.write(bw);
-                bw.close();    //cierra el flujo
+                bw.close();
                 
                 // Como eligió cerrar, volvemos a deshabilitar el area de texto y las opciones...
                 areaTexto.setEditable(false);
@@ -1344,7 +1330,6 @@ private void cerrarArchivoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         // Quiere decir que el wey ya dió Guardar... y ya hay un archivo asignado...
         // Así que hay que guardar de nuevo...
     } else if((archivoAbierto != null) && (directorioArchivo != null)) {
-        // Cogemos el nombre del archivo.
         f = selectorDeArchivos.getSelectedFile();
         BufferedWriter bw;
             try {
@@ -1356,7 +1341,6 @@ private void cerrarArchivoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             } catch (IOException ex) {
                 Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            // Deshabilitamos todo...
             // Como eligió cerrar, volvemos a deshabilitar el area de texto y las opciones...
                 areaTexto.setEditable(false);
 //                areaTexto.setEnabled(false);
@@ -1375,7 +1359,6 @@ private void cerrarArchivoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void alCerrar(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_alCerrar
     
-    // Quiere decir que hay un archivo asignado...
     if(negro.isAlive())
         negro.stop();
     
@@ -1560,7 +1543,7 @@ private void inglesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void replaceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replaceBtnActionPerformed
     
-    Pattern patronReemplazo = Pattern.compile("\\b(write)\\b\\("); // patterStr
+    Pattern patronReemplazo = Pattern.compile("\\b(write)\\b\\(");
     String todoElTexto = areaTexto.getText();
     Matcher matcher = patronReemplazo.matcher(todoElTexto);
     String replaceTo = "imprimir(";
@@ -1571,7 +1554,6 @@ private void replaceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_replaceBtnActionPerformed
 
 private void selectAllMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllMenuItemActionPerformed
-    // Si el área de Texto está habilitada...
     if(areaTexto.isEnabled()) {
         areaTexto.requestFocusInWindow();
         areaTexto.selectAll(); 
