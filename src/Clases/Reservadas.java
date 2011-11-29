@@ -102,9 +102,10 @@ public class Reservadas {
         "ln",
         "clear",
         "salir",
-        "factorial",
+        "factorial",    
         "raiz",
-        "hex"
+        "hex",
+        "booleano"
             
     };
     
@@ -136,7 +137,8 @@ public class Reservadas {
         TokenType.SALIR,
         TokenType.FACTORIAL,
         TokenType.RAIZ,
-        TokenType.HEX
+        TokenType.HEX,
+        TokenType.BOOLEANO
         
     };
     

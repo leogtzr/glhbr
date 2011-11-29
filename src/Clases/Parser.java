@@ -57,7 +57,8 @@ public class Parser {
        FACTORIAL,
        RAIZ,
        HEX,          /* Funciones de conversión */
-       CADENA
+       CADENA,
+       BOOLEANO
        
     };
    
@@ -85,7 +86,8 @@ public class Parser {
         SalirK,
         FactorialK, 
         RaizK,
-        HexK
+        HexK, 
+        BooleanK
     };
     
     public static enum ExpKind {
@@ -420,6 +422,10 @@ public class Parser {
                t = assign_stmt();
                break;
                
+           case BOOLEANO:           /* Hacer la comprobación para los tipos */
+                t = assign_boolean_stmt();
+               break;
+               
            case LEER:
                
                t = read_stmt();
@@ -700,6 +706,19 @@ public class Parser {
        if(t != null)
            t.hijos[0] = expresion();
            
+       return t;
+   }
+   
+   public NodoArbol assign_boolean_stmt() {
+       NodoArbol t = newStmtNode(StmtKind.BooleanK);
+       if(t != null)
+           t.nombre = tokenString;
+       coincidir(TokenType.BOOLEANO);
+       coincidir(TokenType.ID);
+       coincidir(TokenType.ASSIGN);
+       if(t != null)
+           t.hijos[0] = expresion();
+       
        return t;
    }
    
