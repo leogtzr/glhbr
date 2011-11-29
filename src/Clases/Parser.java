@@ -8,57 +8,15 @@ public class Parser {
     
     public static enum TokenType {
        ERROR, 
-       IF, 
-       THEN, 
-       ELSE, 
-       END, 
-       REPETIR, 
-       HASTA, 
-       LEER, 
-       WRITE, 
-       ID, 
-       NUM, 
-       ASSIGN, 
-       EQ, 
-       LT, 
-       PLUS,
-       MINUS, 
-       TIMES, 
-       OVER, 
-       LPARENT, 
-       RPARENT, 
-       SEMI, 
-       POW, 
-       COMA, 
-       MOD, 
-       LEQ, 
-       GEQ, 
-       GT, 
-       NEQ, 
-       NOT, 
-       COMP, 
-       AND, 
-       OR,
-       WHILE, 
-       INFINITO, 
-       INIBLOQUE, 
-       FINBLOQUE, 
-       INICIO, 
-       FINALIZAR,
-       INC,
-       DEC,
-       SENO,
-       COSENO,
-       ABS, 
-       TAN,
-       LN,   /* Logaritmo natural. Fin de las funciones trigonométricas */
-       CLEAR,
-       SALIR,
-       FACTORIAL,
-       RAIZ,
-       HEX,          /* Funciones de conversión */
-       CADENA,
-       BOOLEANO
+       IF, THEN, ELSE, END, 
+       REPETIR, HASTA, 
+       LEER, WRITE, 
+       ID, NUM, 
+       ASSIGN,EQ,LT,PLUS,MINUS,TIMES,OVER,LPARENT,RPARENT,SEMI,POW,COMA,MOD,LEQ,GEQ,GT,NEQ,NOT,COMP,AND, 
+       OR,WHILE,INFINITO,INIBLOQUE,FINBLOQUE,INICIO,FINALIZAR,INC,DEC,SENO,COSENO,ABS, 
+       TAN,LN,CLEAR,SALIR,
+       FACTORIAL,RAIZ,
+       HEX,CADENA,BOOLEANO
        
     };
    
@@ -259,8 +217,19 @@ public class Parser {
    
    public ArrayList<String> getListaErrores() {
        return errores;
-   }
    
+   }
+   // Recorrer el árbol y ver como genera la salida:
+   private void preorden(NodoArbol a) {
+       
+	if(a != null) {
+		/* Operaciones con el nodo a */
+            System.out.print("{" + a.valor + "," + a. + "}");
+		preorden(a.hijos[0]);
+		preorden(a.hijos[1]);
+	}
+    }
+
    public static void printToken(TokenType token, String tokenString) {
        switch(token) {
            case IF:
@@ -286,7 +255,7 @@ public class Parser {
            case FACTORIAL:
            case RAIZ:
            case HEX:
-               // Escribir en un archivo.
+               // PENDIENTE Salida a un archivo?
                System.out.println("palabra reservada: " + tokenString);
                break;
            case ASSIGN:
@@ -711,6 +680,7 @@ public class Parser {
        t.nombre = tokenString;
        coincidir(TokenType.CADENA);
        coincidir(TokenType.RPARENT);
+       
        return t;
    }
    
@@ -724,7 +694,8 @@ public class Parser {
        coincidir(TokenType.ASSIGN);
        if(t != null)
            t.hijos[0] = expresion();
-           
+       
+       preorden(t);
        return t;
    }
    
