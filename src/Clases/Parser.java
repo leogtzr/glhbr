@@ -218,6 +218,7 @@ public class Parser {
    
    }
    
+   // PENDIENTE Eliminar los recorridos, no funcionan.
    private void preorden(NodoArbol a) {
        
 	if(a != null) {
@@ -226,6 +227,7 @@ public class Parser {
             if(a.nombre != null) {
               System.out.print(a.nombre);  
             } else if(a.op != null) {
+                System.out.println();
                 switch(a.op) {
                     case PLUS:
                         System.out.print('+');

@@ -687,7 +687,7 @@ public class editorVentana extends javax.swing.JFrame {
         });
         menuArchivo.add(abrirMenuItem);
 
-        guardarMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        guardarMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         guardarMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tp_save.png"))); // NOI18N
         guardarMenuItem.setMnemonic('G');
         guardarMenuItem.setText("Guardar");
