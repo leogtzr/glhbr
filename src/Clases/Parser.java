@@ -68,7 +68,6 @@ public class Parser {
 
     
     public static void indentar() {
-        // indentno declarada más abajo.
         indentno += 2;
     }
     
@@ -76,7 +75,6 @@ public class Parser {
         indentno -= 2;
     }
     
-    // TODO Procedimiento modificado para mostrar expresiones.
     public static void imprimirEspacios() {
         for(int i = 0; i < indentno; i++)
             System.out.print(" ");
@@ -220,7 +218,7 @@ public class Parser {
    }
    
    // PENDIENTE Eliminar los recorridos, no funcionan.
-   private void preorden(NodoArbol a) {
+   private static void preorden(NodoArbol a) {
        
 	if(a != null) {
 		/* Operaciones con el nodo a */
@@ -251,7 +249,7 @@ public class Parser {
 	}
     }
    
-   private void postorden(NodoArbol a) {
+   private static void postorden(NodoArbol a) {
 	if(a != null) {
 		postorden(a.hijos[0]);
 		postorden(a.hijos[1]);
@@ -279,8 +277,7 @@ public class Parser {
 	}
     }
    
-   // GIT Método inorden agregado.
-   private void inorden(NodoArbol a) {
+   private static void inorden(NodoArbol a) {
 	if(a != null) {
 		inorden(a.hijos[0]);
 		/* Operaciones con el nodo a */
@@ -309,7 +306,36 @@ public class Parser {
 	}
     }
 
-
+public static void recorrerArbol(NodoArbol a) {
+    
+    if(a != null) {
+		/* Operaciones con el nodo a */
+            //System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
+            if(a.nombre != null) {
+              System.out.print(a.nombre);  
+            } else if(a.op != null) {
+                //System.out.println();
+                switch(a.op) {
+                    case PLUS:
+                        System.out.print('+');
+                        break;    
+                    case MINUS:
+                        System.out.print('-');
+                        break;
+                    case TIMES:
+                        System.out.print('*');
+                        break;
+                    case OVER:
+                        System.out.print('/');
+                        break;
+                }         
+            } else if(a.exp == ExpKind.ConstK) {
+                System.out.print(a.valor);
+            } 
+		postorden(a.hijos[0]);
+		preorden(a.hijos[1]);
+	}
+}
 
    public static void printToken(TokenType token, String tokenString) {
        switch(token) {
@@ -776,10 +802,13 @@ public class Parser {
        if(t != null)
            t.hijos[0] = expresion();
        
+       System.out.println("Preorden: \n-------------------------------");
        preorden(t);
+       System.out.println("\nPostorden: \n-------------------------------");
        System.out.println();
        postorden(t);
        System.out.println("\n-------------------------------");
+       System.out.println("Recorrido fachon: \n-------------------------------");
        inorden(t);
        System.out.println("\n-------------------------------");
        return t;
