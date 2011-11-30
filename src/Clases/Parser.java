@@ -149,12 +149,10 @@ public class Parser {
                         break;
                     case HexK:
                         System.out.println("Hex : [" + arbol.nombre + "]");
-                        break;
-                        
+                        break;                        
                     case BooleanK:
                         System.out.println("Asignado a: " + arbol.nombre);
-                        break;
-                        
+                        break;    
                     default:
                         System.out.println("Nodo desconocido");
                 }
@@ -224,7 +222,28 @@ public class Parser {
        
 	if(a != null) {
 		/* Operaciones con el nodo a */
-            System.out.print("{" + a.valor + "," + a. + "}");
+            //System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
+            if(a.nombre != null) {
+              System.out.print(a.nombre);  
+            } else if(a.op != null) {
+                switch(a.op) {
+                    case PLUS:
+                        System.out.print('+');
+                        break;    
+                    case MINUS:
+                        System.out.print('-');
+                        break;
+                    case TIMES:
+                        System.out.print('*');
+                        break;
+                    case OVER:
+                        System.out.print('/');
+                        break;
+                }         
+            } else if(a.exp == ExpKind.ConstK) {
+                System.out.print(a.valor);
+            }
+                
 		preorden(a.hijos[0]);
 		preorden(a.hijos[1]);
 	}

@@ -22,5 +22,9 @@ public class NodoArbol {
     int valor;
     String nombre;
     ExpType type;         /* Para verificación de tipo de expresiones */
+    
+    public TokenType getOp() {
+        return op;
+    }
 
 }
