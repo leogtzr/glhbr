@@ -3,6 +3,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Parser {
     
@@ -58,6 +59,7 @@ public class Parser {
     };
     
     private ArrayList<String> errores = null;
+    private Hashtable simbolos = new Hashtable();
     
     	private boolean isBinary(String s) {
 		for(int i = 0; i < s.length(); i++)
