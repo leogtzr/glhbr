@@ -217,7 +217,7 @@ public class Parser {
        return errores;
    
    }
-   // Recorrer el árbol y ver como genera la salida:
+   
    private void preorden(NodoArbol a) {
        
 	if(a != null) {
@@ -242,12 +242,40 @@ public class Parser {
                 }         
             } else if(a.exp == ExpKind.ConstK) {
                 System.out.print(a.valor);
-            }
-                
+            } 
 		preorden(a.hijos[0]);
 		preorden(a.hijos[1]);
 	}
     }
+   
+   private void postorden(NodoArbol a) {
+	if(a != null) {
+		postorden(a.hijos[0]);
+		postorden(a.hijos[1]);
+		/* Operaciones con el nodo a */
+                if(a.nombre != null) {
+                    System.out.print(a.nombre);  
+                } else if(a.op != null) {
+                    switch(a.op) {
+                        case PLUS:
+                            System.out.print('+');
+                            break;    
+                        case MINUS:
+                            System.out.print('-');
+                            break;
+                        case TIMES:
+                            System.out.print('*');
+                            break;
+                        case OVER:
+                            System.out.print('/');
+                            break;
+                    }         
+                } else if(a.exp == ExpKind.ConstK) {
+                    System.out.print(a.valor);
+                }
+	}
+    }
+
 
    public static void printToken(TokenType token, String tokenString) {
        switch(token) {
@@ -715,6 +743,9 @@ public class Parser {
            t.hijos[0] = expresion();
        
        preorden(t);
+       System.out.println();
+       postorden(t);
+       System.out.println();
        return t;
    }
    
