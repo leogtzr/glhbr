@@ -191,9 +191,7 @@ public class editorVentana extends javax.swing.JFrame {
     private Mode mode = Mode.INSERT;
     String prefijo = null;
     String sufijo = null;
-    
     /************************************************************************* */
-    
     private static boolean isNumeric(String cadena){
         try {
             Integer.parseInt(cadena);

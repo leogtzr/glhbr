@@ -76,6 +76,7 @@ public class Parser {
         indentno -= 2;
     }
     
+    // TODO Procedimiento modificado para mostrar expresiones.
     public static void imprimirEspacios() {
         for(int i = 0; i < indentno; i++)
             System.out.print(" ");
@@ -277,6 +278,37 @@ public class Parser {
                 }
 	}
     }
+   
+   // GIT Método inorden agregado.
+   private void inorden(NodoArbol a) {
+	if(a != null) {
+		inorden(a.hijos[0]);
+		/* Operaciones con el nodo a */
+                if(a.nombre != null) {
+                    System.out.print(a.nombre);  
+                } else if(a.op != null) {
+                    switch(a.op) {
+                        case PLUS:
+                            System.out.print('+');
+                            break;    
+                        case MINUS:
+                            System.out.print('-');
+                            break;
+                        case TIMES:
+                            System.out.print('*');
+                            break;
+                        case OVER:
+                            System.out.print('/');
+                            break;
+                    }         
+                } else if(a.exp == ExpKind.ConstK) {
+                    System.out.print(a.valor);
+                }
+                
+		inorden(a.hijos[1]);
+	}
+    }
+
 
 
    public static void printToken(TokenType token, String tokenString) {
@@ -747,7 +779,9 @@ public class Parser {
        preorden(t);
        System.out.println();
        postorden(t);
-       System.out.println();
+       System.out.println("\n-------------------------------");
+       inorden(t);
+       System.out.println("\n-------------------------------");
        return t;
    }
    

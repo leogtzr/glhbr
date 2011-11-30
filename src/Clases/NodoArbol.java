@@ -1,7 +1,6 @@
 package Clases;
 import Clases.Parser.*;
 
-// TreeNode. Nuestro prototipo de nodo.
 public class NodoArbol {
     
     public NodoArbol() {
@@ -23,8 +22,6 @@ public class NodoArbol {
     String nombre;
     ExpType type;         /* Para verificación de tipo de expresiones */
     
-    public TokenType getOp() {
-        return op;
-    }
+    // GIT Eliminada función getOp en NodoArbol.java
 
 }
