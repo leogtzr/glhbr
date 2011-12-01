@@ -526,8 +526,8 @@ public static void recorrerArbol(NodoArbol a) {
                t = assign_stmt();
                break;
                // PENDIENTE Hacer la comprobación para los tipos:
-           case BOOLEANO:
-                t = assign_boolean_stmt();
+           case BINARIO:
+                t = assign_binary_stmt();
                break;
                
            case LEER:
@@ -823,17 +823,17 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
-   public NodoArbol assign_boolean_stmt() {
+   public NodoArbol assign_binary_stmt() {
        NodoArbol t = newStmtNode(StmtKind.BooleanK);
        
-       coincidir(TokenType.BOOLEANO);
+       coincidir(TokenType.BINARIO);
        if(t != null)
            t.nombre = tokenString;
        
        JOptionPane.showMessageDialog(null, tokenString);
        if(tabla.tabla.containsKey(tokenString) == false) {
            JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
-           t.type = ExpType.Boolean;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
+           t.type = ExpType.Binario;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
            tabla.put(tokenString, t);
            //NodoArbol temporal = (NodoArbol)tabla.tabla.get(tokenString);
            //JOptionPane.showMessageDialog(null, "Id : " + temporal.nombre + " | " + temporal.type);
