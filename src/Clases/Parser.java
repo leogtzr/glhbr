@@ -916,11 +916,12 @@ public static void recorrerArbol(NodoArbol a) {
                coincidir(TokenType.NUM);
                break;
            case ID:
+               
                t = newExpNode(ExpKind.IdK);
                if((t != null) && (token == TokenType.ID))
                    t.nombre = tokenString;
                
-               if(tabla.existeVar(tokenString)) {
+               if(tabla.tabla.containsKey(tokenString) == true) {
                    JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
                } else {
                    JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");

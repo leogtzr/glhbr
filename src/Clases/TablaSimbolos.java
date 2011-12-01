@@ -9,7 +9,7 @@ public class TablaSimbolos {
     private String tokenID;
     private NodoArbol nodo;
     private Parser.ExpType tipoDeDato;
-    private Hashtable tabla;
+    public Hashtable tabla;
     
     public TablaSimbolos(String tokenID, NodoArbol nodo) {
         this.tokenID = tokenID;
@@ -48,4 +48,8 @@ public class TablaSimbolos {
             return false;
     }
     
+    // GIT Método que 
+    public void showTable() {
+        
+    }
 }
