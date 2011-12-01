@@ -1,6 +1,5 @@
 /* Contiene aparte del nodo, el tipo de dato de la variable */
 package Clases;
-
 import java.util.Hashtable;
 
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
@@ -39,6 +38,14 @@ public class TablaSimbolos {
     
     public void put(String tokenID, NodoArbol t) {
         tabla.put(tokenID, t);
+    }
+    
+    // GIT Tabla de simbolos con sus métodos implementados.
+    public boolean existeVar(String id) {
+        if(tabla.get(id) != null)
+            return true;
+        else
+            return false;
     }
     
 }

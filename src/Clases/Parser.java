@@ -3,6 +3,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Parser {
     
@@ -918,6 +919,13 @@ public static void recorrerArbol(NodoArbol a) {
                t = newExpNode(ExpKind.IdK);
                if((t != null) && (token == TokenType.ID))
                    t.nombre = tokenString;
+               
+               if(tabla.existeVar(tokenString)) {
+                   JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
+               } else {
+                   JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+                   tabla.put(tokenString, t);
+               }
                coincidir(TokenType.ID);
                break;
            case LPARENT:
