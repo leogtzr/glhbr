@@ -3,7 +3,6 @@
 package Clases;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class Parser {
     
@@ -21,6 +20,9 @@ public class Parser {
        
     };
    
+    /* La tabla podría llevar esta información */
+    TablaSimbolos tabla = new TablaSimbolos();
+    
     public static enum NodeKind {
         StmtK, ExpK
      };
@@ -59,7 +61,6 @@ public class Parser {
     };
     
     private ArrayList<String> errores = null;
-    private Hashtable simbolos = new Hashtable();
     
     	private boolean isBinary(String s) {
 		for(int i = 0; i < s.length(); i++)
@@ -203,11 +204,15 @@ public class Parser {
    public Parser() {
        palabras = null;
        indice = 0;
+       tabla = new TablaSimbolos();
+       
    }
     
    public Parser(ArrayList<Lexema> palabras) {
        this.palabras = palabras;
        indice = 0;
+       tabla = new TablaSimbolos();
+       
    }
    
    public ArrayList<Lexema> getListaLexemas() {
