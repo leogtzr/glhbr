@@ -64,14 +64,21 @@ public class Parser {
     
     private ArrayList<String> errores = null;
     
-    	private boolean isBinary(String s) {
-		for(int i = 0; i < s.length(); i++)
-			if(s.charAt(i) != '0' && s.charAt(i) != '1')
-				return false;
-		return true;
-	}
-
+    private boolean isBinary(String s) {
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s.charAt(i) != '0' && s.charAt(i) != '1') {
+                return false;
+            }
+        }
+        return true;
+    }
     
+    // Convierte un String con forma de binario a entero.
+    public int bin2int(String str) {
+        return Integer.parseInt(str,2);
+    }
+
     public static void indentar() {
         indentno += 4;
     }
@@ -845,7 +852,7 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)
-           t.hijos[0] = expresion();
+           t.hijos[0] = expresion_binaria();        // Hacer un procedimiento expresion_binaria
        
        return t;
    }
@@ -956,6 +963,104 @@ public static void recorrerArbol(NodoArbol a) {
        }
        return t;
    }
+   
+   /////////////// Código de prueba /////////////////////////////////////////////////////////////////
+      public NodoArbol expresion_binaria() {
+       NodoArbol t = simple_expresion_binaria();
+       if((token == TokenType.GT) || (token == TokenType.LT) || (token == TokenType.EQ)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+           }
+           
+           coincidir(token);
+           if(t != null)
+               t.hijos[1] = simple_expresion_binaria();
+           
+       }
+       return t;
+   }
+   
+   public NodoArbol simple_expresion_binaria() {
+       NodoArbol t = termino_binario();
+       while((token == TokenType.PLUS) || (token == TokenType.MINUS)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+               coincidir(token);
+               t.hijos[1] = termino_binario();
+           }
+       }
+       return t;
+   }
+   
+   
+   public NodoArbol termino_binario() {
+       NodoArbol t = factor_binario();
+       while((token == TokenType.TIMES) || (token == TokenType.OVER)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+               coincidir(token);
+               p.hijos[1] = factor_binario();
+           }
+       }
+       return t;
+   }
+   
+   public NodoArbol factor_binario() {
+       NodoArbol t = null;
+       switch(token) {
+           case NUM:
+               t = newExpNode(ExpKind.ConstK);
+               if((t != null) && (token == TokenType.NUM)) {
+                   if(isBinary(tokenString) == false)
+                       syntaxError("Debe especificar un número binario válido. Vea la Ayuda.\n");
+                   else             // Sino convertimos
+                       t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
+               }
+                   
+               // O creamos otro campo en NodoArbol.java para albergar un binario con un String o hacemos la conversión
+               // a decimal y luego convertimos de nuevo a binario...
+               JOptionPane.showMessageDialog(null, "Valor: " + Integer.parseInt(tokenString));
+               
+               coincidir(TokenType.NUM);
+               break;
+           case ID:
+               
+               t = newExpNode(ExpKind.IdK);
+               if((t != null) && (token == TokenType.ID))
+                   t.nombre = tokenString;
+               
+               if(tabla.tabla.containsKey(tokenString) == true) {
+                   JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
+               } else {
+                   JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+                   tabla.put(tokenString, t);
+               }
+               coincidir(TokenType.ID);
+               break;
+           case LPARENT:
+               coincidir(TokenType.LPARENT);
+               t = expresion_binaria();
+               coincidir(TokenType.RPARENT);
+               break;
+           default:
+               syntaxError("Token inesperado ---> ");
+               printToken(token, tokenString);
+               token = getToken();
+               break;
+       }
+       return t;
+   }
+   //////////////////////// Fin código de prueba ///////////////////////////////////////////////
    
    public TokenType getToken() {
        
