@@ -40,16 +40,6 @@ public class TablaSimbolos {
         tabla.put(tokenID, t);
     }
     
-    // GIT Tabla de simbolos con sus métodos implementados.
-    public boolean existeVar(String id) {
-        if(tabla.get(id) != null)
-            return true;
-        else
-            return false;
-    }
+    // PENDIENTE Implementar un método para que muestre correctamente el tipo de dato.
     
-    // GIT Método que 
-    public void showTable() {
-        
-    }
 }

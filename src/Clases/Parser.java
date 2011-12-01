@@ -17,7 +17,7 @@ public class Parser {
        OR,WHILE,INFINITO,INIBLOQUE,FINBLOQUE,INICIO,FINALIZAR,INC,DEC,SENO,COSENO,ABS, 
        TAN,LN,CLEAR,SALIR,
        FACTORIAL,RAIZ,
-       HEX,CADENA,BOOLEANO
+       HEX,CADENA,BOOLEANO,BINARIO
        
     };
    
@@ -49,7 +49,8 @@ public class Parser {
         FactorialK, 
         RaizK,
         HexK, 
-        BooleanK
+        BooleanK, 
+        BinarioK
     };
     
     public static enum ExpKind {
@@ -72,11 +73,11 @@ public class Parser {
 
     
     public static void indentar() {
-        indentno += 2;
+        indentno += 4;
     }
     
     public static void unindent() {
-        indentno -= 2;
+        indentno -= 4;
     }
     
     public static void imprimirEspacios() {
@@ -828,6 +829,19 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.BOOLEANO);
        if(t != null)
            t.nombre = tokenString;
+       
+       JOptionPane.showMessageDialog(null, tokenString);
+       if(tabla.tabla.containsKey(tokenString) == false) {
+           JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+           t.type = ExpType.Boolean;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
+           tabla.put(tokenString, t);
+           //NodoArbol temporal = (NodoArbol)tabla.tabla.get(tokenString);
+           //JOptionPane.showMessageDialog(null, "Id : " + temporal.nombre + " | " + temporal.type);
+           
+       }
+       // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
+       // Es una asignación, entonces debemos asegurarnos que la variable no esté en la tabla de símbolos...
+       
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)
