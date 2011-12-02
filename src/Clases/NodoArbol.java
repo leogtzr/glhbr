@@ -21,7 +21,5 @@ public class NodoArbol {
     int valor;
     String nombre;
     ExpType type;         /* Para verificación de tipo de expresiones */
-    
-    // GIT Eliminada función getOp en NodoArbol.java
 
 }

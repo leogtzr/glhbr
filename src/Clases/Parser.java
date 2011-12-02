@@ -36,9 +36,9 @@ public class Parser {
         WriteK, 
         WhileK, 
         InfinitumK, 
-        PowK, /* Elevar una variable a un valor */
-        IncK,    /* Incrementar una variable */
-        DecK,    /* Decrementar el valor de una variable a determinado valor */
+        PowK,
+        IncK,
+        DecK,
         SenoK,
         CosenoK,
         AbsK,
@@ -76,7 +76,7 @@ public class Parser {
     
     // Convierte un String con forma de binario a entero.
     public int bin2int(String str) {
-        return Integer.parseInt(str,2);
+        return Integer.parseInt(str, 2);        // Base 2
     }
 
     public static void indentar() {
@@ -856,6 +856,9 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.ASSIGN);
        if(t != null)
            t.hijos[0] = expresion_binaria();        // Hacer un procedimiento expresion_binaria
+       
+       tabla.mostrarTabla();
+           
        
        return t;
    }
