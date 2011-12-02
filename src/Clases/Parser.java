@@ -845,6 +845,9 @@ public static void recorrerArbol(NodoArbol a) {
            //NodoArbol temporal = (NodoArbol)tabla.tabla.get(tokenString);
            //JOptionPane.showMessageDialog(null, "Id : " + temporal.nombre + " | " + temporal.type);
            
+       } else {
+           // PENDIENTE El usuario está tratando de declarar una variable que ya existe. Hacer algo.
+          
        }
        // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
        // Es una asignación, entonces debemos asegurarnos que la variable no esté en la tabla de símbolos...
@@ -1034,10 +1037,16 @@ public static void recorrerArbol(NodoArbol a) {
                coincidir(TokenType.NUM);
                break;
            case ID:
+               // Checar primero que dicha variable se encuentre en la tabla de simbolos.
+               // Si se encuentra, checar que el tipo sea binario....
+               NodoArbol temporal = (NodoArbol) tabla.tabla.get(tokenString);
+               JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
                
                t = newExpNode(ExpKind.IdK);
-               if((t != null) && (token == TokenType.ID))
+               if((t != null) && (token == TokenType.ID)) {
+                   
                    t.nombre = tokenString;
+               }
                
                if(tabla.tabla.containsKey(tokenString) == true) {
                    JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
