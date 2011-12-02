@@ -43,7 +43,6 @@ public class TablaSimbolos {
     
     // PENDIENTE Implementar un método para que muestre correctamente el tipo de dato.
     public void mostrarTabla() {
-        
         Enumeration e = this.tabla.keys();
         Object obj;
         System.out.println("Identificador          No. de Línea");
@@ -55,7 +54,6 @@ public class TablaSimbolos {
             System.out.printf("%5s              %10d\n", x.nombre, x.lineno);
             
         }
-
     }
     
 }

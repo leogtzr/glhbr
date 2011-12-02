@@ -514,36 +514,26 @@ public static void recorrerArbol(NodoArbol a) {
        
    }
    
-   // PENDIENTE Indentar correctamente todo el código de esta función.
    public NodoArbol statement() {
        NodoArbol t = null;
-       switch(token) {
-           
+       switch(token) {    
            case IF:
                t = if_stmt();
                break;
-               
            case REPETIR:
-               
                t = repeat_stmt();
                break;
-               
            case ID:
-               
                t = assign_stmt();
                break;
                // PENDIENTE Hacer la comprobación para los tipos:
            case BINARIO:
                 t = assign_binary_stmt();
                break;
-               
            case LEER:
-               
                t = read_stmt();
                break;
-               
            case WRITE:
-               
                t = write_stmt();
                break;
            case POW:
@@ -564,7 +554,6 @@ public static void recorrerArbol(NodoArbol a) {
            case ABS:
                t = abs_stmt();
                break;
-               
            case TAN:
                t = tan_stmt();
                break;
@@ -574,7 +563,6 @@ public static void recorrerArbol(NodoArbol a) {
            case CLEAR:
                clear_stmt();
                break;
-               
            case SALIR:
                t = salir_stmt();
                break;
@@ -587,15 +575,12 @@ public static void recorrerArbol(NodoArbol a) {
            case HEX:
                t = hex_stmt();
                break;
-    
            case WHILE:
                t = while_stmt();
                break;
-               
            case INFINITO:
                t = infinito_stmt();
                break;
-               
            default:
                syntaxError("Token inesperado --> ");
                printToken(token, tokenString);
