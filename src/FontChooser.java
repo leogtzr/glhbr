@@ -470,19 +470,9 @@ class ItemChooser extends JPanel {
       return selectedValue;
     }
   }
-
-  /**
-   * This inner interface must be implemented by any object that wants to be
-   * notified when the current selection in a ItemChooser component changes.
-   */
   public interface Listener extends java.util.EventListener {
     public void itemChosen(ItemChooser.Event e);
   }
-
-  /**
-   * This inner class is a simple demonstration of the ItemChooser component
-   * It uses command-line arguments as ItemChooser labels and values.
-   */
   public static class Demo {
     public static void main(String[] args) {
       // Create a window, arrange to handle close requests

@@ -44,13 +44,13 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.UndoManager;
 import Clases.Analizador;
 import Clases.Parser;
+import javax.swing.Icon;
 
 public class editorVentana extends javax.swing.JFrame {
     
     public editorVentana() {
         initComponents();
     }
-    
     public class Hilo extends Thread
     {
         @Override
@@ -950,25 +950,25 @@ public class editorVentana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(estadoDeLinea, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(replaceBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 487, Short.MAX_VALUE)
                 .addComponent(idiomaCheck)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(estadoDeLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idiomaCheck)
                     .addComponent(replaceBtn))
@@ -1362,7 +1362,6 @@ private void alCerrar(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_alCerra
         negro.stop();
     
     if((archivoAbierto != null) && (directorioArchivo != null)) {
-        // Las opciones para el cuadro de pregunta.
         Object[] options = {"Sí", "No"};
         int n = JOptionPane.showOptionDialog(this, "Desea guardar los cambios ?",
                 "Guardar cambios en : " + archivoAbierto,JOptionPane.YES_NO_OPTION,
@@ -1370,7 +1369,6 @@ private void alCerrar(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_alCerra
         
         // Quiere decir que el wey ya ha escrito algo pero no ha guardado...
     } else if((areaTexto.isEnabled() == true) && (areaTexto.getText().isEmpty() == false)) {
-        // Presentar el cuadro de diálogo....
         Object[] options = {"Sí", "No"};
         int n = JOptionPane.showOptionDialog(this, "Desea guardar los cambios ?",
         "Guardar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
@@ -1460,6 +1458,9 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         ArrayList<String> syntaxErrors = syntax.getListaErrores();
         
         NodoArbol arbolSintactico = syntax.parse();
+        // PENDIENTE Manejar los errores por medio de un componente.
+        // PENDIENTE Qué se va a hacer luego de tener el conteo de los errores?
+        JOptionPane.showMessageDialog(null, "Mensajito : " + syntax.getErrorString());
         Parser.imprimirArbol(arbolSintactico);
         
 }//GEN-LAST:event_compilarMenuItemActionPerformed

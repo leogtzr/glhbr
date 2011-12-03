@@ -23,6 +23,8 @@ public class Parser {
    
     /* La tabla podría llevar esta información */
     TablaSimbolos tabla = new TablaSimbolos();
+    ArrayList<String> errores = null;
+    String errorString = "";
     
     public static enum NodeKind {
         StmtK, ExpK
@@ -61,12 +63,10 @@ public class Parser {
     public static enum ExpType {
         Void, Integer, Boolean, Binario
     };
-    
-    private ArrayList<String> errores = null;
+
     
     private boolean isBinary(String s) {
-        for(int i = 0; i < s.length(); i++)
-        {
+        for(int i = 0; i < s.length(); i++) {
             if(s.charAt(i) != '0' && s.charAt(i) != '1') {
                 return false;
             }
@@ -74,9 +74,12 @@ public class Parser {
         return true;
     }
     
-    // Convierte un String con forma de binario a entero.
     public int bin2int(String str) {
-        return Integer.parseInt(str, 2);        // Base 2
+        return Integer.parseInt(str, 2);
+    }
+    
+    public String getErrorString() {
+        return errorString;
     }
 
     public static void indentar() {
@@ -189,7 +192,6 @@ public class Parser {
                 System.out.println("Nodo desconocido");
             }
             
-            // Llamar recursivamente a la función.
             for(int j = 0; j < MAXCHILDREN; j++)
                 imprimirArbol(arbol.hijos[j]);
             
@@ -213,15 +215,15 @@ public class Parser {
    public Parser() {
        palabras = null;
        indice = 0;
-       tabla = new TablaSimbolos();
-       
+       tabla = new TablaSimbolos();   
+       errorString = "";
    }
     
    public Parser(ArrayList<Lexema> palabras) {
        this.palabras = palabras;
        indice = 0;
        tabla = new TablaSimbolos();
-       
+       errorString = "";
    }
    
    public ArrayList<Lexema> getListaLexemas() {
@@ -269,8 +271,7 @@ public class Parser {
 	if(a != null) {
 		postorden(a.hijos[0]);
 		postorden(a.hijos[1]);
-		/* Operaciones con el nodo a */
-                if(a.nombre != null) {
+		if(a.nombre != null) {
                     System.out.print(a.nombre);  
                 } else if(a.op != null) {
                     switch(a.op) {
@@ -823,15 +824,15 @@ public static void recorrerArbol(NodoArbol a) {
            t.nombre = tokenString;
        
        JOptionPane.showMessageDialog(null, tokenString);
-       if(tabla.tabla.containsKey(tokenString) == false) {
+       if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
            JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
            t.type = ExpType.Binario;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
            tabla.put(tokenString, t);
-           //NodoArbol temporal = (NodoArbol)tabla.tabla.get(tokenString);
-           //JOptionPane.showMessageDialog(null, "Id : " + temporal.nombre + " | " + temporal.type);
            
        } else {
            // PENDIENTE El usuario está tratando de declarar una variable que ya existe. Hacer algo.
+           //errores.add("La variable " + tokenString + " ya se encuentra declarada");
+           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "|";
           
        }
        // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
@@ -843,7 +844,6 @@ public static void recorrerArbol(NodoArbol a) {
            t.hijos[0] = expresion_binaria();        // Hacer un procedimiento expresion_binaria
        
        tabla.mostrarTabla();
-           
        
        return t;
    }
@@ -1012,7 +1012,7 @@ public static void recorrerArbol(NodoArbol a) {
            case NUM:
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM)) {
-                   if(isBinary(tokenString) == false)
+                   if(isBinary(tokenString) == false)   // Checar si es un número binario.
                        syntaxError("Debe especificar un número binario válido. Vea la Ayuda.\n");
                    else             // Sino convertimos
                        t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
@@ -1025,8 +1025,8 @@ public static void recorrerArbol(NodoArbol a) {
                coincidir(TokenType.NUM);
                break;
            case ID:
-               // Checar primero que dicha variable se encuentre en la tabla de simbolos.
-               // Si se encuentra, checar que el tipo sea binario....
+               // PENDIENTE Checar primero que dicha variable se encuentre en la tabla de simbolos.
+               // PENDIENTE Si se encuentra, checar que el tipo sea binario....
                NodoArbol temporal = (NodoArbol) tabla.tabla.get(tokenString);
                JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
                
