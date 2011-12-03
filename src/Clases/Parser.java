@@ -832,7 +832,7 @@ public static void recorrerArbol(NodoArbol a) {
        } else {
            // PENDIENTE El usuario está tratando de declarar una variable que ya existe. Hacer algo.
            //errores.add("La variable " + tokenString + " ya se encuentra declarada");
-           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "|";
+           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
           
        }
        // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...

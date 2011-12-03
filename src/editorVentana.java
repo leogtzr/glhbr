@@ -1460,7 +1460,11 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         NodoArbol arbolSintactico = syntax.parse();
         // PENDIENTE Manejar los errores por medio de un componente.
         // PENDIENTE Qué se va a hacer luego de tener el conteo de los errores?
-        JOptionPane.showMessageDialog(null, "Mensajito : " + syntax.getErrorString());
+        if(syntax.getErrorString().split("\n").length > 0) {
+            JOptionPane.showMessageDialog(null, syntax.getErrorString(), 
+                    "Error de compilación", JOptionPane.ERROR_MESSAGE);
+        }
+        
         Parser.imprimirArbol(arbolSintactico);
         
 }//GEN-LAST:event_compilarMenuItemActionPerformed
