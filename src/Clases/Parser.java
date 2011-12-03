@@ -527,7 +527,6 @@ public static void recorrerArbol(NodoArbol a) {
            case ID:
                t = assign_stmt();
                break;
-               // PENDIENTE Hacer la comprobación para los tipos:
            case BINARIO:
                 t = assign_binary_stmt();
                break;
@@ -830,8 +829,7 @@ public static void recorrerArbol(NodoArbol a) {
            tabla.put(tokenString, t);
            
        } else {
-           // PENDIENTE El usuario está tratando de declarar una variable que ya existe. Hacer algo.
-           //errores.add("La variable " + tokenString + " ya se encuentra declarada");
+           
            errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
           
        }
@@ -1012,9 +1010,11 @@ public static void recorrerArbol(NodoArbol a) {
            case NUM:
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM)) {
-                   if(isBinary(tokenString) == false)   // Checar si es un número binario.
-                       syntaxError("Debe especificar un número binario válido. Vea la Ayuda.\n");
-                   else             // Sino convertimos
+                   if(isBinary(tokenString) == false) {
+                     // PENDIENTE Agregar a la variable String de errores.
+                       errorString += "Debe especificar un número binario válido.: " + lineno + "\n";
+                       syntaxError("Debe especificar un número binario válido. Vea la Ayuda.\n");  
+                   } else             // Sino convertimos
                        t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
                }
                    
