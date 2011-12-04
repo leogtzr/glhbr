@@ -257,7 +257,6 @@ public class Parser {
    
    } */
    
-   // PENDIENTE Eliminar los recorridos, no funcionan.
    private static void preorden(NodoArbol a) {
        
 	if(a != null) {

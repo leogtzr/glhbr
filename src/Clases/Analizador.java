@@ -18,7 +18,6 @@ public class Analizador {
     private static String asignacionCadena = "";
     private static int nLineas = 1;
     
-    // GIT Indentado correcto en Analizador.java
     public static int getLineas() {
         return nLineas;
     }
@@ -312,7 +311,8 @@ public class Analizador {
     }
    
     /* Devuelve <x, 1> <A, 2> <SUM, 2>     */
-    public static String getLexForm(ArrayList<Lexema> palabras, boolean idioma) {
+    // PENDIENTE Sirve lo que sigue?
+    /*public static String getLexForm(ArrayList<Lexema> palabras, boolean idioma) {
         String forma = "";
         // La tabla Hash a utilizar.
         HashMap<String, Integer> hash = new HashMap<String, Integer>();
@@ -330,6 +330,6 @@ public class Analizador {
                 forma += "< " + palabras.get(i).getValor() + ", " + hash.get(palabras.get(i).getValor()) + " > " + (palabras.get(i).getValor().equals(";") ? "\n" : "");
         
         return forma;
-    }
+    }*/
     
 }
