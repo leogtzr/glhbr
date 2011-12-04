@@ -1,5 +1,6 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
+// PENDIENTE Quitar los mensajes de JOptionPane.showMessage
 package Clases;
 
 import java.util.ArrayList;
@@ -15,13 +16,11 @@ public class Parser {
        ID, NUM, 
        ASSIGN,EQ,LT,PLUS,MINUS,TIMES,OVER,LPARENT,RPARENT,SEMI,POW,COMA,MOD,LEQ,GEQ,GT,NEQ,NOT,COMP,AND, 
        OR,WHILE,INFINITO,INIBLOQUE,FINBLOQUE,INICIO,FINALIZAR,INC,DEC,SENO,COSENO,ABS, 
-       TAN,LN,CLEAR,SALIR,
-       FACTORIAL,RAIZ,
-       HEX,CADENA,BOOLEANO,BINARIO
-       
+       TAN, LN, CLEAR, SALIR,
+       FACTORIAL, RAIZ,
+       HEX, CADENA, BOOLEANO, BINARIO
     };
    
-    /* La tabla podría llevar esta información */
     TablaSimbolos tabla = new TablaSimbolos();
     ArrayList<String> errores = null;
     String errorString = "";
@@ -784,7 +783,6 @@ public static void recorrerArbol(NodoArbol a) {
        NodoArbol t = newStmtNode(StmtKind.HexK);
        coincidir(TokenType.HEX);
        coincidir(TokenType.LPARENT);
-       //JOptionPane.showMessageDialog(null, t.hijos[0].valor);
        t.nombre = tokenString;
        coincidir(TokenType.CADENA);
        coincidir(TokenType.RPARENT);
@@ -822,9 +820,9 @@ public static void recorrerArbol(NodoArbol a) {
        if(t != null)
            t.nombre = tokenString;
        
-       JOptionPane.showMessageDialog(null, tokenString);
+       //JOptionPane.showMessageDialog(null, tokenString);
        if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
-           JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+           //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
            t.type = ExpType.Binario;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
            tabla.put(tokenString, t);
            
@@ -932,9 +930,9 @@ public static void recorrerArbol(NodoArbol a) {
                    t.nombre = tokenString;
                
                if(tabla.tabla.containsKey(tokenString) == true) {
-                   JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
                } else {
-                   JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
                    tabla.put(tokenString, t);
                }
                coincidir(TokenType.ID);
@@ -1011,29 +1009,26 @@ public static void recorrerArbol(NodoArbol a) {
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM)) {
                    if(isBinary(tokenString) == false) {
-                     // PENDIENTE Agregar a la variable String de errores.
                        errorString += "Debe especificar un número binario válido., línea: " + lineno + "\n";
                        syntaxError("Debe especificar un número binario válido. Vea la Ayuda.\n");  
                    } else             // Sino convertimos
                        t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
                }
                    
-               // O creamos otro campo en NodoArbol.java para albergar un binario con un String o hacemos la conversión
-               // a decimal y luego convertimos de nuevo a binario...
-               JOptionPane.showMessageDialog(null, "Valor: " + Integer.parseInt(tokenString));
+               //JOptionPane.showMessageDialog(null, "Valor: " + Integer.parseInt(tokenString));
                
                coincidir(TokenType.NUM);
                break;
            case ID:
-               // PENDIENTE Checar primero que dicha variable se encuentre en la tabla de simbolos.
-               // PENDIENTE Si se encuentra, checar que el tipo sea binario....
-               // PENDIENTE Si una variable en la expresión no existe lanza una excepción... Corregir, probar con una variable que no exista.
+               // PENDIENTE Checar primero que dicha variable se encuentre en la tabla de simbolos. DONE
+               // PENDIENTE Si se encuentra, checar que el tipo sea binario....                     DONE
+               // PENDIENTE Si una variable en la expresión no existe lanza una excepción...        DONE
                NodoArbol temporal = null;
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
-                   errorString += "Variable o función no encontrada: " + tokenString + " ,linea: " + lineno + "\n";
+                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
                } else {
-                   JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
+                   //JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
                }
                
                t = newExpNode(ExpKind.IdK);
@@ -1043,14 +1038,14 @@ public static void recorrerArbol(NodoArbol a) {
                }
                
                if(tabla.tabla.containsKey(tokenString) == true) {
-                   JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
                } else {
-                   JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
                    tabla.put(tokenString, t);
                }
                coincidir(TokenType.ID);
                break;
-           case LPARENT:
+           case LPARENT:            /** Expresión entre paréntesis **/
                coincidir(TokenType.LPARENT);
                t = expresion_binaria();
                coincidir(TokenType.RPARENT);
