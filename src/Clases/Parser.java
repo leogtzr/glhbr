@@ -1012,7 +1012,7 @@ public static void recorrerArbol(NodoArbol a) {
                if((t != null) && (token == TokenType.NUM)) {
                    if(isBinary(tokenString) == false) {
                      // PENDIENTE Agregar a la variable String de errores.
-                       errorString += "Debe especificar un número binario válido.: " + lineno + "\n";
+                       errorString += "Debe especificar un número binario válido., línea: " + lineno + "\n";
                        syntaxError("Debe especificar un número binario válido. Vea la Ayuda.\n");  
                    } else             // Sino convertimos
                        t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
