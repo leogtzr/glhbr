@@ -21,7 +21,6 @@ public class Parser {
    
     TablaSimbolos tabla = new TablaSimbolos();
     ArrayList<String> errores = null;
-    public int countError = 0;
     String errorString = "";
     
     public static enum NodeKind {
@@ -228,10 +227,11 @@ public class Parser {
        return palabras;
    }
    
-   public ArrayList<String> getListaErrores() {
+   // GIT Método no utilizado eliminado.
+   /*public ArrayList<String> getListaErrores() {
        return errores;
    
-   }
+   } */
    
    // PENDIENTE Eliminar los recorridos, no funcionan.
    private static void preorden(NodoArbol a) {
@@ -813,7 +813,7 @@ public static void recorrerArbol(NodoArbol a) {
    }
    
    public NodoArbol assign_binary_stmt() {
-       NodoArbol t = newStmtNode(StmtKind.BooleanK);
+       NodoArbol t = newStmtNode(StmtKind.BinarioK);
        
        coincidir(TokenType.BINARIO);
        if(t != null)

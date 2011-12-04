@@ -1455,12 +1455,12 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         Parser syntax = new Parser(palabras);
         Parser.lineno = 0;
         
-        ArrayList<String> syntaxErrors = syntax.getListaErrores();
+        // GIT Variable no utilizada borrada
+        //ArrayList<String> syntaxErrors = syntax.getListaErrores();
         
         NodoArbol arbolSintactico = syntax.parse();
         
         // TODO Sólo se avisará al usuario, el deberá arreglar los errores.
-        //JOptionPane.showMessageDialog(this, "Errores: [" + syntax.getErrorString() + "]");
         if(syntax.getErrorString().length() == 0) {
             ImageIcon imageIcon = new ImageIcon("src/icons/ok_icon.gif");
             JOptionPane.showMessageDialog(this, "Compilación correcta.", "Todo correcto", JOptionPane.INFORMATION_MESSAGE, imageIcon);
