@@ -399,7 +399,6 @@ public static void recorrerArbol(NodoArbol a) {
            case BINARIO:
            case ENTERO:
            case DECIMAL:
-           
                // PENDIENTE Salida a un archivo?
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -840,20 +839,21 @@ public static void recorrerArbol(NodoArbol a) {
    }
    
    public NodoArbol assign_binary_stmt() {
-       NodoArbol t = newStmtNode(StmtKind.BinarioK);
-       
-       coincidir(TokenType.BINARIO);
+       NodoArbol t = newStmtNode(StmtKind.BinarioK);    
+       coincidir(TokenType.BINARIO);            // Aquí ya avanzamos hacie el ID...
        if(t != null)
            t.nombre = tokenString;
        
        if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
-           //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+           JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
            t.type = ExpType.Binario;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
            tabla.put(tokenString, t);
            
        } else {    
+           syntaxError("La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n");
            errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
        }
+       JOptionPane.showMessageDialog(null, tokenString);
        
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
@@ -861,7 +861,6 @@ public static void recorrerArbol(NodoArbol a) {
            t.hijos[0] = expresion_binaria();        // Hacer un procedimiento expresion_binaria
        
        tabla.mostrarTabla();
-       
        return t;
    }
    
@@ -1059,11 +1058,6 @@ public static void recorrerArbol(NodoArbol a) {
                    t.nombre = tokenString;
                }
                
-               /*
-               if(tabla.tabla.containsKey(tokenString) == true) {
-               } else {
-                   tabla.put(tokenString, t);
-               } */
                coincidir(TokenType.ID);
                break;
            case LPARENT:            /* Expresión entre paréntesis */
