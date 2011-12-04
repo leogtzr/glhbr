@@ -854,8 +854,7 @@ public static void recorrerArbol(NodoArbol a) {
        } else {    
            errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
        }
-       // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
-       // Es una asignación, entonces debemos asegurarnos que la variable no esté en la tabla de símbolos...
+       
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)
@@ -1038,7 +1037,6 @@ public static void recorrerArbol(NodoArbol a) {
                        t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
                    }
                }
-                   
                
                coincidir(TokenType.NUM);
                break;
@@ -1050,22 +1048,24 @@ public static void recorrerArbol(NodoArbol a) {
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
                    errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+                   syntaxError("Variable o función no encontrada: " + tokenString + " ,línea: " + lineno);
                } else {
-                   //JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
+                   // Ya que si se encuentra en la tabla de símbolos, checar que sea de tipo binario, sino lanzar error.
+                   if(temporal.type != ExpType.Binario) {
+                       errorString += "La variable " + tokenString + " no es de tipo Binario, corrija ese error, línea " + lineno;
+                       syntaxError("La variable " + tokenString + " no es de tipo Binario, corrija ese error, línea " + lineno);
+                   }
                }
                
                t = newExpNode(ExpKind.IdK);
                if((t != null) && (token == TokenType.ID)) {
-                   
                    t.nombre = tokenString;
                }
-               
+               /*
                if(tabla.tabla.containsKey(tokenString) == true) {
-               
                } else {
-               
                    tabla.put(tokenString, t);
-               }
+               } */
                coincidir(TokenType.ID);
                break;
            case LPARENT:            /* Expresión entre paréntesis */
