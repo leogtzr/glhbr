@@ -1,7 +1,8 @@
-// FIXME Corregir errores con || y &&
-// FIXME Expresiones de resaltado.
-// FIXME Problemas con UNDO al abrir un archivo. Falla sólo en Linux?
-// Agregado de palabras a la lista por idioma y en el menú Abrir.
+// PENDIENTE Corregir errores con || y &&
+// PENDIENTE Expresiones de resaltado.
+// PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?
+// PENDIENTE Agregado de palabras a la lista por idioma y en el menú Abrir.
+// PENDIENTE No sirve el resaltado de números de 1 dígito.
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
@@ -44,7 +45,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.UndoManager;
 import Clases.Analizador;
 import Clases.Parser;
-import javax.swing.Icon;
+// GIT Imports innecesarios removidos.
 
 public class editorVentana extends javax.swing.JFrame {
     
