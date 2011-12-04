@@ -1031,7 +1031,7 @@ public static void recorrerArbol(NodoArbol a) {
                NodoArbol temporal = null;
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
-                   errorString += "Variable o función no encontrada: " + tokenString + " ,linea: " + lineno;
+                   errorString += "Variable o función no encontrada: " + tokenString + " ,linea: " + lineno + "\n";
                } else {
                    JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
                }
@@ -1057,6 +1057,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado ---> ");
+               errorString += "Token inesperado: " + tokenString + "\n";
                printToken(token, tokenString);
                token = getToken();
                break;
