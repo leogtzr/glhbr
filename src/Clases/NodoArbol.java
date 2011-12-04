@@ -8,6 +8,8 @@ public class NodoArbol {
         hijos[0] = null;
         hijos[1] = null;
         hijos[2] = null;
+        valor = 0;
+        valorDecimal = 0.0;
     }
     
     public NodoArbol []hijos; /* Maximo de tres hijos MAXHIJOS */
@@ -18,7 +20,8 @@ public class NodoArbol {
     StmtKind stmt; /* Tipo de sentencia */
     ExpKind exp;  /* Tipo de expresion */
     TokenType op;      /* Tipo de operador */
-    int valor;
+    int valor = 0;
+    double valorDecimal = 0.0;
     String nombre;
     ExpType type;         /* Para verificación de tipo de expresiones */
 

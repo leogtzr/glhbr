@@ -1,8 +1,10 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
+// Pendiente, como almacenar un número decimal en NodoArbol?
 package Clases;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Parser {
     
@@ -16,7 +18,7 @@ public class Parser {
        OR,WHILE,INFINITO,INIBLOQUE,FINBLOQUE,INICIO,FINALIZAR,INC,DEC,SENO,COSENO,ABS, 
        TAN, LN, CLEAR, SALIR,
        FACTORIAL, RAIZ,
-       HEX, CADENA, BOOLEANO, BINARIO
+       HEX, CADENA, BOOLEANO, BINARIO, ENTERO, DECIMAL
     };
    
     TablaSimbolos tabla = new TablaSimbolos();
@@ -49,7 +51,9 @@ public class Parser {
         RaizK,
         HexK, 
         BooleanK, 
-        BinarioK
+        BinarioK,
+        EnteroK,
+        DecimalK
     };
     
     public static enum ExpKind {
@@ -58,10 +62,9 @@ public class Parser {
     
     // Enumeración para verificación de Tipo.
     public static enum ExpType {
-        Void, Integer, Boolean, Binario
+        Void, Integer, Boolean, Binario, Entero, Float, Decimal
     };
 
-    
     private boolean isBinary(String s) {
         for(int i = 0; i < s.length(); i++) {
             if(s.charAt(i) != '0' && s.charAt(i) != '1') {
@@ -71,6 +74,15 @@ public class Parser {
         return true;
     }
     
+    public static boolean isFloat(String token) {
+        if(Pattern.matches("[+-]?\\d*\\.\\d+", token))
+            return true;
+        return Pattern.matches("[+-]?\\d*[\\.]?\\d+[eE][+-]?\\d+", token);
+    }
+    public static boolean isEntero(String token) {
+        return Pattern.matches("[+-]?\\d+", token);
+    }
+
     public int bin2int(String str) {
         return Integer.parseInt(str, 2);
     }
@@ -99,11 +111,9 @@ public class Parser {
             imprimirEspacios();
             if(arbol.nodeKind == NodeKind.StmtK) {
                 switch(arbol.stmt) {
-                    
                     case IfK:
                         System.out.println("If");
                         break;
-                    
                     case RepeatK:
                         System.out.println("Repetir");
                         break;
@@ -164,6 +174,15 @@ public class Parser {
                     case BooleanK:
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;    
+                    case BinarioK:
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;
+                    case EnteroK:
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;
+                    case DecimalK:
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;
                     default:
                         System.out.println("Nodo desconocido");
                 }
@@ -175,7 +194,15 @@ public class Parser {
                         printToken(arbol.op, "\\0");
                         break;
                     case ConstK:
-                        System.out.println("const: " + arbol.valor);
+                        //System.out.println("const: " + arbol.valor + "|" + arbol.valorDecimal);
+                        // PENDIENTE Hacer las comparaciones correspondientes para mostrar entre binarios, enteros y decimales.
+                        //System.out.println("const: " + (arbol.type == ExpType.Entero) ? arbol.valor : arbol.valorDecimal);
+                        // PENDIENTE Correcto muestreo entre decimales y enteros
+                        if(arbol.type == ExpType.Entero)
+                            System.out.println("const: " + arbol.valor);
+                        else
+                            System.out.println("const: " + arbol.valorDecimal);
+                        
                         break;
                     case IdK:
                         System.out.println("id: " + arbol.nombre);
@@ -237,8 +264,7 @@ public class Parser {
    private static void preorden(NodoArbol a) {
        
 	if(a != null) {
-		/* Operaciones con el nodo a */
-            //System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
+		//System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
             if(a.nombre != null) {
               System.out.print(a.nombre);  
             } else if(a.op != null) {
@@ -295,7 +321,6 @@ public class Parser {
    private static void inorden(NodoArbol a) {
 	if(a != null) {
 		inorden(a.hijos[0]);
-		/* Operaciones con el nodo a */
                 if(a.nombre != null) {
                     System.out.print(a.nombre);  
                 } else if(a.op != null) {
@@ -315,8 +340,7 @@ public class Parser {
                     }         
                 } else if(a.exp == ExpKind.ConstK) {
                     System.out.print(a.valor);
-                }
-                
+                }                
 		inorden(a.hijos[1]);
 	}
     }
@@ -324,12 +348,10 @@ public class Parser {
 public static void recorrerArbol(NodoArbol a) {
     
     if(a != null) {
-		/* Operaciones con el nodo a */
-            //System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
+		//System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
             if(a.nombre != null) {
               System.out.print(a.nombre);  
             } else if(a.op != null) {
-                //System.out.println();
                 switch(a.op) {
                     case PLUS:
                         System.out.print('+');
@@ -377,6 +399,10 @@ public static void recorrerArbol(NodoArbol a) {
            case FACTORIAL:
            case RAIZ:
            case HEX:
+           case BINARIO:
+           case ENTERO:
+           case DECIMAL:
+           
                // PENDIENTE Salida a un archivo?
                System.out.println("palabra reservada: " + tokenString);
                break;
@@ -422,7 +448,6 @@ public static void recorrerArbol(NodoArbol a) {
            case CADENA:
                System.out.println("cadena=" + tokenString);
                break;
-               
            case ERROR:
                System.out.println("Error: " + tokenString);
                break;
@@ -505,7 +530,6 @@ public static void recorrerArbol(NodoArbol a) {
                    p.hermano = q;
                    p = q;
                }
-                   
            }
        }
        
@@ -527,6 +551,12 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            case BINARIO:
                 t = assign_binary_stmt();
+               break;
+           case ENTERO:
+               t = assign_entero_stmt();
+               break;
+           case DECIMAL:
+               t = assign_decimal_stmt();
                break;
            case LEER:
                t = read_stmt();
@@ -819,20 +849,16 @@ public static void recorrerArbol(NodoArbol a) {
        if(t != null)
            t.nombre = tokenString;
        
-       //JOptionPane.showMessageDialog(null, tokenString);
        if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
            //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
            t.type = ExpType.Binario;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
            tabla.put(tokenString, t);
            
-       } else {
-           
+       } else {    
            errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
-          
        }
        // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
        // Es una asignación, entonces debemos asegurarnos que la variable no esté en la tabla de símbolos...
-       
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)
@@ -985,7 +1011,6 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
-   
    public NodoArbol termino_binario() {
        NodoArbol t = factor_binario();
        while((token == TokenType.TIMES) || (token == TokenType.OVER)) {
@@ -1010,8 +1035,11 @@ public static void recorrerArbol(NodoArbol a) {
                    if(isBinary(tokenString) == false) {
                        errorString += "Debe especificar un número binario válido, línea: " + lineno + "\n";
                        syntaxError("Debe especificar un número binario válido\n");  
-                   } else             // Sino convertimos
+                   } else {
+                       t.type = ExpType.Binario;
+                                 // Sino convertimos
                        t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
+                   }
                }
                    
                //JOptionPane.showMessageDialog(null, "Valor: " + Integer.parseInt(tokenString));
@@ -1059,6 +1087,308 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    //////////////////////// Fin código de prueba ///////////////////////////////////////////////
+   /////////////////////// Código de prueba para enteros ///////////////////////////////////////
+   public NodoArbol assign_entero_stmt() {
+   
+       NodoArbol t = newStmtNode(StmtKind.EnteroK);
+       
+       coincidir(TokenType.ENTERO);
+       if(t != null)
+           t.nombre = tokenString;
+       
+       if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
+           //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+           t.type = ExpType.Entero;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
+           tabla.put(tokenString, t);
+           
+       } else {    
+           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
+       }
+       // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
+       // Es una asignación, entonces debemos asegurarnos que la variable no esté en la tabla de símbolos...
+       coincidir(TokenType.ID);
+       coincidir(TokenType.ASSIGN);
+       if(t != null)
+           t.hijos[0] = expresion_entera();        // Hacer un procedimiento expresion_entera
+       
+       tabla.mostrarTabla();
+       
+       return t;
+   }
+   
+   
+    /////////////// Código de prueba /////////////////////////////////////////////////////////////////
+      public NodoArbol expresion_entera() {
+       NodoArbol t = simple_expresion_entera();
+       if((token == TokenType.GT) || (token == TokenType.LT) || (token == TokenType.EQ)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+           }
+           
+           coincidir(token);
+           if(t != null)
+               t.hijos[1] = simple_expresion_entera();
+           
+       }
+       return t;
+   }
+   
+   public NodoArbol simple_expresion_entera() {
+       NodoArbol t = termino_entero();
+       while((token == TokenType.PLUS) || (token == TokenType.MINUS)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+               coincidir(token);
+               t.hijos[1] = termino_entero();
+           }
+       }
+       return t;
+   }
+   
+   public NodoArbol termino_entero() {
+       NodoArbol t = factor_entero();
+       while((token == TokenType.TIMES) || (token == TokenType.OVER)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+               coincidir(token);
+               p.hijos[1] = factor_entero();
+           }
+       }
+       return t;
+   }
+   
+   public NodoArbol factor_entero() {
+       NodoArbol t = null;
+       switch(token) {
+           case NUM:
+               t = newExpNode(ExpKind.ConstK);
+               if((t != null) && (token == TokenType.NUM)) {
+                   if(isEntero(tokenString) == false) { // Checar si es un número entero.
+                       errorString += "Encontrado un número no Entero, convertir a entero, línea: " + lineno + "\n";
+                       syntaxError("Debe especificar un número entero válido\n");  
+                   } else {
+                                    // Sino convertimos a entero y almacenamos en el miembro "valor".
+                       t.type = ExpType.Entero;
+                       t.valor = Integer.parseInt(tokenString); // Hacer la comprobación de tipos.
+                   }
+               }
+               
+               coincidir(TokenType.NUM);
+               break;
+           case ID:
+               
+               NodoArbol temporal = null;
+               temporal = (NodoArbol) tabla.tabla.get(tokenString);
+               if(temporal == null) {
+                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+               } else {
+                   // Chequeo de tipos luego que sí está en la tabla de símbolos.
+                   if(temporal.type != ExpType.Entero) {
+                       
+                       if(temporal.type == ExpType.Float) {
+                           // PENDIENTE Mostrar mensaje alusivo a la conversión.
+                           t.valor = (int)temporal.valor;    // Convertimos a float y luego a entero para truncar...
+                       } else {
+                           errorString += "Tipos incompatibles entero y binario, línea " + lineno + "\n";
+                       }
+                       
+                   } else {     // Es Entero.
+                       t = newExpNode(ExpKind.IdK);
+                       t.valor = temporal.valor;
+                   }
+                   
+               }
+               
+               t = newExpNode(ExpKind.IdK);
+               if((t != null) && (token == TokenType.ID)) {
+                   
+                   t.nombre = tokenString;
+               }
+               
+               if(tabla.tabla.containsKey(tokenString) == true) {
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
+               } else {
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+                   tabla.put(tokenString, t);
+               }
+               coincidir(TokenType.ID);
+               break;
+           case LPARENT:            /** Expresión entre paréntesis **/
+               coincidir(TokenType.LPARENT);
+               t = expresion_entera();
+               coincidir(TokenType.RPARENT);
+               break;
+           default:
+               syntaxError("Token inesperado ---> ");
+               errorString += "Token inesperado: " + tokenString + "\n";
+               printToken(token, tokenString);
+               token = getToken();
+               break;
+       }
+       return t;
+   }
+   /////////////////// Fin código de enteros ///////////////////////////////////
+   ////////////////// Inicio de código de decimales ////////////////////////////
+   public NodoArbol assign_decimal_stmt() {
+   
+       NodoArbol t = newStmtNode(StmtKind.DecimalK);
+       
+       coincidir(TokenType.DECIMAL);
+       if(t != null)
+           t.nombre = tokenString;
+       
+       if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
+           t.type = ExpType.Decimal;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
+           tabla.put(tokenString, t);       // Agregar a la tabla de símbolos
+           
+       } else {    
+           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
+       }
+       // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
+       // Es una asignación, entonces debemos asegurarnos que la variable no esté en la tabla de símbolos...
+       coincidir(TokenType.ID);
+       coincidir(TokenType.ASSIGN);
+       if(t != null)
+           t.hijos[0] = expresion_decimal();        // Hacer un procedimiento expresion_entera
+       
+       tabla.mostrarTabla();
+       
+       return t;
+   }
+   
+   
+    /////////////// Código de prueba /////////////////////////////////////////////////////////////////
+      public NodoArbol expresion_decimal() {
+       NodoArbol t = simple_expresion_decimal();
+       if((token == TokenType.GT) || (token == TokenType.LT) || (token == TokenType.EQ)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+           }
+           
+           coincidir(token);
+           if(t != null)
+               t.hijos[1] = simple_expresion_decimal();
+           
+       }
+       return t;
+   }
+   
+   public NodoArbol simple_expresion_decimal() {
+       NodoArbol t = termino_decimal();
+       while((token == TokenType.PLUS) || (token == TokenType.MINUS)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+               coincidir(token);
+               t.hijos[1] = termino_decimal();
+           }
+       }
+       return t;
+   }
+   
+   public NodoArbol termino_decimal() {
+       NodoArbol t = factor_decimal();
+       while((token == TokenType.TIMES) || (token == TokenType.OVER)) {
+           NodoArbol p = newExpNode(ExpKind.OpK);
+           if(p != null) {
+               p.hijos[0] = t;
+               p.op = token;
+               t = p;
+               coincidir(token);
+               p.hijos[1] = factor_decimal();
+           }
+       }
+       return t;
+   }
+   
+   public NodoArbol factor_decimal() {
+       NodoArbol t = null;
+       switch(token) {
+           case NUM:
+               t = newExpNode(ExpKind.ConstK);
+               if((t != null) && (token == TokenType.NUM)) {
+                   if(isFloat(tokenString) == false) { // Checar si es un número flotante
+                       errorString += "Encontrado un número no Flotante, convertir a entero, línea: " + lineno + "\n";
+                       syntaxError("Debe especificar un número entero válido\n");  
+                   } else {
+                                    // Sino convertimos a double y almacenamos en el miembro "valor" y "valorDecimal"
+                       //t.valor = Integer.parseInt(tokenString); // Hacer la comprobación de tipos.
+                       t.type = ExpType.Decimal;
+                       t.valorDecimal = Double.parseDouble(tokenString);
+                   }
+               }
+               
+               coincidir(TokenType.NUM);
+               break;
+           case ID:
+               
+               NodoArbol temporal = null;
+               temporal = (NodoArbol) tabla.tabla.get(tokenString);
+               if(temporal == null) {
+                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+               } else {
+                   // Chequeo de tipos luego que sí está en la tabla de símbolos.
+                   if(temporal.type != ExpType.Decimal) {
+                       
+                       if(temporal.type == ExpType.Float) {
+                           // PENDIENTE Mostrar mensaje alusivo a la conversión.
+                           t.valor = (int)temporal.valor;    // Convertimos a float y luego a entero para truncar...
+                       } else {
+                           errorString += "Tipos incompatibles entero y binario, línea " + lineno + "\n";
+                       }
+                       
+                   } else {     // Es Entero.
+                       t = newExpNode(ExpKind.IdK);
+                       t.valor = temporal.valor;
+                   }
+                   
+               }
+               
+               t = newExpNode(ExpKind.IdK);
+               if((t != null) && (token == TokenType.ID)) {
+                   
+                   t.nombre = tokenString;
+               }
+               
+               if(tabla.tabla.containsKey(tokenString) == true) {
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
+               } else {
+                   //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+                   tabla.put(tokenString, t);
+               }
+               coincidir(TokenType.ID);
+               break;
+           case LPARENT:            /** Expresión entre paréntesis **/
+               coincidir(TokenType.LPARENT);
+               t = expresion_entera();
+               coincidir(TokenType.RPARENT);
+               break;
+           default:
+               syntaxError("Token inesperado ---> ");
+               errorString += "Token inesperado: " + tokenString + "\n";
+               printToken(token, tokenString);
+               token = getToken();
+               break;
+       }
+       return t;
+   }
+   ////////////////////////////// Fin Código de flotantes //////////////////////
    
    public TokenType getToken() {
        
@@ -1080,10 +1410,7 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.ID);
        
        t = stmt_sequence();
-       //indice--;
-       //coincidir(TokenType.SEMI);
        coincidir(TokenType.FINALIZAR);
-       //System.out.println("Esto mero : " + "[" + token + "] = " + indice + "[->" + palabras.get(indice - 1).getValor() + "\n");
        
        return t;
    }

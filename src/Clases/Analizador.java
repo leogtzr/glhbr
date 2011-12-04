@@ -1,7 +1,7 @@
 // ITCH II.
-// Analizador léxico. GLHBR
+// Analizador léxico para el compilador GLHBR
+// PENDIENTE Quitar los cast's, no son necesarios.
 package Clases;
-//import static Clases.Alfabeto.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -90,7 +90,7 @@ public class Analizador {
                     while(Character.isDigit((char)c))
                     {
                         lexema += Character.toString((char)c);
-                        c = fr.read(); // fgetc(inputFILE);
+                        c = fr.read();
                     }
                     /* Hacer comprobacion de numero con notación científica */
                     if((char)c == 'E')
@@ -115,7 +115,7 @@ public class Analizador {
                             while( Character.isDigit(c) )
                             {
                                 lexema += Character.toString((char)c);
-                                c = fr.read();//fgetc(inputFILE);
+                                c = fr.read();
                             }
                     }
                 } else {
@@ -133,7 +133,6 @@ public class Analizador {
             switch(c)
             {
                 case ' ': break;
-
                 case '^':
                     //System.out.printf("Operador (Exponenciación - ^) : %c ---> %d\n", c, nLineas);
                     palabras.add(new Lexema("^", TokenType.POW).setLineNo(nLineas));
@@ -143,7 +142,6 @@ public class Analizador {
                     palabras.add(new Lexema("(", TokenType.LPARENT).setLineNo(nLineas));
                     //System.out.printf("Delimitador (LParen - ( ) : %c ---> %d\n", c, nLineas);
                     break;
-
                 case ')':
                     palabras.add(new Lexema(")", TokenType.RPARENT).setLineNo(nLineas));
                     //System.out.printf("Delimitador (RParen - ) ) : %c ---> %d\n", c, nLineas);

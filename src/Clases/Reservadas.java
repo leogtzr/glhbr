@@ -105,7 +105,9 @@ public class Reservadas {
         "factorial",    
         "raiz",
         "hex",
-        "binario"
+        "binario",
+        "entero",
+        "decimal"
             
     };
     
@@ -138,7 +140,9 @@ public class Reservadas {
         TokenType.FACTORIAL,
         TokenType.RAIZ,
         TokenType.HEX,
-        TokenType.BINARIO
+        TokenType.BINARIO,
+        TokenType.ENTERO,
+        TokenType.DECIMAL
         
     };
     
