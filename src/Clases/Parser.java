@@ -535,6 +535,7 @@ public static void recorrerArbol(NodoArbol a) {
                t = repeat_stmt();
                break;
            case ID:
+               // PENDIENTE Almacenar el tipo de la variable para compatibilidad? variable glogal?
                t = assign_stmt();
                break;
            case BINARIO:
@@ -813,6 +814,13 @@ public static void recorrerArbol(NodoArbol a) {
        if((t != null) && (token == TokenType.ID))
            // Cuidado con esto!
            t.nombre = tokenString;
+       JOptionPane.showMessageDialog(null, tokenString);
+       // PENDIENTE Checar si existe dicha variable
+       //if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
+       if(tabla.tabla.containsKey(tokenString) == false) {
+           errorString += "La variable o función " + tokenString + " no existe, línea" + lineno + "\n";
+           syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
+       }
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)
@@ -1387,7 +1395,6 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.INICIO);
        System.out.println("Programa: " + tokenString);
        
-       // GIT Las variables no pueden tener el mismo identificador que el programa.
        NodoArbol programName = newStmtNode(StmtKind.ProgramK);
        programName.nombre = tokenString;
        tabla.put(tokenString, programName);
