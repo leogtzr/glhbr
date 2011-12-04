@@ -22,7 +22,6 @@ public class Parser {
     };
    
     TablaSimbolos tabla = new TablaSimbolos();
-    ArrayList<String> errores = null;
     String errorString = "";
     
     public static enum NodeKind {
@@ -820,7 +819,10 @@ public static void recorrerArbol(NodoArbol a) {
        if(tabla.tabla.containsKey(tokenString) == false) {
            errorString += "La variable o función " + tokenString + " no existe, línea" + lineno + "\n";
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
+       } else { // Sí existe y obtenemos su tipo...
+           
        }
+       
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
        if(t != null)
