@@ -3,6 +3,7 @@
 // PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?
 // PENDIENTE Agregado de palabras a la lista por idioma y en el menú Abrir.
 // PENDIENTE No sirve el resaltado de números de 1 dígito.
+// PENDIENTE Eliminar la ventana de salida?
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
@@ -45,7 +46,6 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.UndoManager;
 import Clases.Analizador;
 import Clases.Parser;
-// GIT Imports innecesarios removidos.
 
 public class editorVentana extends javax.swing.JFrame {
     
@@ -1438,7 +1438,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
             Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String kaka = Analizador.getLexForm(palabras, idiomaCheck.isSelected() == true ? true : false);
+        //String kaka = Analizador.getLexForm(palabras, idiomaCheck.isSelected() == true ? true : false);
     
         /* areaLexico.setText(kaka);
         

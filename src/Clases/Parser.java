@@ -1,6 +1,5 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
-// PENDIENTE Almacenar el binario como String en NodoArbol.java?
 package Clases;
 
 import java.util.ArrayList;
@@ -254,7 +253,7 @@ public class Parser {
    private static void preorden(NodoArbol a) {
        
 	if(a != null) {
-		//System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
+		
             if(a.nombre != null) {
               System.out.print(a.nombre);  
             } else if(a.op != null) {
@@ -338,7 +337,6 @@ public class Parser {
 public static void recorrerArbol(NodoArbol a) {
     
     if(a != null) {
-		//System.out.print("[" + a.nombre + "," + a.exp + "," + a.nodeKind + "," + a.op + "," + a.stmt + "," + a.type + "," + a.valor + "]\n");
             if(a.nombre != null) {
               System.out.print(a.nombre);  
             } else if(a.op != null) {
@@ -1396,6 +1394,5 @@ public static void recorrerArbol(NodoArbol a) {
        
        return t;
    }
-   // Solo para ir viendo el comportamiento..., auxiliar para comprobación.
-   // GIT Método recorrer eliminado
+
 }
