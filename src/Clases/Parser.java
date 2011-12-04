@@ -195,7 +195,7 @@ public class Parser {
                         printToken(arbol.op, "\\0");
                         break;
                     case ConstK:
-                        if(arbol.type == ExpType.Entero)
+                        if(arbol.type == ExpType.Entero || arbol.type == ExpType.Binario)
                             System.out.println("const: " + arbol.valor);
                         else
                             System.out.println("const: " + arbol.valorDecimal);
@@ -1039,7 +1039,6 @@ public static void recorrerArbol(NodoArbol a) {
                    }
                }
                    
-               //JOptionPane.showMessageDialog(null, "Valor: " + Integer.parseInt(tokenString));
                
                coincidir(TokenType.NUM);
                break;
@@ -1062,14 +1061,14 @@ public static void recorrerArbol(NodoArbol a) {
                }
                
                if(tabla.tabla.containsKey(tokenString) == true) {
-                   //JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
+               
                } else {
-                   //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
+               
                    tabla.put(tokenString, t);
                }
                coincidir(TokenType.ID);
                break;
-           case LPARENT:            /** Expresión entre paréntesis **/
+           case LPARENT:            /* Expresión entre paréntesis */
                coincidir(TokenType.LPARENT);
                t = expresion_binaria();
                coincidir(TokenType.RPARENT);
