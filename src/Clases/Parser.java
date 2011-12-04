@@ -53,7 +53,8 @@ public class Parser {
         BooleanK, 
         BinarioK,
         EnteroK,
-        DecimalK
+        DecimalK,
+        ProgramK
     };
     
     public static enum ExpKind {
@@ -836,7 +837,6 @@ public static void recorrerArbol(NodoArbol a) {
            t.nombre = tokenString;
        
        if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
-           //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
            t.type = ExpType.Binario;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
            tabla.put(tokenString, t);
            
@@ -844,7 +844,6 @@ public static void recorrerArbol(NodoArbol a) {
            syntaxError("La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n");
            errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
        }
-       //JOptionPane.showMessageDialog(null, tokenString);
        
        coincidir(TokenType.ID);
        coincidir(TokenType.ASSIGN);
@@ -1387,11 +1386,16 @@ public static void recorrerArbol(NodoArbol a) {
        token = getToken();
        coincidir(TokenType.INICIO);
        System.out.println("Programa: " + tokenString);
+       
+       // GIT Las variables no pueden tener el mismo identificador que el programa.
+       NodoArbol programName = newStmtNode(StmtKind.ProgramK);
+       programName.nombre = tokenString;
+       tabla.put(tokenString, programName);
+       
        coincidir(TokenType.ID);
        
        t = stmt_sequence();
-       coincidir(TokenType.FINALIZAR);
-       
+       coincidir(TokenType.FINALIZAR);       
        return t;
    }
 
