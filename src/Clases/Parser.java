@@ -251,12 +251,6 @@ public class Parser {
        return palabras;
    }
    
-   // GIT Método no utilizado eliminado.
-   /*public ArrayList<String> getListaErrores() {
-       return errores;
-   
-   } */
-   
    private static void preorden(NodoArbol a) {
        
 	if(a != null) {

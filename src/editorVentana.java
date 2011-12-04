@@ -1455,10 +1455,6 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         Parser.tokenString = "";
         Parser syntax = new Parser(palabras);
         Parser.lineno = 0;
-        
-        // GIT Variable no utilizada borrada
-        //ArrayList<String> syntaxErrors = syntax.getListaErrores();
-        
         NodoArbol arbolSintactico = syntax.parse();
         
         // TODO Sólo se avisará al usuario, el deberá arreglar los errores.
