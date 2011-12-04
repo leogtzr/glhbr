@@ -1,10 +1,8 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
-// PENDIENTE Quitar los mensajes de JOptionPane.showMessage
 package Clases;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class Parser {
     
@@ -23,6 +21,7 @@ public class Parser {
    
     TablaSimbolos tabla = new TablaSimbolos();
     ArrayList<String> errores = null;
+    public int countError = 0;
     String errorString = "";
     
     public static enum NodeKind {
@@ -1009,8 +1008,8 @@ public static void recorrerArbol(NodoArbol a) {
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM)) {
                    if(isBinary(tokenString) == false) {
-                       errorString += "Debe especificar un número binario válido., línea: " + lineno + "\n";
-                       syntaxError("Debe especificar un número binario válido. Vea la Ayuda.\n");  
+                       errorString += "Debe especificar un número binario válido, línea: " + lineno + "\n";
+                       syntaxError("Debe especificar un número binario válido\n");  
                    } else             // Sino convertimos
                        t.valor = bin2int(tokenString); // Hacer la comprobación de tipos.
                }

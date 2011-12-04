@@ -1460,8 +1460,12 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         NodoArbol arbolSintactico = syntax.parse();
         
         // TODO Sólo se avisará al usuario, el deberá arreglar los errores.
-        if(syntax.getErrorString().split("\n").length > 0) {
-            JOptionPane.showMessageDialog(null, syntax.getErrorString(), 
+        //JOptionPane.showMessageDialog(this, "Errores: [" + syntax.getErrorString() + "]");
+        if(syntax.getErrorString().length() == 0) {
+            ImageIcon imageIcon = new ImageIcon("src/icons/ok_icon.gif");
+            JOptionPane.showMessageDialog(this, "Compilación correcta.", "Todo correcto", JOptionPane.INFORMATION_MESSAGE, imageIcon);
+        } else {
+            JOptionPane.showMessageDialog(null, syntax.getErrorString(),
                     "Error de compilación", JOptionPane.ERROR_MESSAGE);
         }
         
