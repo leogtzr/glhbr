@@ -1048,7 +1048,7 @@ public static void recorrerArbol(NodoArbol a) {
                } else {
                    // Ya que si se encuentra en la tabla de símbolos, checar que sea de tipo binario, sino lanzar error.
                    if(temporal.type != ExpType.Binario) {
-                       errorString += "La variable " + tokenString + " no es de tipo Binario, corrija ese error, línea " + lineno;
+                       errorString += "La variable " + tokenString + " no es de tipo Binario, corrija ese error, línea " + lineno + "\n";
                        syntaxError("La variable " + tokenString + " no es de tipo Binario, corrija ese error, línea " + lineno);
                    }
                }
