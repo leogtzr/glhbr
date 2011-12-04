@@ -1027,8 +1027,14 @@ public static void recorrerArbol(NodoArbol a) {
            case ID:
                // PENDIENTE Checar primero que dicha variable se encuentre en la tabla de simbolos.
                // PENDIENTE Si se encuentra, checar que el tipo sea binario....
-               NodoArbol temporal = (NodoArbol) tabla.tabla.get(tokenString);
-               JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
+               // PENDIENTE Si una variable en la expresión no existe lanza una excepción... Corregir, probar con una variable que no exista.
+               NodoArbol temporal = null;
+               temporal = (NodoArbol) tabla.tabla.get(tokenString);
+               if(temporal == null) {
+                   errorString += "Variable o función no encontrada: " + tokenString + " ,linea: " + lineno;
+               } else {
+                   JOptionPane.showMessageDialog(null, "---> " + tokenString + " | " + temporal.type);
+               }
                
                t = newExpNode(ExpKind.IdK);
                if((t != null) && (token == TokenType.ID)) {
