@@ -1041,9 +1041,6 @@ public static void recorrerArbol(NodoArbol a) {
                coincidir(TokenType.NUM);
                break;
            case ID:
-               // PENDIENTE Checar primero que dicha variable se encuentre en la tabla de simbolos. DONE
-               // PENDIENTE Si se encuentra, checar que el tipo sea binario....                     DONE
-               // PENDIENTE Si una variable en la expresión no existe lanza una excepción...        DONE
                NodoArbol temporal = null;
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
@@ -1061,6 +1058,7 @@ public static void recorrerArbol(NodoArbol a) {
                if((t != null) && (token == TokenType.ID)) {
                    t.nombre = tokenString;
                }
+               
                /*
                if(tabla.tabla.containsKey(tokenString) == true) {
                } else {
@@ -1169,6 +1167,7 @@ public static void recorrerArbol(NodoArbol a) {
            case NUM:
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM)) {
+                   // PENDIENTE Sino es entero, checar si es float y si lo es convertir a entero.
                    if(isEntero(tokenString) == false) { // Checar si es un número entero.
                        errorString += "Encontrado un número no Entero, convertir a entero, línea: " + lineno + "\n";
                        syntaxError("Debe especificar un número entero válido\n");  
@@ -1191,9 +1190,9 @@ public static void recorrerArbol(NodoArbol a) {
                    // Chequeo de tipos luego que sí está en la tabla de símbolos.
                    if(temporal.type != ExpType.Entero) {
                        
-                       if(temporal.type == ExpType.Float) {
-                           // PENDIENTE Mostrar mensaje alusivo a la conversión.
-                           t.valor = (int)temporal.valor;    // Convertimos a float y luego a entero para truncar...
+                       if(temporal.type == ExpType.Decimal) {
+                           JOptionPane.showMessageDialog(null, "Variable de tipo decimal " + tokenString + " encontrada, convirtiendo a entero, línea " + lineno);;
+                           t.valor = (int)temporal.valorDecimal;    // Convertimos a float y luego a entero para truncar...
                        } else {
                            errorString += "Tipos incompatibles entero y binario, línea " + lineno + "\n";
                        }
@@ -1325,6 +1324,7 @@ public static void recorrerArbol(NodoArbol a) {
                            t.type = ExpType.Decimal;
                            t.valorDecimal = Double.parseDouble(tokenString);
                        } else {
+                           // Un binario encontrado.
                            errorString += "Error, tipos de datos incompatibles, " + tokenString + ", línea " + lineno + "\n";
                            syntaxError("Debe especificar un número flotante válido\n");  
                        }
@@ -1344,13 +1344,14 @@ public static void recorrerArbol(NodoArbol a) {
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
                    errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+                   syntaxError("Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n");
                } else {
                    // Chequeo de tipos luego que sí está en la tabla de símbolos.
                    if(temporal.type != ExpType.Decimal) {
                        
-                       if(temporal.type == ExpType.Float) {
+                       if(temporal.type == ExpType.Entero) {
                            // PENDIENTE Mostrar mensaje alusivo a la conversión.
-                           t.valor = (int)temporal.valor;    // Convertimos a float y luego a entero para truncar...
+                           t.valorDecimal = (double)temporal.valor;    // Convertimos a float y luego a entero para truncar...
                        } else {
                            errorString += "Tipos incompatibles entero y binario, línea " + lineno + "\n";
                        }
@@ -1368,15 +1369,16 @@ public static void recorrerArbol(NodoArbol a) {
                    t.nombre = tokenString;
                }
                
+               /*
                if(tabla.tabla.containsKey(tokenString) == true) {
                    //JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
                } else {
                    //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
                    tabla.put(tokenString, t);
-               }
+               } */
                coincidir(TokenType.ID);
                break;
-           case LPARENT:            /** Expresión entre paréntesis **/
+           case LPARENT:            /* Expresión entre paréntesis */
                coincidir(TokenType.LPARENT);
                t = expresion_entera();
                coincidir(TokenType.RPARENT);
@@ -1417,10 +1419,5 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    // Solo para ir viendo el comportamiento..., auxiliar para comprobación.
-   public void recorrer() {
-       for(int i = 0; i < this.palabras.size(); i++)
-           System.out.println(this.palabras.get(i).getValor() + ": " + this.palabras.get(i).getLineNo() + " - " + 
-                   this.palabras.get(i).getTipoToken()
-                   );
-   }   
+   // GIT Método recorrer eliminado
 }

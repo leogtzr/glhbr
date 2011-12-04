@@ -1,0 +1,17 @@
+// Parser.java
+public void recorrer() {
+       for(int i = 0; i < this.palabras.size(); i++)
+           System.out.println(this.palabras.get(i).getValor() + ": " + this.palabras.get(i).getLineNo() + " - " + 
+                   this.palabras.get(i).getTipoToken()
+                   );
+   }   
+
+
+    // Devuelve el código Hash de una cadena.
+	// Reservadas.java
+
+    public int codigoHash(String s) {
+        int v = 0;
+        for(int i = 0; i < s.length(); v += (int)s.charAt(i));
+        return v % palabrasIngles.length;
+    }
