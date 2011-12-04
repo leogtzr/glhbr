@@ -1,10 +1,11 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
-// Pendiente, como almacenar un número decimal en NodoArbol?
+// PENDIENTE Almacenar el binario como String en NodoArbol.java?
 package Clases;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 public class Parser {
     
@@ -194,10 +195,6 @@ public class Parser {
                         printToken(arbol.op, "\\0");
                         break;
                     case ConstK:
-                        //System.out.println("const: " + arbol.valor + "|" + arbol.valorDecimal);
-                        // PENDIENTE Hacer las comparaciones correspondientes para mostrar entre binarios, enteros y decimales.
-                        //System.out.println("const: " + (arbol.type == ExpType.Entero) ? arbol.valor : arbol.valorDecimal);
-                        // PENDIENTE Correcto muestreo entre decimales y enteros
                         if(arbol.type == ExpType.Entero)
                             System.out.println("const: " + arbol.valor);
                         else
@@ -1323,9 +1320,15 @@ public static void recorrerArbol(NodoArbol a) {
            case NUM:
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM)) {
-                   if(isFloat(tokenString) == false) { // Checar si es un número flotante
-                       errorString += "Encontrado un número no Flotante, convertir a entero, línea: " + lineno + "\n";
-                       syntaxError("Debe especificar un número entero válido\n");  
+                   if(isFloat(tokenString) == false) { 
+                       if(isEntero(tokenString) == true) {
+                           JOptionPane.showMessageDialog(null, "Número no decimal detectado, convirtiendo a decimal: " + tokenString + ", linea " + lineno);
+                           t.type = ExpType.Decimal;
+                           t.valorDecimal = Double.parseDouble(tokenString);
+                       } else {
+                           errorString += "Error, tipos de datos incompatibles, " + tokenString + ", línea " + lineno + "\n";
+                           syntaxError("Debe especificar un número flotante válido\n");  
+                       }
                    } else {
                                     // Sino convertimos a double y almacenamos en el miembro "valor" y "valorDecimal"
                        //t.valor = Integer.parseInt(tokenString); // Hacer la comprobación de tipos.
