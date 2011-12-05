@@ -508,6 +508,7 @@ public static void recorrerArbol(NodoArbol a) {
        } else {
            
            syntaxError("Nodo no esperado --> ");
+           errorString += "Nodo no esperado --> " + tokenString;
            printToken(expected, tokenString);
            System.out.print("      ");
            
@@ -612,6 +613,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado --> ");
+               errorString += "Token inesperado --> " + tokenString; 
                printToken(token, tokenString);
                token = getToken();
                break;
@@ -1023,6 +1025,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado ---> ");
+               errorString += "Token inesperado ---> " + tokenString;
                printToken(token, tokenString);
                token = getToken();
                break;
