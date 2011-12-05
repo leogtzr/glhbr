@@ -1,5 +1,7 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
+
+// PENDIENTE Adherir los errores en cualquier parte al string ErrorString.
 package Clases;
 
 import java.util.ArrayList;
@@ -81,7 +83,7 @@ public class Parser {
         return Pattern.matches("[+-]?\\d*[\\.]?\\d+[eE][+-]?\\d+", token);
     }
     public static boolean isEntero(String token) {
-        return Pattern.matches("[+-]?\\d+", token);
+        return Pattern.matches("[+-]?\\d+", token) && token.charAt(0) != '0';
     }
 
     public int bin2int(String str) {
@@ -967,18 +969,28 @@ public static void recorrerArbol(NodoArbol a) {
                
                if((t != null) && (token == TokenType.NUM)) {
                    // Chequeo de tipos:
-                   if((asignacionTipo == ExpType.Binario) && (getTipoDatoString(tokenString) == ExpType.Entero) && isBinary(tokenString)) {
+                   if((asignacionTipo == ExpType.Binario) || (getTipoDatoString(tokenString) == ExpType.Entero) && isBinary(tokenString)) {
                        //JOptionPane.showMessageDialog(null, "paso por aqui");
+                       //JOptionPane.showMessageDialog(null, "Binario por aquí");
                        t.type = ExpType.Binario;
                        t.valor = bin2int(tokenString);
                        // Enteros
                    } else if((asignacionTipo == ExpType.Entero) && getTipoDatoString(tokenString) == ExpType.Entero && isEntero(tokenString) == true) {
                        t.type = ExpType.Entero;
                        t.valor = Integer.parseInt(tokenString);
+                   } else if((asignacionTipo == ExpType.Decimal) && getTipoDatoString(tokenString) == ExpType.Decimal || getTipoDatoString(tokenString) == ExpType.Decimal) {
+                       // Código para decimales.
+                       //JOptionPane.showMessageDialog(null, "por aquí.... con " + tokenString);
+                       t.type = ExpType.Decimal;
+                       t.valorDecimal = Double.parseDouble(tokenString);
                    } else {
                        //JOptionPane.showMessageDialog(null, "Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno);
-                       errorString += "Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno + "\n";
+                       errorString += "Los tipos de datos no coinciden (" + tokenString + "), deben ser " + asignacionTipo + ", línea " + lineno + "\n";
                        syntaxError("Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno + "\n");
+                       if((asignacionTipo == ExpType.Entero) && isFloat(tokenString)) {
+                           t.type = ExpType.Entero;
+                           t.valor = (int)Double.parseDouble(tokenString);
+                       }
                    }
                }
                    
@@ -990,12 +1002,18 @@ public static void recorrerArbol(NodoArbol a) {
                if((t != null) && (token == TokenType.ID))
                    t.nombre = tokenString;
                
-               if(tabla.tabla.containsKey(tokenString) == true) {
-                   //JOptionPane.showMessageDialog(null, "\nLa variable: [" + tokenString + "] ya existe");
-               } else {
-                   //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
-                   tabla.put(tokenString, t);
+               if(tabla.tabla.containsKey(tokenString) == false) {
+                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+                   syntaxError("Variable o función no encontrada: " + tokenString + " ,línea: " + lineno);
+               } else {         // Si existe...
+                   NodoArbol temporal = null;
+                   temporal = (NodoArbol) tabla.tabla.get(tokenString);
+                   if(temporal.type != asignacionTipo) {
+                       errorString += "Error de tipos con " + tokenString + " , línea " + lineno + "\n";
+                       syntaxError("Error de tipos con " + tokenString + " , línea " + lineno + "\n");
+                   }
                }
+               
                coincidir(TokenType.ID);
                break;
            case LPARENT:

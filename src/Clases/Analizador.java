@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import Clases.Parser.*;
 
 public class Analizador {
@@ -310,26 +309,4 @@ public class Analizador {
         fr.close();
     }
    
-    /* Devuelve <x, 1> <A, 2> <SUM, 2>     */
-    // PENDIENTE Sirve lo que sigue?
-    /*public static String getLexForm(ArrayList<Lexema> palabras, boolean idioma) {
-        String forma = "";
-        // La tabla Hash a utilizar.
-        HashMap<String, Integer> hash = new HashMap<String, Integer>();
-        // Recorrer primero y agregar los no reservadas.
-        int direccion_preambulo = 0;
-        for(int i = 0; i < palabras.size(); i++)            // Recorremos todo el ArrayList.
-            if(!Reservadas.esReservada(palabras.get(i).getValor(), idioma) && !hash.containsKey(palabras.get(i).getValor()))
-                 hash.put(palabras.get(i).getValor(), hash.size());
-            else ++direccion_preambulo; 
-        
-        for(int i = 0; i < palabras.size(); i++)
-            if(Reservadas.esReservada(palabras.get(i).getValor(), idioma))
-                forma += "< " + palabras.get(i).getValor() + " > " + (palabras.get(i).getValor().equals(";") ? "\n" : "");
-            else
-                forma += "< " + palabras.get(i).getValor() + ", " + hash.get(palabras.get(i).getValor()) + " > " + (palabras.get(i).getValor().equals(";") ? "\n" : "");
-        
-        return forma;
-    }*/
-    
 }
