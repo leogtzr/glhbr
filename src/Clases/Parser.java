@@ -546,7 +546,6 @@ public static void recorrerArbol(NodoArbol a) {
                t = repeat_stmt();
                break;
            case ID:
-               // PENDIENTE Almacenar el tipo de la variable para compatibilidad? variable glogal?
                t = assign_stmt();
                break;
            case BINARIO:
@@ -823,7 +822,6 @@ public static void recorrerArbol(NodoArbol a) {
        
        NodoArbol t = newStmtNode(StmtKind.AssignK);
        if((t != null) && (token == TokenType.ID))
-           // Cuidado con esto!
            t.nombre = tokenString;
        
        // PENDIENTE Checar si existe dicha variable
@@ -835,8 +833,6 @@ public static void recorrerArbol(NodoArbol a) {
            temporal = (NodoArbol) tabla.tabla.get(tokenString);
            asignacionTipo = temporal.type;          // Asignamos el tipo global al tipo encontrado en la variable de asignación.
            //JOptionPane.showMessageDialog(null, asignacionTipo + "|" + temporal.type);
-           
-           
        }
        
        coincidir(TokenType.ID);
@@ -959,25 +955,31 @@ public static void recorrerArbol(NodoArbol a) {
                // PENDIENTE Hacer un casting para comprobar tipos de constantes...
                
                //JOptionPane.showMessageDialog(null, "Tipo de dato de : " + tokenString + " " + getTipoDatoString(tokenString) + " y global " + asignacionTipo);
-               if((asignacionTipo == ExpType.Binario) && getTipoDatoString(tokenString) == ExpType.Entero && 
+               /*if((asignacionTipo == ExpType.Binario) && getTipoDatoString(tokenString) == ExpType.Entero && 
                        isBinary(tokenString)
                        ) {
                    //JOptionPane.showMessageDialog(null, "Los tipos de datos coinciden\nGlobal: " + asignacionTipo + "\nLocal: " + getTipoDatoString(tokenString));
                } else {
                    //JOptionPane.showMessageDialog(null, "Error - " + asignacionTipo + " y " + getTipoDatoString(tokenString));
-                   errorString += "Intentando asignar " + tokenString + " a un binario, línea " + lineno;
+                   errorString += "Intentando asignar " + tokenString + " a un binario, línea " + lineno + "\n";
                    syntaxError("Intentando asignar " + tokenString + " a un binario, línea " + lineno);
-               }
+               }*/
                
                if((t != null) && (token == TokenType.NUM)) {
                    // Chequeo de tipos:
-                   if((asignacionTipo == ExpType.Binario) && getTipoDatoString(tokenString) == ExpType.Entero && 
-                       isBinary(tokenString)) {
+                   if((asignacionTipo == ExpType.Binario) && (getTipoDatoString(tokenString) == ExpType.Entero) && isBinary(tokenString)) {
                        //JOptionPane.showMessageDialog(null, "paso por aqui");
                        t.type = ExpType.Binario;
-                       // Hacer la conversión solo si coinciden
                        t.valor = bin2int(tokenString);
-                   } // Demás condiciones...
+                       // Enteros
+                   } else if((asignacionTipo == ExpType.Entero) && getTipoDatoString(tokenString) == ExpType.Entero && isEntero(tokenString) == true) {
+                       t.type = ExpType.Entero;
+                       t.valor = Integer.parseInt(tokenString);
+                   } else {
+                       //JOptionPane.showMessageDialog(null, "Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno);
+                       errorString += "Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno + "\n";
+                       syntaxError("Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno + "\n");
+                   }
                }
                    
                coincidir(TokenType.NUM);
