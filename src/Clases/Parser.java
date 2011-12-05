@@ -497,6 +497,7 @@ public static void recorrerArbol(NodoArbol a) {
    
    public static void syntaxError(String mensaje) {
        System.out.printf("Error de sintaxis en la línea: %d: %s", lineno, mensaje);
+       
        // Código para salir.
    }
    
@@ -520,7 +521,7 @@ public static void recorrerArbol(NodoArbol a) {
        NodoArbol t = statement();
        NodoArbol p = t;
        
-       while(/*(token != TokenType.ENDFILE) && */(token != TokenType.FINALIZAR) && (token != TokenType.FINBLOQUE) && (token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
+       while((token != TokenType.FINALIZAR) && (token != TokenType.FINBLOQUE) && (token != TokenType.END) && (token != TokenType.ELSE) && (token != TokenType.HASTA) && (indice < this.palabras.size())) {
            
            NodoArbol q;
            coincidir(TokenType.SEMI);
@@ -635,7 +636,6 @@ public static void recorrerArbol(NodoArbol a) {
                t.hijos[2] = stmt_sequence();
        }
        
-       // Cuidado Ver cómo va a terminar el IF
        coincidir(TokenType.END);
        return t;
        
