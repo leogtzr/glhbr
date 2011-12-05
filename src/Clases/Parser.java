@@ -23,6 +23,7 @@ public class Parser {
    
     TablaSimbolos tabla = new TablaSimbolos();
     String errorString = "";
+    ExpType asignacionTipo = ExpType.Void;
     
     public static enum NodeKind {
         StmtK, ExpK
@@ -90,7 +91,18 @@ public class Parser {
     public String getErrorString() {
         return errorString;
     }
-
+    
+    public ExpType getTipoDatoString(String s) {
+        if(isFloat(s)) {
+            return ExpType.Decimal;
+        } else if(isEntero(s) && s.charAt(0) != '0') {
+            return ExpType.Entero;
+        } else if(isBinary(s)) {
+            return ExpType.Binario;
+        } else
+            return ExpType.Void;
+    }
+    
     public static void indentar() {
         indentno += 4;
     }
@@ -813,13 +825,17 @@ public static void recorrerArbol(NodoArbol a) {
        if((t != null) && (token == TokenType.ID))
            // Cuidado con esto!
            t.nombre = tokenString;
-       JOptionPane.showMessageDialog(null, tokenString);
+       
        // PENDIENTE Checar si existe dicha variable
-       //if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
        if(tabla.tabla.containsKey(tokenString) == false) {
            errorString += "La variable o función " + tokenString + " no existe, línea" + lineno + "\n";
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
        } else { // Sí existe y obtenemos su tipo...
+           NodoArbol temporal = null;
+           temporal = (NodoArbol) tabla.tabla.get(tokenString);
+           asignacionTipo = temporal.type;          // Asignamos el tipo global al tipo encontrado en la variable de asignación.
+           //JOptionPane.showMessageDialog(null, asignacionTipo + "|" + temporal.type);
+           
            
        }
        
@@ -939,8 +955,31 @@ public static void recorrerArbol(NodoArbol a) {
        switch(token) {
            case NUM:
                t = newExpNode(ExpKind.ConstK);
-               if((t != null) && (token == TokenType.NUM))
-                   t.valor = Integer.parseInt(tokenString);
+               //JOptionPane.showMessageDialog(null, "Leyendo: " + tokenString);
+               // PENDIENTE Hacer un casting para comprobar tipos de constantes...
+               
+               //JOptionPane.showMessageDialog(null, "Tipo de dato de : " + tokenString + " " + getTipoDatoString(tokenString) + " y global " + asignacionTipo);
+               if((asignacionTipo == ExpType.Binario) && getTipoDatoString(tokenString) == ExpType.Entero && 
+                       isBinary(tokenString)
+                       ) {
+                   //JOptionPane.showMessageDialog(null, "Los tipos de datos coinciden\nGlobal: " + asignacionTipo + "\nLocal: " + getTipoDatoString(tokenString));
+               } else {
+                   //JOptionPane.showMessageDialog(null, "Error - " + asignacionTipo + " y " + getTipoDatoString(tokenString));
+                   errorString += "Intentando asignar " + tokenString + " a un binario, línea " + lineno;
+                   syntaxError("Intentando asignar " + tokenString + " a un binario, línea " + lineno);
+               }
+               
+               if((t != null) && (token == TokenType.NUM)) {
+                   // Chequeo de tipos:
+                   if((asignacionTipo == ExpType.Binario) && getTipoDatoString(tokenString) == ExpType.Entero && 
+                       isBinary(tokenString)) {
+                       //JOptionPane.showMessageDialog(null, "paso por aqui");
+                       t.type = ExpType.Binario;
+                       // Hacer la conversión solo si coinciden
+                       t.valor = bin2int(tokenString);
+                   } // Demás condiciones...
+               }
+                   
                coincidir(TokenType.NUM);
                break;
            case ID:
