@@ -264,36 +264,6 @@ public class Parser {
        return palabras;
    }
    
-   private static void preorden(NodoArbol a) {
-       
-	if(a != null) {
-		
-            if(a.nombre != null) {
-              System.out.print(a.nombre);  
-            } else if(a.op != null) {
-                //System.out.println();
-                switch(a.op) {
-                    case PLUS:
-                        System.out.print('+');
-                        break;    
-                    case MINUS:
-                        System.out.print('-');
-                        break;
-                    case TIMES:
-                        System.out.print('*');
-                        break;
-                    case OVER:
-                        System.out.print('/');
-                        break;
-                }         
-            } else if(a.exp == ExpKind.ConstK) {
-                System.out.print(a.valor);
-            } 
-		preorden(a.hijos[0]);
-		preorden(a.hijos[1]);
-	}
-    }
-   
    private static void postorden(NodoArbol a) {
 	if(a != null) {
 		postorden(a.hijos[0]);
