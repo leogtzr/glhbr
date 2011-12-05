@@ -684,7 +684,6 @@ public static void recorrerArbol(NodoArbol a) {
        NodoArbol t = newStmtNode(StmtKind.PowK);
        coincidir(TokenType.POW);
        coincidir(TokenType.LPARENT);
-       //coincidir(TokenType.COMA);  /* Por lo pronto sin la coma: pow(x 1 * 2 + 34); */
        coincidir(TokenType.ID);
        coincidir(TokenType.COMA);
        if(t != null)
@@ -698,7 +697,6 @@ public static void recorrerArbol(NodoArbol a) {
        NodoArbol t = newStmtNode(StmtKind.IncK);
        coincidir(TokenType.INC);
        coincidir(TokenType.LPARENT);
-       //coincidir(TokenType.COMA);  /* Por lo pronto sin la coma: pow(x 1 * 2 + 34); */
        coincidir(TokenType.ID);
        coincidir(TokenType.COMA);
        if(t != null)
@@ -712,7 +710,6 @@ public static void recorrerArbol(NodoArbol a) {
        NodoArbol t = newStmtNode(StmtKind.IncK);
        coincidir(TokenType.DEC);
        coincidir(TokenType.LPARENT);
-       //coincidir(TokenType.COMA);  /* Por lo pronto sin la coma: pow(x 1 * 2 + 34); */
        coincidir(TokenType.ID);
        coincidir(TokenType.COMA);
        if(t != null)
