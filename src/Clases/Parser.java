@@ -271,7 +271,7 @@ public class Parser {
             if(a.nombre != null) {
               System.out.print(a.nombre);  
             } else if(a.op != null) {
-                System.out.println();
+                //System.out.println();
                 switch(a.op) {
                     case PLUS:
                         System.out.print('+');
@@ -825,7 +825,6 @@ public static void recorrerArbol(NodoArbol a) {
        if((t != null) && (token == TokenType.ID))
            t.nombre = tokenString;
        
-       // PENDIENTE Checar si existe dicha variable
        if(tabla.tabla.containsKey(tokenString) == false) {
            errorString += "La variable o función " + tokenString + " no existe, línea" + lineno + "\n";
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
@@ -833,7 +832,6 @@ public static void recorrerArbol(NodoArbol a) {
            NodoArbol temporal = null;
            temporal = (NodoArbol) tabla.tabla.get(tokenString);
            asignacionTipo = temporal.type;          // Asignamos el tipo global al tipo encontrado en la variable de asignación.
-           //JOptionPane.showMessageDialog(null, asignacionTipo + "|" + temporal.type);
        }
        
        coincidir(TokenType.ID);
@@ -841,15 +839,6 @@ public static void recorrerArbol(NodoArbol a) {
        if(t != null)
            t.hijos[0] = expresion();
        
-       System.out.println("Preorden: \n-------------------------------");
-       preorden(t);
-       System.out.println("\nPostorden: \n-------------------------------");
-       System.out.println();
-       postorden(t);
-       System.out.println("\n-------------------------------");
-       System.out.println("Recorrido fachon: \n-------------------------------");
-       inorden(t);
-       System.out.println("\n-------------------------------");
        return t;
    }
    
@@ -874,6 +863,8 @@ public static void recorrerArbol(NodoArbol a) {
            t.hijos[0] = expresion_binaria();        // Hacer un procedimiento expresion_binaria
        
        tabla.mostrarTabla();
+       // Ver el recorrido del árbol........................................................
+
        return t;
    }
    
@@ -952,25 +943,10 @@ public static void recorrerArbol(NodoArbol a) {
        switch(token) {
            case NUM:
                t = newExpNode(ExpKind.ConstK);
-               //JOptionPane.showMessageDialog(null, "Leyendo: " + tokenString);
-               // PENDIENTE Hacer un casting para comprobar tipos de constantes...
-               
-               //JOptionPane.showMessageDialog(null, "Tipo de dato de : " + tokenString + " " + getTipoDatoString(tokenString) + " y global " + asignacionTipo);
-               /*if((asignacionTipo == ExpType.Binario) && getTipoDatoString(tokenString) == ExpType.Entero && 
-                       isBinary(tokenString)
-                       ) {
-                   //JOptionPane.showMessageDialog(null, "Los tipos de datos coinciden\nGlobal: " + asignacionTipo + "\nLocal: " + getTipoDatoString(tokenString));
-               } else {
-                   //JOptionPane.showMessageDialog(null, "Error - " + asignacionTipo + " y " + getTipoDatoString(tokenString));
-                   errorString += "Intentando asignar " + tokenString + " a un binario, línea " + lineno + "\n";
-                   syntaxError("Intentando asignar " + tokenString + " a un binario, línea " + lineno);
-               }*/
                
                if((t != null) && (token == TokenType.NUM)) {
                    // Chequeo de tipos:
                    if((asignacionTipo == ExpType.Binario) || (getTipoDatoString(tokenString) == ExpType.Entero) && isBinary(tokenString)) {
-                       //JOptionPane.showMessageDialog(null, "paso por aqui");
-                       //JOptionPane.showMessageDialog(null, "Binario por aquí");
                        t.type = ExpType.Binario;
                        t.valor = bin2int(tokenString);
                        // Enteros
@@ -979,11 +955,9 @@ public static void recorrerArbol(NodoArbol a) {
                        t.valor = Integer.parseInt(tokenString);
                    } else if((asignacionTipo == ExpType.Decimal) && getTipoDatoString(tokenString) == ExpType.Decimal || getTipoDatoString(tokenString) == ExpType.Decimal) {
                        // Código para decimales.
-                       //JOptionPane.showMessageDialog(null, "por aquí.... con " + tokenString);
                        t.type = ExpType.Decimal;
                        t.valorDecimal = Double.parseDouble(tokenString);
                    } else {
-                       //JOptionPane.showMessageDialog(null, "Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno);
                        errorString += "Los tipos de datos no coinciden (" + tokenString + "), deben ser " + asignacionTipo + ", línea " + lineno + "\n";
                        syntaxError("Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno + "\n");
                        if((asignacionTipo == ExpType.Entero) && isFloat(tokenString)) {
@@ -1157,7 +1131,11 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.ASSIGN);
        if(t != null)
            t.hijos[0] = expresion_entera();        // Hacer un procedimiento expresion_entera    
-       tabla.mostrarTabla();
+       //tabla.mostrarTabla();
+       System.out.println();
+       System.out.println("---------------------------------------------------------------");
+       preorden(t);
+       System.out.println("---------------------------------------------------------------");
        
        return t;
    }
@@ -1262,7 +1240,6 @@ public static void recorrerArbol(NodoArbol a) {
                        t.type = ExpType.Entero;
                        t.valor = temporal.valor;
                    }
-                   
                }
                
                if((t != null) && (token == TokenType.ID)) {

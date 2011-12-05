@@ -1153,7 +1153,6 @@ private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             guardarMenuItem.setEnabled(true);
             guardarComoMenuItem.setEnabled(true);
         }
-                //muestra la ubicación del archivo guardado
             } catch(IOException ex) {
                 JOptionPane.showMessageDialog(this,ex.getMessage(),ex.toString(),JOptionPane.ERROR_MESSAGE);
             }
@@ -1228,8 +1227,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 int state = selectorDeArchivos.showSaveDialog(this);
         
         if(state == JFileChooser.APPROVE_OPTION) {    //si elige guardar en el archivo
-            f = selectorDeArchivos.getSelectedFile();    //se obtiene el archivo seleccionado
-            
+            f = selectorDeArchivos.getSelectedFile();    //se obtiene el archivo seleccionado   
             archivoAbierto = f.getName();
             directorioArchivo = f.getParent();
             
@@ -1250,7 +1248,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 System.exit(0);             //se cancela esta operación
             case JOptionPane.NO_OPTION:
                 System.exit(0);
-            //en otro caso se continúa con la operación y no se guarda el documento actual
+            
         }
 
     }
