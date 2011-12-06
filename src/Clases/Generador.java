@@ -31,7 +31,6 @@ public class Generador {
     	}
     }
     
-    // Genera código ensamblador basado en una asignación.
     public void generar() {
         
         FileWriter fichero = null;

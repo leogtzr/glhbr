@@ -246,7 +246,7 @@ public class Parser {
     public static int indentno = 0;
     private int indice = 0;
     private String pila = "";
-    private ArrayList<NodoArbol> pilaNodos = null;
+    //private ArrayList<NodoArbol> pilaNodos = null;
     public ArrayList<String> tokensPila = new ArrayList<String>();
     
     public static TokenType token;              // El token actual.
@@ -265,7 +265,7 @@ public class Parser {
        indice = 0;
        tabla = new TablaSimbolos();
        errorString = "";
-       pilaNodos = new ArrayList<NodoArbol>();
+       //pilaNodos = new ArrayList<NodoArbol>();
        this.programName = programName;
    }
    
