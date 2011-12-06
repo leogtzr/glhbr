@@ -10,7 +10,6 @@ import javax.swing.ActionMap;
 import javax.swing.AbstractAction;
 import javax.swing.InputMap;
 import Clases.Lexema;
-import Clases.Reservadas;
 import Clases.Parser.*;
 import Clases.NodoArbol;
 import java.awt.Color;
@@ -204,6 +203,7 @@ public class editorVentana extends javax.swing.JFrame {
     
     // TODO Método para volcar todo al área de Texto.
     
+    /*
     public void verTablaDeSimbolos() {
         texto = "";
         for(int i = 0; i < palabras.size(); i++)
@@ -213,7 +213,7 @@ public class editorVentana extends javax.swing.JFrame {
         
         areaTablaSimbolos.setText(texto);
         
-    }
+    }*/
     
     public void resaltarEstructuras() {
         if(idiomaCheck.isSelected()) // Español
@@ -345,11 +345,6 @@ public class editorVentana extends javax.swing.JFrame {
         verDatosMenuItem = new javax.swing.JMenuItem();
         colorArea = new javax.swing.JColorChooser();
         dialogoColor = new javax.swing.JDialog();
-        verTablaSimbolos = new javax.swing.JDialog();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        areaTablaSimbolos = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        areaLexico = new javax.swing.JTextArea();
         ayudaPopup = new javax.swing.JDialog();
         ayudaLabel = new javax.swing.JLabel();
         tabSizeDialog = new javax.swing.JDialog();
@@ -502,38 +497,6 @@ public class editorVentana extends javax.swing.JFrame {
         dialogoColorLayout.setVerticalGroup(
             dialogoColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        verTablaSimbolos.setTitle("Tabla de símbolos");
-
-        areaTablaSimbolos.setBackground(new java.awt.Color(242, 140, 71));
-        areaTablaSimbolos.setColumns(20);
-        areaTablaSimbolos.setRows(5);
-        jScrollPane3.setViewportView(areaTablaSimbolos);
-
-        areaLexico.setColumns(20);
-        areaLexico.setRows(5);
-        jScrollPane4.setViewportView(areaLexico);
-
-        javax.swing.GroupLayout verTablaSimbolosLayout = new javax.swing.GroupLayout(verTablaSimbolos.getContentPane());
-        verTablaSimbolos.getContentPane().setLayout(verTablaSimbolosLayout);
-        verTablaSimbolosLayout.setHorizontalGroup(
-            verTablaSimbolosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(verTablaSimbolosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        verTablaSimbolosLayout.setVerticalGroup(
-            verTablaSimbolosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, verTablaSimbolosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(verTablaSimbolosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
-                .addContainerGap())
         );
 
         javax.swing.GroupLayout ayudaPopupLayout = new javax.swing.GroupLayout(ayudaPopup.getContentPane());
@@ -1423,7 +1386,6 @@ private void resaltarareaTextoBtnActionPerformed(java.awt.event.ActionEvent evt)
 
 private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compilarMenuItemActionPerformed
         
-        areaTablaSimbolos.setText("");
         palabras = new ArrayList<Lexema>();
         palabras.clear();
         
@@ -1634,8 +1596,6 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem abrirMenuItem;
     private javax.swing.JButton aceptarTabBtn;
-    private javax.swing.JTextArea areaLexico;
-    private javax.swing.JTextArea areaTablaSimbolos;
     javax.swing.JTextArea areaTexto;
     private javax.swing.JLabel ayudaLabel;
     private javax.swing.JMenu ayudaMenu;
@@ -1676,8 +1636,6 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuBar menu;
@@ -1696,7 +1654,6 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenuItem tabSizeMenuItem;
     private javax.swing.JTextField tabSizeTxt;
     private javax.swing.JMenuItem verDatosMenuItem;
-    private javax.swing.JDialog verTablaSimbolos;
     private javax.swing.JMenuItem whileCodeMenuItem;
     // End of variables declaration//GEN-END:variables
 }

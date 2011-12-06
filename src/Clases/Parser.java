@@ -268,7 +268,6 @@ public class Parser {
        this.programName = programName;
    }
    
-   
    private static void postorden(NodoArbol a) {
 	if(a != null) {
 		postorden(a.hijos[0]);
@@ -480,17 +479,13 @@ public static void recorrerArbol(NodoArbol a) {
    }
    
    public void coincidir(TokenType expected) {
-       if(token == expected) {
-           
+       if(token == expected) {        
            token = getToken();
-           
        } else {
-           
            syntaxError("Nodo no esperado --> ");
            errorString += "Nodo no esperado --> " + tokenString;
            printToken(expected, tokenString);
            System.out.print("      ");
-           
        }
    }
    
@@ -1096,7 +1091,6 @@ public static void recorrerArbol(NodoArbol a) {
            t.nombre = tokenString;
        
        if(tabla.tabla.containsKey(tokenString) == false) {          // Si no se encuentra en la tabla de símbolos.
-           //JOptionPane.showMessageDialog(null, "\nLa variable: " + tokenString + " NO existe, agregando");
            t.type = ExpType.Entero;        // Importante agregar el tipo antes de agregar a la tabla de símbolos...
            tabla.put(tokenString, t);
            
@@ -1109,11 +1103,9 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.ASSIGN);
        if(t != null)
            t.hijos[0] = expresion_entera();        // Hacer un procedimiento expresion_entera    
-       //tabla.mostrarTabla();
        System.out.println();
        System.out.println("---------------------------------------------------------------");
        
-       //JOptionPane.showMessageDialog(null, " Tamaño = " + generarPila(t).size() + ", menos el igual.");
        generarPila(t);
        
        Generador generador = new Generador(tokensPila, programName);
@@ -1122,7 +1114,7 @@ public static void recorrerArbol(NodoArbol a) {
        postorden(t);
        
        System.out.println("---------------------------------------------------------------");
-       
+       tabla.mostrarTabla();
        return t;
    }
    
