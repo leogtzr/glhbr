@@ -45,7 +45,6 @@ import javax.swing.text.Highlighter;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.UndoManager;
 import Clases.Analizador;
-import Clases.Generador;
 import Clases.Parser;
 
 public class editorVentana extends javax.swing.JFrame {
@@ -1451,7 +1450,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         
         Parser.indentno = 0;
         Parser.tokenString = "";
-        Parser syntax = new Parser(palabras);
+        Parser syntax = new Parser(palabras, archivoAbierto);
         Parser.lineno = 0;
         NodoArbol arbolSintactico = syntax.parse();
         

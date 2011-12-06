@@ -25,6 +25,7 @@ public class Parser {
     TablaSimbolos tabla = new TablaSimbolos();
     String errorString = "";
     ExpType asignacionTipo = ExpType.Void;
+    String programName = null;
     
     public static enum NodeKind {
         StmtK, ExpK
@@ -259,12 +260,13 @@ public class Parser {
        errorString = "";
    }
     
-   public Parser(ArrayList<Lexema> palabras) {
+   public Parser(ArrayList<Lexema> palabras, String programName) {
        this.palabras = palabras;
        indice = 0;
        tabla = new TablaSimbolos();
        errorString = "";
        pilaNodos = new ArrayList<NodoArbol>();
+       this.programName = programName;
    }
    
    public ArrayList<Lexema> getListaLexemas() {
@@ -1117,11 +1119,8 @@ public static void recorrerArbol(NodoArbol a) {
        
        //JOptionPane.showMessageDialog(null, " Tamaño = " + generarPila(t).size() + ", menos el igual.");
        generarPila(t);
-       for(int i = 0; i < tokensPila.size(); i++) {
-           //JOptionPane.showMessageDialog(null, "(" + tokensPila.get(i) + ") -> " + i);
-       }
        
-       Generador generador = new Generador(tokensPila);
+       Generador generador = new Generador(tokensPila, programName);
        generador.generar();
        
        postorden(t);
