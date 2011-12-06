@@ -104,6 +104,10 @@ public class Parser {
             return ExpType.Void;
     }
     
+    public TablaSimbolos getTablaSimbolos() {
+        return this.tabla;
+    }
+    
     public static void indentar() {
         indentno += 4;
     }
@@ -294,35 +298,34 @@ public class Parser {
 	}
     }
    
-   // PENDIENTE generarPila que devuelva un arrayList de nodo de NodoArbol.java
-   // PENDIENTE Hacer una prueba de conteo de nodos, para ver si es factible....
-   private ArrayList<NodoArbol> generarPila(NodoArbol a) {
+   public ArrayList<String> generarPila(NodoArbol a) {
 	if(a != null) {
 		generarPila(a.hijos[0]);
 		generarPila(a.hijos[1]);
 		if(a.nombre != null) {
-                    pila += a.nombre;
-                    pilaNodos.add(a);
+                    tokensPila.add(a.nombre);
                 } else if(a.op != null) {
                     switch(a.op) {
                         case PLUS:
-                            pila += "+";
+                            //pila += "+";
+                            tokensPila.add("+");
                             break;    
                         case MINUS:
-                            pila += "-";
+                            tokensPila.add("-");
                             break;
                         case TIMES:
-                            pila += "*";
+                            tokensPila.add("*");
                             break;
                         case OVER:
-                            pila += "/";
+                            tokensPila.add("/");
                             break;
                     }         
                 } else if(a.exp == ExpKind.ConstK) {
                     pila += a.valor;
+                    tokensPila.add(a.valor + "");
                 }
 	}
-        return pilaNodos;
+        return tokensPila;
     }
    
 public static void recorrerArbol(NodoArbol a) {
@@ -1112,7 +1115,15 @@ public static void recorrerArbol(NodoArbol a) {
        System.out.println();
        System.out.println("---------------------------------------------------------------");
        
-       JOptionPane.showMessageDialog(null, generarPila(t).size() + "Tamaño...");
+       //JOptionPane.showMessageDialog(null, " Tamaño = " + generarPila(t).size() + ", menos el igual.");
+       generarPila(t);
+       for(int i = 0; i < tokensPila.size(); i++) {
+           //JOptionPane.showMessageDialog(null, "(" + tokensPila.get(i) + ") -> " + i);
+       }
+       
+       Generador generador = new Generador(tokensPila);
+       generador.generar();
+       
        postorden(t);
        
        System.out.println("---------------------------------------------------------------");

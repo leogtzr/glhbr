@@ -45,6 +45,7 @@ import javax.swing.text.Highlighter;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.UndoManager;
 import Clases.Analizador;
+import Clases.Generador;
 import Clases.Parser;
 
 public class editorVentana extends javax.swing.JFrame {
@@ -1453,6 +1454,9 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         Parser syntax = new Parser(palabras);
         Parser.lineno = 0;
         NodoArbol arbolSintactico = syntax.parse();
+        
+        //Generador generador = new Generador(syntax.getTablaSimbolos());
+        //generador.generarCodigo(); // Generamos código a un archivo.
         
         // TODO Sólo se avisará al usuario, el deberá arreglar los errores.
         if(syntax.getErrorString().length() == 0) {
