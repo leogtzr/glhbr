@@ -203,11 +203,12 @@ public class editorVentana extends javax.swing.JFrame {
     }
     
     // TODO Método para volcar todo al área de Texto.
+    
     public void verTablaDeSimbolos() {
         texto = "";
         for(int i = 0; i < palabras.size(); i++)
             texto += areaTablaSimbolos.getText() + "{" + "\n" + "\tLexema: [" + 
-                    palabras.get(i).getValor() + "]\n\tTipo: " +  palabras.get(i).getTipo() +
+                    palabras.get(i).getValor() + "]\n\tTipo: " + 
                     "\n\tReservado : " + Reservadas.esReservada(palabras.get(i).getValor(), idiomaCheck.isSelected() ? true : false) + "\n}\n";
         
         areaTablaSimbolos.setText(texto);
@@ -1394,9 +1395,7 @@ private void cambiarTipoLetraActionPerformed(java.awt.event.ActionEvent evt) {//
     
     if(font.getSelectedFont() != null)
         areaTexto.setFont(font.getSelectedFont());
-    
     repaint();
-    
 }//GEN-LAST:event_cambiarTipoLetraActionPerformed
 
 private void cambiarColorMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarColorMenuItemActionPerformed

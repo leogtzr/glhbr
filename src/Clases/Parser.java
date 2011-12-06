@@ -1,7 +1,6 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
 
-// PENDIENTE Adherir los errores en cualquier parte al string ErrorString.
 package Clases;
 
 import java.util.ArrayList;
@@ -241,6 +240,9 @@ public class Parser {
     public static final int MAXCHILDREN = 3;
     public static int indentno = 0;
     private int indice = 0;
+    private String pila = "";
+    private ArrayList<NodoArbol> pilaNodos = null;
+    public ArrayList<String> tokensPila = new ArrayList<String>();
     
     public static TokenType token;              // El token actual.
     public static String tokenString;
@@ -258,6 +260,7 @@ public class Parser {
        indice = 0;
        tabla = new TablaSimbolos();
        errorString = "";
+       pilaNodos = new ArrayList<NodoArbol>();
    }
    
    public ArrayList<Lexema> getListaLexemas() {
@@ -291,33 +294,37 @@ public class Parser {
 	}
     }
    
-   private static void inorden(NodoArbol a) {
+   // PENDIENTE generarPila que devuelva un arrayList de nodo de NodoArbol.java
+   // PENDIENTE Hacer una prueba de conteo de nodos, para ver si es factible....
+   private ArrayList<NodoArbol> generarPila(NodoArbol a) {
 	if(a != null) {
-		inorden(a.hijos[0]);
-                if(a.nombre != null) {
-                    System.out.print(a.nombre);  
+		generarPila(a.hijos[0]);
+		generarPila(a.hijos[1]);
+		if(a.nombre != null) {
+                    pila += a.nombre;
+                    pilaNodos.add(a);
                 } else if(a.op != null) {
                     switch(a.op) {
                         case PLUS:
-                            System.out.print('+');
+                            pila += "+";
                             break;    
                         case MINUS:
-                            System.out.print('-');
+                            pila += "-";
                             break;
                         case TIMES:
-                            System.out.print('*');
+                            pila += "*";
                             break;
                         case OVER:
-                            System.out.print('/');
+                            pila += "/";
                             break;
                     }         
                 } else if(a.exp == ExpKind.ConstK) {
-                    System.out.print(a.valor);
-                }                
-		inorden(a.hijos[1]);
+                    pila += a.valor;
+                }
 	}
+        return pilaNodos;
     }
-
+   
 public static void recorrerArbol(NodoArbol a) {
     
     if(a != null) {
@@ -342,7 +349,7 @@ public static void recorrerArbol(NodoArbol a) {
                 System.out.print(a.valor);
             } 
 		postorden(a.hijos[0]);
-		preorden(a.hijos[1]);
+		//preorden(a.hijos[1]);
 	}
 }
 
@@ -1104,7 +1111,10 @@ public static void recorrerArbol(NodoArbol a) {
        //tabla.mostrarTabla();
        System.out.println();
        System.out.println("---------------------------------------------------------------");
-       preorden(t);
+       
+       JOptionPane.showMessageDialog(null, generarPila(t).size() + "Tamaño...");
+       postorden(t);
+       
        System.out.println("---------------------------------------------------------------");
        
        return t;

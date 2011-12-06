@@ -3,7 +3,6 @@ package Clases;
 public class Lexema
 {
     private String valor;
-    private int tipo;
     private Parser.TokenType tipoTokenLexema;
     private int numeroLinea = 0;
     
@@ -24,10 +23,6 @@ public class Lexema
     
     public String getValor() {
         return this.valor;
-    }
-    
-    public int getTipo() {
-        return this.tipo;
     }
     
     public Parser.TokenType getTipoToken() {
