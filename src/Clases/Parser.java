@@ -265,13 +265,9 @@ public class Parser {
        indice = 0;
        tabla = new TablaSimbolos();
        errorString = "";
-       //pilaNodos = new ArrayList<NodoArbol>();
        this.programName = programName;
    }
    
-   public ArrayList<Lexema> getListaLexemas() {
-       return palabras;
-   }
    
    private static void postorden(NodoArbol a) {
 	if(a != null) {
