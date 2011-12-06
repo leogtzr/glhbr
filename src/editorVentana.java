@@ -2,7 +2,6 @@
 // PENDIENTE Expresiones de resaltado.
 // PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?
 // PENDIENTE Agregado de palabras a la lista por idioma y en el menú Abrir.
-// PENDIENTE No sirve el resaltado de números de 1 dígito.
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
@@ -971,13 +970,14 @@ private void nuevoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         im.put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
         am.put(COMMIT_ACTION, new CommitAction());
         
-        // PENDING Agregado de palabras a resaltar por idioma.
+        // PENDIENTE Agregado de palabras a resaltar por idioma.
+        // PENDIENTE Añadir más palabras reservadas.
         words = new ArrayList<String>();
-        words.add("dobles");
+        words.add("decimal");
         words.add("entero");
-        words.add("finals");
+        words.add("imprimir");
         words.add("inicio");
-        words.add("mientras");
+        words.add("fin");
         
         deshacerBtn.setEnabled(true);
         rehacerMenuItem.setEnabled(true);
@@ -1009,7 +1009,6 @@ private void nuevoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         directorioArchivo = null;
         // Limpiamos la caja de texto, puesto que ya estamos en otro archivo.
         areaTexto.setText("");
-        
         return; // Salimos.
         // Ya hay un archivo asignado, primero guardamos lo que ya haya...
     } else if((archivoAbierto != null) && (directorioArchivo != null)) {
@@ -1130,7 +1129,39 @@ private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 JOptionPane.showMessageDialog(this,ex.getMessage(),ex.toString(),JOptionPane.ERROR_MESSAGE);
             }
         }
+    /////////////////// Código de prueba para autocompletado de palabras //////////////////////////////
+    areaTexto.getDocument().addUndoableEditListener(new UndoableEditListener() {
+            @Override public void undoableEditHappened(UndoableEditEvent e) {
+            undoManager.addEdit(e.getEdit());
+          }
+        });
+    
+        areaTexto.getDocument().addDocumentListener(new MyDocumentListener());
+        InputMap im = areaTexto.getInputMap();
+        ActionMap am = areaTexto.getActionMap();
+        im.put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
+        am.put(COMMIT_ACTION, new CommitAction());
         
+        // PENDIENTE Agregado de palabras a resaltar por idioma.
+        // PENDIENTE Añadir más palabras reservadas.
+        words = new ArrayList<String>();
+        words.add("decimal");
+        words.add("entero");
+        words.add("imprimir");
+        words.add("inicio");
+        words.add("fin");
+        
+        deshacerBtn.setEnabled(true);
+        rehacerMenuItem.setEnabled(true);
+        
+        areaTexto.requestFocusInWindow();
+        
+        ImageIcon icono = new ImageIcon(getClass().getResource("/icons/tp_new.png"));
+        compilarMenuItem.setIcon(icono);
+        areaTexto.setComponentPopupMenu(popup);
+        negro.start();
+        //////////////////////////// fin código de prueba para autocompletado //////////////////////////////
+    
 }//GEN-LAST:event_abrirMenuItemActionPerformed
 
 private void guardarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMenuItemActionPerformed

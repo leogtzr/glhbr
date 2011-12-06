@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Dec 5, 2011 */
+
 public class Generador {
     private int tope = 0;
     ArrayList<String> pila = null;

@@ -1,4 +1,3 @@
-/* Contiene aparte del nodo, el tipo de dato de la variable */
 package Clases;
 import java.util.Enumeration;
 import java.util.Hashtable;
