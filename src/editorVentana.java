@@ -3,7 +3,6 @@
 // PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?
 // PENDIENTE Agregado de palabras a la lista por idioma y en el menú Abrir.
 // PENDIENTE No sirve el resaltado de números de 1 dígito.
-// PENDIENTE Eliminar la ventana de salida?
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
@@ -258,6 +257,16 @@ public class editorVentana extends javax.swing.JFrame {
        pattern = Pattern.compile("(\\+|\\-|%|\\^|\\*|\\/|\\||\\&|;|\\<=?|\\>=?|=|!=?)"); 
        matcher = pattern.matcher(areaTexto.getText());
        coloreado = new MyHighlightPainter(Color.PINK);
+       while( matcher.find() )
+            try {
+                hilite.addHighlight(matcher.start(), matcher.end(), coloreado);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       
+       pattern = Pattern.compile("(\\d)"); 
+       matcher = pattern.matcher(areaTexto.getText());
+       coloreado = new MyHighlightPainter(Color.orange);
        while( matcher.find() )
             try {
                 hilite.addHighlight(matcher.start(), matcher.end(), coloreado);
