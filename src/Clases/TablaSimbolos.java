@@ -41,17 +41,16 @@ public class TablaSimbolos {
         tabla.put(tokenID, t);
     }
     
-    // PENDIENTE Implementar un método para que muestre correctamente el tipo de dato.
     public void mostrarTabla() {
         Enumeration e = this.tabla.keys();
         Object obj;
-        System.out.println("Identificador          No. de Línea");
-        System.out.println("------------------------------------");
+        System.out.println("Identificador          No. de Línea         Tipo");
+        System.out.println("-------------------------------------------------");
             
         while (e.hasMoreElements()) {
             obj = e.nextElement();
-            NodoArbol x = (NodoArbol)this.tabla.get(obj); // Mostramos...
-            System.out.printf("%5s              %10d\n", x.nombre, x.lineno);
+            NodoArbol x = (NodoArbol)this.tabla.get(obj); 
+            System.out.printf("%5s              %10d  %17s\n", x.nombre, x.lineno, x.type);
             
         }
     }
