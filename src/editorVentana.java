@@ -351,7 +351,6 @@ public class editorVentana extends javax.swing.JFrame {
         tabSizeDialog = new javax.swing.JDialog();
         jLabel8 = new javax.swing.JLabel();
         tabSizeTxt = new javax.swing.JTextField();
-        aceptarTabBtn = new javax.swing.JButton();
         estadoDeLinea = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -521,11 +520,9 @@ public class editorVentana extends javax.swing.JFrame {
         jLabel8.setLabelFor(tabSizeTxt);
         jLabel8.setText("Tamaño");
 
-        aceptarTabBtn.setMnemonic('A');
-        aceptarTabBtn.setText("Aceptar");
-        aceptarTabBtn.addActionListener(new java.awt.event.ActionListener() {
+        tabSizeTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aceptarTabBtnActionPerformed(evt);
+                tabSizeTxtActionPerformed(evt);
             }
         });
 
@@ -535,12 +532,9 @@ public class editorVentana extends javax.swing.JFrame {
             tabSizeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabSizeDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tabSizeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabSizeDialogLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tabSizeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(aceptarTabBtn))
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabSizeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tabSizeDialogLayout.setVerticalGroup(
@@ -550,9 +544,7 @@ public class editorVentana extends javax.swing.JFrame {
                 .addGroup(tabSizeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(tabSizeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(aceptarTabBtn)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1424,10 +1416,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         Parser.lineno = 0;
         NodoArbol arbolSintactico = syntax.parse();
         
-        //Generador generador = new Generador(syntax.getTablaSimbolos());
-        //generador.generarCodigo(); // Generamos código a un archivo.
-        
-        // TODO Sólo se avisará al usuario, el deberá arreglar los errores.
+        // TODO Avisar de los errores.
         if(syntax.getErrorString().length() == 0) {
             ImageIcon imageIcon = new ImageIcon("src/icons/ok_icon.gif");
             JOptionPane.showMessageDialog(this, "Compilación correcta.", "Todo correcto", JOptionPane.INFORMATION_MESSAGE, imageIcon);
@@ -1539,20 +1528,6 @@ private void syntaxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GE
 //    AnalizadorSintactico.Analizar(palabras);    
 }//GEN-LAST:event_syntaxMenuItemActionPerformed
 
-private void aceptarTabBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarTabBtnActionPerformed
-    
-    if(!isNumeric(tabSizeTxt.getText()))
-    {
-        JOptionPane.showMessageDialog(this, "El tamaño debe ser un número entero válido", "Tamaño tabulador", JOptionPane.ERROR_MESSAGE);
-    } else if(Integer.parseInt(tabSizeTxt.getText()) > 10) {
-        JOptionPane.showMessageDialog(this, "El tamaño del tabulador no debe exceder los 10 caracteres.", "Tamaño tabulador", JOptionPane.ERROR_MESSAGE);
-    } else {
-        areaTexto.setTabSize(Integer.parseInt(tabSizeTxt.getText()));
-        tabSizeDialog.setVisible(false);
-    }
-    
-}//GEN-LAST:event_aceptarTabBtnActionPerformed
-
 private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSizeMenuItemActionPerformed
     //this.setVisible(false);
    tabSizeDialog.setModal(true);
@@ -1567,6 +1542,20 @@ private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt
     // PENDIENTE Volcar a un archivo de texto.
     
 }//GEN-LAST:event_imprimirArbolMenuItemActionPerformed
+
+private void tabSizeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSizeTxtActionPerformed
+
+    if(!isNumeric(tabSizeTxt.getText()))
+    {
+        JOptionPane.showMessageDialog(this, "El tamaño debe ser un número entero válido", "Tamaño tabulador", JOptionPane.ERROR_MESSAGE);
+    } else if(Integer.parseInt(tabSizeTxt.getText()) > 10) {
+        JOptionPane.showMessageDialog(this, "El tamaño del tabulador no debe exceder los 10 caracteres.", "Tamaño tabulador", JOptionPane.ERROR_MESSAGE);
+    } else {
+        areaTexto.setTabSize(Integer.parseInt(tabSizeTxt.getText()));
+        tabSizeDialog.setVisible(false);
+    }
+    
+}//GEN-LAST:event_tabSizeTxtActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1601,7 +1590,6 @@ private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JDialog aboutDialog;
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem abrirMenuItem;
-    private javax.swing.JButton aceptarTabBtn;
     javax.swing.JTextArea areaTexto;
     private javax.swing.JLabel ayudaLabel;
     private javax.swing.JMenu ayudaMenu;
