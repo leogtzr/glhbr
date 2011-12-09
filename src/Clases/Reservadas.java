@@ -76,7 +76,6 @@ public class Reservadas {
     };
     
     public static final String reservedWords[] = {
-        /* Solo 8 por lo pronto */
         "if",
         "then", 
         "else", 

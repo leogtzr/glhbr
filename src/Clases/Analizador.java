@@ -1,5 +1,3 @@
-// ITCH II.
-// Analizador léxico para el compilador GLHBR
 package Clases;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,13 +49,12 @@ public class Analizador {
             
             /*Si después de filtrar el identificador hallamos un número, buscamos por un literal numérico */           
             if(Character.isDigit(c)) {
-                // Concatenamos los digitos...
                 while(Character.isDigit(c)) {
                     lexema += Character.toString((char)c);
                     c = fr.read();
                 }
-                /* digito+(digito+|e)(E(+|-|e)digito+|e) */
-                if((char)c == '.') {
+                
+                if((char)c == '.') {        /* digito+(digito+|e)(E(+|-|e)digito+|e) */
                     /* Avanzamos después del punto */
                     c = fr.read();
                     lexema += Character.toString('.');
