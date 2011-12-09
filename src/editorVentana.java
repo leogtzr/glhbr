@@ -1418,8 +1418,6 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
             Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //String kaka = Analizador.getLexForm(palabras, idiomaCheck.isSelected() == true ? true : false);
-    
         /* areaLexico.setText(kaka);
         
         verTablaDeSimbolos(); // Aquí se vacía toda la información:

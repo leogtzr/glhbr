@@ -17,10 +17,6 @@ public class Analizador {
     private static String asignacionCadena = "";
     private static int nLineas = 1;
     
-    public static int getLineas() {
-        return nLineas;
-    }
-    
     public static void AnalizadorLexico(File f, ArrayList<Lexema> palabras, boolean idioma) throws FileNotFoundException, IOException {
         int indice = 1;
         nLineas = 1;
