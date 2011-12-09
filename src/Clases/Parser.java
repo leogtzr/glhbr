@@ -16,7 +16,7 @@ public class Parser {
        LEER, WRITE, 
        ID, NUM, 
        ASSIGN,EQ,LT,PLUS,MINUS,TIMES,OVER,LPARENT,RPARENT,SEMI,POW,COMA,MOD,LEQ,GEQ,GT,NEQ,NOT,COMP,AND, 
-       OR,WHILE,INFINITO,INIBLOQUE,FINBLOQUE,INICIO,FINALIZAR,INC,DEC,SENO,COSENO,ABS, 
+       OR, WHILE, INFINITO,INIBLOQUE,FINBLOQUE,INICIO,FINALIZAR,INC,DEC,SENO,COSENO,ABS, 
        TAN, LN, CLEAR, SALIR,
        FACTORIAL, RAIZ,
        HEX, CADENA, BOOLEANO, BINARIO, ENTERO, DECIMAL
@@ -26,6 +26,7 @@ public class Parser {
     String errorString = "";
     ExpType asignacionTipo = ExpType.Void;
     String programName = null;
+    String arbolString = "";
     
     public static enum NodeKind {
         StmtK, ExpK
@@ -82,6 +83,7 @@ public class Parser {
             return true;
         return Pattern.matches("[+-]?\\d*[\\.]?\\d+[eE][+-]?\\d+", token);
     }
+
     public static boolean isEntero(String token) {
         return Pattern.matches("[+-]?\\d+", token) && token.charAt(0) != '0';
     }
@@ -196,6 +198,7 @@ public class Parser {
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;
                     case EnteroK:
+                        // Generador de código aquí.
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;
                     case DecimalK:
@@ -241,15 +244,133 @@ public class Parser {
         
     }
     
+    // PENDIENTE Método para imprimir archivo.
+        public static void imprimirArbolArchivo(NodoArbol arbol) {
+        
+        indentar();
+        while(arbol != null) {
+            imprimirEspacios();
+            if(arbol.nodeKind == NodeKind.StmtK) {
+                switch(arbol.stmt) {
+                    case IfK:
+                        System.out.println("If");
+                        break;
+                    case RepeatK:
+                        System.out.println("Repetir");
+                        break;
+                    case AssignK:
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;
+                    case ReadK:
+                        System.out.println("Read: " + arbol.nombre);
+                        break;
+                    case WriteK:
+                        System.out.println("Write");
+                        break;
+                    case WhileK:
+                        System.out.println("While");
+                        break;
+                    case InfinitumK:
+                        System.out.println("Infinito");
+                        break;
+                    case PowK:
+                        System.out.println("Pow");
+                        break;
+                    case IncK:
+                        System.out.println("Inc");
+                        break;             
+                    case DecK:
+                        System.out.println("Dec");
+                        break;
+                    case SenoK:
+                        System.out.println("Seno");
+                        break;
+                    case CosenoK:
+                        System.out.println("Coseno");
+                        break;
+                    case AbsK:
+                        System.out.println("Abs");
+                        break;
+                    case TanK:
+                        System.out.println("Tan");
+                        break;
+                    case LnK:
+                        System.out.println("Ln");
+                        break;
+                    case ClearK:
+                        System.out.println("Clear");
+                        break;
+                    case SalirK:
+                        System.out.println("Salir");
+                        break;
+                    case FactorialK:
+                        System.out.println("Factorial");
+                        break;
+                    case RaizK:
+                        System.out.println("Raiz");
+                        break;
+                    case HexK:
+                        System.out.println("Hex : [" + arbol.nombre + "]");
+                        break;                        
+                    case BooleanK:
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;    
+                    case BinarioK:
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;
+                    case EnteroK:
+                        // Generador de código aquí.
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;
+                    case DecimalK:
+                        System.out.println("Asignado a: " + arbol.nombre);
+                        break;
+                    default:
+                        System.out.println("Nodo desconocido");
+                }
+            } else if(arbol.nodeKind == NodeKind.ExpK) {
+                
+                switch(arbol.exp) {
+                    case OpK:
+                        System.out.print("op: ");
+                        printToken(arbol.op, "\\0");
+                        break;
+                    case ConstK:
+                        if(arbol.type == ExpType.Entero || arbol.type == ExpType.Binario)
+                            System.out.println("const: " + arbol.valor);
+                        else
+                            System.out.println("const: " + arbol.valorDecimal);
+                        
+                        break;
+                    case IdK:
+                        System.out.println("id: " + arbol.nombre);
+                        break;
+                    default:
+                        System.out.println("Nodo desconocido");
+                        break;
+                }
+                
+            } else {
+                System.out.println("Nodo desconocido");
+            }
+            
+            for(int j = 0; j < MAXCHILDREN; j++)
+                imprimirArbolArchivo(arbol.hijos[j]);
+            
+            arbol = arbol.hermano;
+            
+        }
+        
+        unindent();
+        
+    }
+
     private ArrayList<Lexema> palabras = null;   
     public static final int MAXCHILDREN = 3;
     public static int indentno = 0;
     private int indice = 0;
-    private String pila = "";
-    //private ArrayList<NodoArbol> pilaNodos = null;
     public ArrayList<String> tokensPila = new ArrayList<String>();
-    
-    public static TokenType token;              // El token actual.
+    public static TokenType token;
     public static String tokenString;
     public static int lineno = 0;
    
@@ -258,6 +379,7 @@ public class Parser {
        indice = 0;
        tabla = new TablaSimbolos();   
        errorString = "";
+       arbolString = "";
    }
     
    public Parser(ArrayList<Lexema> palabras, String programName) {
@@ -304,7 +426,6 @@ public class Parser {
                 } else if(a.op != null) {
                     switch(a.op) {
                         case PLUS:
-                            //pila += "+";
                             tokensPila.add("+");
                             break;    
                         case MINUS:
@@ -318,8 +439,7 @@ public class Parser {
                             break;
                     }         
                 } else if(a.exp == ExpKind.ConstK) {
-                    pila += a.valor;
-                    tokensPila.add(a.valor + "");
+              tokensPila.add(a.valor + "");
                 }
 	}
         return tokensPila;
@@ -1106,9 +1226,10 @@ public static void recorrerArbol(NodoArbol a) {
        System.out.println();
        System.out.println("---------------------------------------------------------------");
        
-       generarPila(t);
+       JOptionPane.showMessageDialog(null, "Elementos de la pila: " + generarPila(t).size());
        
        Generador generador = new Generador(tokensPila, programName);
+       // PENDIENTE Juntar los lexemas relaciones con la asignación de enteros y crear un método
        generador.generar();
        
        postorden(t);

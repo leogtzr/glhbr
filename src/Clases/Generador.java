@@ -1,3 +1,4 @@
+// PENDIENTE Ver si podría generar triplos o cuadruplos con el algoritmo
 package Clases;
 
 import java.io.FileWriter;
@@ -8,9 +9,15 @@ import java.util.ArrayList;
 /* Dec 5, 2011 */
 
 public class Generador {
+    
     private int tope = 0;
-    ArrayList<String> pila = null;
+    private ArrayList<String> pila = null;
     String programName = null;
+    
+    public String getProgramName() {
+        return programName;
+    }
+    
     public Generador(ArrayList<String> pila_2, String programName) {
         tope = 0;
         pila = null;
@@ -46,30 +53,31 @@ public class Generador {
         for(int i = 0; i < pila.size() - 1; i++) {
             
             if(isOperator(pila.get(i)) == false) {
-                pw.println("mov " + ("R" + tope) + ",#" + pila.get(i) + " ; Cargamos la constante " + pila.get(i));
+                pw.println("MOV " + ("R" + tope) + ",#" + pila.get(i) + " ; Cargamos la constante " + pila.get(i));
                 tope++;
             } else {
                 switch(pila.get(i).charAt(0)) {
                     case '+':
-                        pw.println("add R" + (tope - 2) + ",R" + (tope - 1) + "     ; Sumamos");
+                        pw.println("ADD R" + (tope - 2) + ",R" + (tope - 1) + " ; Sumamos");
                         tope--;
                         break;
                     case '-':
-                        pw.println("sub R" + (tope - 2) + ",R" + (tope - 1) + "        ; Restamos");
+                        pw.println("SUB R" + (tope - 2) + ",R" + (tope - 1) + "        ; Restamos");
                         tope--;
                         break;
                     case '*':
-                        pw.println("mul R" + (tope - 2) + ",R" + (tope - 1) + "     ;  Multiplicamos");
+                        pw.println("MUL R" + (tope - 2) + ",R" + (tope - 1) + "     ;  Multiplicamos");
                         tope--;
                         break;    
                     case '/':
-                        pw.println("div R" + (tope - 2) + ",R" + (tope - 1) + "     ; Dividimos");
+                        pw.println("DIV R" + (tope - 2) + ",R" + (tope - 1) + "     ; Dividimos");
                         tope--;
                         break;
                 }
             }
         }
-        pw.println("mov " + pila.get(pila.size() - 1) + ",R0    ; fin de la sentencia");
+        pw.println("MOV " + pila.get(pila.size() - 1) + ",R0    ; fin de la sentencia");
+        pw.println("; Mostrar el resultado de " + pila.get(pila.size() - 1));
         } catch(Exception e) {
             e.printStackTrace();
         } finally {

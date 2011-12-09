@@ -1,6 +1,5 @@
-// PENDIENTE Corregir errores con || y &&
 // PENDIENTE Expresiones de resaltado.
-// PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?
+// PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?, probar si falla en Windows.
 // PENDIENTE Agregado de palabras a la lista por idioma y en el menú Abrir.
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
@@ -88,19 +87,15 @@ public class editorVentana extends javax.swing.JFrame {
             return;
         
         String prefix = content.substring(w + 1).toLowerCase();
-        //JOptionPane.showMessageDialog(null, "[" + prefix + "]");
         int n = Collections.binarySearch(words, prefix);
         if (n < 0 && -n <= words.size()) {
             String match = words.get(-n - 1);
             if (match.startsWith(prefix)) {
                 String completion = match.substring(pos - w);
                 
-                // Aguas con esto
-                //JOptionPane.showMessageDialog(null, "Esto : " + prefix + " " + completion);
                 prefijo = prefix;                
                 SwingUtilities.invokeLater(
-                        new CompletionTask(completion, pos + 1));
-                
+                        new CompletionTask(completion, pos + 1));                
             }
         } else 
             mode = Mode.INSERT;
@@ -198,8 +193,6 @@ public class editorVentana extends javax.swing.JFrame {
             return false;
         }
     }
-    
-    // TODO Método para volcar todo al área de Texto.
     
     /*
     public void verTablaDeSimbolos() {
@@ -384,9 +377,6 @@ public class editorVentana extends javax.swing.JFrame {
         cortarMenuItem = new javax.swing.JMenuItem();
         selectAllMenuItem = new javax.swing.JMenuItem();
         irAMenuItem = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        forCodeMenuItem = new javax.swing.JMenuItem();
-        whileCodeMenuItem = new javax.swing.JMenuItem();
         menuFormato = new javax.swing.JMenu();
         cambiarTipoLetra = new javax.swing.JMenuItem();
         colorFuenteMenuItem = new javax.swing.JMenuItem();
@@ -394,6 +384,7 @@ public class editorVentana extends javax.swing.JFrame {
         compilarMenu = new javax.swing.JMenu();
         compilarMenuItem = new javax.swing.JMenuItem();
         syntaxMenuItem = new javax.swing.JMenuItem();
+        imprimirArbolMenuItem = new javax.swing.JMenuItem();
         configuracionMenu = new javax.swing.JMenu();
         idiomaMenuItem = new javax.swing.JMenu();
         espanolMenuItem = new javax.swing.JMenuItem();
@@ -781,26 +772,6 @@ public class editorVentana extends javax.swing.JFrame {
         });
         edicionMenu.add(irAMenuItem);
 
-        jMenu1.setText("Código");
-
-        forCodeMenuItem.setText("for(..., ..., ...)");
-        forCodeMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                forCodeMenuItemActionPerformed(evt);
-            }
-        });
-        jMenu1.add(forCodeMenuItem);
-
-        whileCodeMenuItem.setText("while(...)");
-        whileCodeMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                whileCodeMenuItemActionPerformed(evt);
-            }
-        });
-        jMenu1.add(whileCodeMenuItem);
-
-        edicionMenu.add(jMenu1);
-
         menu.add(edicionMenu);
 
         menuFormato.setMnemonic('F');
@@ -864,6 +835,16 @@ public class editorVentana extends javax.swing.JFrame {
             }
         });
         compilarMenu.add(syntaxMenuItem);
+
+        imprimirArbolMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/IcoArbol.png"))); // NOI18N
+        imprimirArbolMenuItem.setMnemonic('I');
+        imprimirArbolMenuItem.setText("Imprimir árbol a archivo");
+        imprimirArbolMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirArbolMenuItemActionPerformed(evt);
+            }
+        });
+        compilarMenu.add(imprimirArbolMenuItem);
 
         menu.add(compilarMenu);
 
@@ -1567,14 +1548,6 @@ private void selectAllMenuItemActionPerformed(java.awt.event.ActionEvent evt) {/
     }
 }//GEN-LAST:event_selectAllMenuItemActionPerformed
 
-private void forCodeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forCodeMenuItemActionPerformed
-        areaTexto.insert("for(  ,   ,   )", areaTexto.getCaretPosition());
-}//GEN-LAST:event_forCodeMenuItemActionPerformed
-
-private void whileCodeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whileCodeMenuItemActionPerformed
-    areaTexto.insert("while()", areaTexto.getCaretPosition());
-}//GEN-LAST:event_whileCodeMenuItemActionPerformed
-
 private void syntaxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_syntaxMenuItemActionPerformed
 //    AnalizadorSintactico.Analizar(palabras);    
 }//GEN-LAST:event_syntaxMenuItemActionPerformed
@@ -1601,6 +1574,12 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
    tabSizeDialog.setVisible(true);
    this.setVisible(true);
 }//GEN-LAST:event_tabSizeMenuItemActionPerformed
+
+private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirArbolMenuItemActionPerformed
+
+    // PENDIENTE Volcar a un archivo de texto.
+    
+}//GEN-LAST:event_imprimirArbolMenuItemActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1656,11 +1635,11 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenu edicionMenu;
     private javax.swing.JMenuItem espanolMenuItem;
     private javax.swing.JLabel estadoDeLinea;
-    private javax.swing.JMenuItem forCodeMenuItem;
     private javax.swing.JMenuItem guardarComoMenuItem;
     private javax.swing.JMenuItem guardarMenuItem;
     private javax.swing.JCheckBox idiomaCheck;
     private javax.swing.JMenu idiomaMenuItem;
+    private javax.swing.JMenuItem imprimirArbolMenuItem;
     private javax.swing.JMenuItem imprimirMenuItem;
     private javax.swing.JMenuItem inglesMenuItem;
     private javax.swing.JMenuItem irAMenuItem;
@@ -1672,7 +1651,6 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1694,6 +1672,5 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JMenuItem tabSizeMenuItem;
     private javax.swing.JTextField tabSizeTxt;
     private javax.swing.JMenuItem verDatosMenuItem;
-    private javax.swing.JMenuItem whileCodeMenuItem;
     // End of variables declaration//GEN-END:variables
 }

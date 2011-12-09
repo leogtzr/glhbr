@@ -9,7 +9,7 @@ public class NodoArbol {
         hijos[1] = null;
         hijos[2] = null;
         valor = 0;
-        valorDecimal = 0.0;
+        valorDecimal = 0.0;         /* Solo para tipos decimales */
     }
     
     public NodoArbol []hijos; /* Maximo de tres hijos MAXHIJOS */
