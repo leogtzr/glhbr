@@ -1525,7 +1525,7 @@ private void selectAllMenuItemActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_selectAllMenuItemActionPerformed
 
 private void syntaxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_syntaxMenuItemActionPerformed
-//    AnalizadorSintactico.Analizar(palabras);    
+
 }//GEN-LAST:event_syntaxMenuItemActionPerformed
 
 private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSizeMenuItemActionPerformed
