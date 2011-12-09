@@ -382,7 +382,6 @@ public class editorVentana extends javax.swing.JFrame {
         cambiarColorMenuItem = new javax.swing.JMenuItem();
         compilarMenu = new javax.swing.JMenu();
         compilarMenuItem = new javax.swing.JMenuItem();
-        syntaxMenuItem = new javax.swing.JMenuItem();
         imprimirArbolMenuItem = new javax.swing.JMenuItem();
         configuracionMenu = new javax.swing.JMenu();
         idiomaMenuItem = new javax.swing.JMenu();
@@ -819,14 +818,6 @@ public class editorVentana extends javax.swing.JFrame {
             }
         });
         compilarMenu.add(compilarMenuItem);
-
-        syntaxMenuItem.setText("Sintáctico");
-        syntaxMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                syntaxMenuItemActionPerformed(evt);
-            }
-        });
-        compilarMenu.add(syntaxMenuItem);
 
         imprimirArbolMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/IcoArbol.png"))); // NOI18N
         imprimirArbolMenuItem.setMnemonic('I');
@@ -1524,10 +1515,6 @@ private void selectAllMenuItemActionPerformed(java.awt.event.ActionEvent evt) {/
     }
 }//GEN-LAST:event_selectAllMenuItemActionPerformed
 
-private void syntaxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_syntaxMenuItemActionPerformed
-
-}//GEN-LAST:event_syntaxMenuItemActionPerformed
-
 private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSizeMenuItemActionPerformed
     //this.setVisible(false);
    tabSizeDialog.setModal(true);
@@ -1539,8 +1526,12 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirArbolMenuItemActionPerformed
 
-    // PENDIENTE Volcar a un archivo de texto.
-    
+        Parser.indentno = 0;
+        Parser.tokenString = "";
+        Parser syntax = new Parser(palabras, archivoAbierto);
+        Parser.lineno = 0;
+        NodoArbol arbolSintactico = syntax.parse();
+        
 }//GEN-LAST:event_imprimirArbolMenuItemActionPerformed
 
 private void tabSizeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSizeTxtActionPerformed
@@ -1642,7 +1633,6 @@ private void tabSizeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JMenuItem seleccionarTodo;
     private javax.swing.JMenuItem selectAllMenuItem;
     private javax.swing.JFileChooser selectorDeArchivos;
-    private javax.swing.JMenuItem syntaxMenuItem;
     private javax.swing.JDialog tabSizeDialog;
     private javax.swing.JMenuItem tabSizeMenuItem;
     private javax.swing.JTextField tabSizeTxt;

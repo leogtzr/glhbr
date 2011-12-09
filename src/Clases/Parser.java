@@ -1,5 +1,6 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
+// PENDIENTE Agregar los archivos de código fuente al proyecto.
 
 package Clases;
 
@@ -15,8 +16,8 @@ public class Parser {
        REPETIR, HASTA, 
        LEER, WRITE, 
        ID, NUM, 
-       ASSIGN,EQ,LT,PLUS,MINUS,TIMES,OVER,LPARENT,RPARENT,SEMI,POW,COMA,MOD,LEQ,GEQ,GT,NEQ,NOT,COMP,AND, 
-       OR, WHILE, INFINITO,INIBLOQUE,FINBLOQUE,INICIO,FINALIZAR,INC,DEC,SENO,COSENO,ABS, 
+       ASSIGN, EQ, LT, PLUS, MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, 
+       OR, WHILE, INFINITO, INIBLOQUE, FINBLOQUE, INICIO, FINALIZAR, INC, DEC, SENO, COSENO, ABS, 
        TAN, LN, CLEAR, SALIR,
        FACTORIAL, RAIZ,
        HEX, CADENA, BOOLEANO, BINARIO, ENTERO, DECIMAL
@@ -120,7 +121,7 @@ public class Parser {
     }
     
     public static void imprimirEspacios() {
-        for(int i = 0; i < indentno; i++)
+        for(short i = 0; i < indentno; i++)
             System.out.print(" ");
     }
     
@@ -233,7 +234,7 @@ public class Parser {
                 System.out.println("Nodo desconocido");
             }
             
-            for(int j = 0; j < MAXCHILDREN; j++)
+            for(byte j = 0; j < MAXCHILDREN; j++)
                 imprimirArbol(arbol.hijos[j]);
             
             arbol = arbol.hermano;
@@ -254,6 +255,7 @@ public class Parser {
                 switch(arbol.stmt) {
                     case IfK:
                         System.out.println("If");
+                        
                         break;
                     case RepeatK:
                         System.out.println("Repetir");
@@ -354,7 +356,7 @@ public class Parser {
                 System.out.println("Nodo desconocido");
             }
             
-            for(int j = 0; j < MAXCHILDREN; j++)
+            for(byte j = 0; j < MAXCHILDREN; j++)
                 imprimirArbolArchivo(arbol.hijos[j]);
             
             arbol = arbol.hermano;
@@ -561,7 +563,7 @@ public static void recorrerArbol(NodoArbol a) {
            System.out.println("Error, no hay memoria");
            // Código para salir del método o el programa
        } else {
-           for(int i = 0; i < MAXCHILDREN; i++)
+           for(byte i = 0; i < MAXCHILDREN; i++)
                t.hijos[i] = null;
            t.hermano = null;
            
@@ -579,7 +581,7 @@ public static void recorrerArbol(NodoArbol a) {
            System.out.println("Error, no hay memoria");
            // Código para salir del método o el programa
        } else {
-           for(int i = 0; i < MAXCHILDREN; i++)
+           for(byte i = 0; i < MAXCHILDREN; i++)
                t.hijos[i] = null;
            
            t.hermano = null;
