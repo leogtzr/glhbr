@@ -1418,17 +1418,6 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
             Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        /* areaLexico.setText(kaka);
-        
-        verTablaDeSimbolos(); // Aquí se vacía toda la información:
-            this.setVisible(false);
-            verTablaSimbolos.setModal(true);
-            verTablaSimbolos.setSize(800, 600);
-            verTablaSimbolos.setResizable(true);
-            verTablaSimbolos.setVisible(true);
-        this.setVisible(true);
-        */
-        
         Parser.indentno = 0;
         Parser.tokenString = "";
         Parser syntax = new Parser(palabras, archivoAbierto);
