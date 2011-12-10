@@ -1,9 +1,7 @@
 // PENDIENTE Expresiones de resaltado.
 // PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?, probar si falla en Windows.
 // PENDIENTE Agregado de palabras a la lista por idioma y en el menú Abrir.
-import java.io.EOFException;
 import java.io.PrintWriter;
-import java.io.StringReader;
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
@@ -432,17 +430,19 @@ public class editorVentana extends javax.swing.JFrame {
                 .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(aboutDialogLayout.createSequentialGroup()
-                        .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aboutDialogLayout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cerrarBtnDialog))
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(aboutDialogLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cerrarBtnDialog)
+                        .addGap(66, 66, 66)))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         aboutDialogLayout.setVerticalGroup(
             aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,8 +461,8 @@ public class editorVentana extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cerrarBtnDialog)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(cerrarBtnDialog))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -506,13 +506,13 @@ public class editorVentana extends javax.swing.JFrame {
             .addGroup(ayudaPopupLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ayudaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         ayudaPopupLayout.setVerticalGroup(
             ayudaPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ayudaPopupLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ayudaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(ayudaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1176,7 +1176,7 @@ private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
    aboutDialog.setIconImage(icon);
    this.setVisible(false);
    aboutDialog.setModal(true);
-   aboutDialog.setSize(410, 220);
+   aboutDialog.setSize(450, 220);
    aboutDialog.setResizable(false);
    aboutDialog.setVisible(true);
    this.setVisible(true);
