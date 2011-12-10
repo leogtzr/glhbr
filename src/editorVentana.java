@@ -1,6 +1,9 @@
 // PENDIENTE Expresiones de resaltado.
 // PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?, probar si falla en Windows.
 // PENDIENTE Agregado de palabras a la lista por idioma y en el menú Abrir.
+import java.io.EOFException;
+import java.io.PrintWriter;
+import java.io.StringReader;
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import javax.swing.ActionMap;
@@ -382,6 +385,7 @@ public class editorVentana extends javax.swing.JFrame {
         cambiarColorMenuItem = new javax.swing.JMenuItem();
         compilarMenu = new javax.swing.JMenu();
         compilarMenuItem = new javax.swing.JMenuItem();
+        imprimirArbolMenuItem = new javax.swing.JMenuItem();
         configuracionMenu = new javax.swing.JMenu();
         idiomaMenuItem = new javax.swing.JMenu();
         espanolMenuItem = new javax.swing.JMenuItem();
@@ -563,7 +567,7 @@ public class editorVentana extends javax.swing.JFrame {
         estadoDeLinea.setText("Abra o cree un nuevo archivo");
 
         areaTexto.setColumns(20);
-        areaTexto.setFont(new java.awt.Font("FreeMono", 1, 13));
+        areaTexto.setFont(new java.awt.Font("FreeMono", 1, 13)); // NOI18N
         areaTexto.setRows(5);
         areaTexto.setTabSize(2);
         areaTexto.setToolTipText("Ingrese su texto");
@@ -818,6 +822,15 @@ public class editorVentana extends javax.swing.JFrame {
         });
         compilarMenu.add(compilarMenuItem);
 
+        imprimirArbolMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/IcoArbol.png"))); // NOI18N
+        imprimirArbolMenuItem.setText("Imprimir árbol sintáctico");
+        imprimirArbolMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirArbolMenuItemActionPerformed(evt);
+            }
+        });
+        compilarMenu.add(imprimirArbolMenuItem);
+
         menu.add(compilarMenu);
 
         configuracionMenu.setMnemonic('n');
@@ -877,7 +890,10 @@ public class editorVentana extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(estadoDeLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(replaceBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 487, Short.MAX_VALUE)
@@ -887,20 +903,17 @@ public class editorVentana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(estadoDeLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idiomaCheck)
-                    .addComponent(replaceBtn))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(replaceBtn)
+                    .addComponent(idiomaCheck))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(estadoDeLinea))
@@ -1528,6 +1541,50 @@ private void tabSizeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
 }//GEN-LAST:event_tabSizeTxtActionPerformed
 
+private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirArbolMenuItemActionPerformed
+
+        palabras = new ArrayList<Lexema>();
+        palabras.clear();
+
+        try {
+            Analizador.AnalizadorLexico(f, palabras, idiomaCheck.isSelected() == true ? true : false);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(editorVentana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Parser.indentno = 0;
+        Parser.tokenString = "";
+        Parser syntax = new Parser(palabras, archivoAbierto);
+        Parser.lineno = 0;
+        Parser.arbolString = "";
+        
+        syntax.imprimirArbolArchivo(syntax.parse());
+        JOptionPane.showMessageDialog(null, Parser.arbolString);
+        
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        
+        try {
+            fichero = new FileWriter("arbol.txt");
+            pw = new PrintWriter(fichero);
+            pw.print(archivoAbierto + "\n");
+            pw.print(Parser.arbolString);
+            
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+        
+}//GEN-LAST:event_imprimirArbolMenuItemActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1585,6 +1642,7 @@ private void tabSizeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JMenuItem guardarMenuItem;
     private javax.swing.JCheckBox idiomaCheck;
     private javax.swing.JMenu idiomaMenuItem;
+    private javax.swing.JMenuItem imprimirArbolMenuItem;
     private javax.swing.JMenuItem imprimirMenuItem;
     private javax.swing.JMenuItem inglesMenuItem;
     private javax.swing.JMenuItem irAMenuItem;

@@ -77,7 +77,7 @@ public class Generador {
             }
         }
         pw.println("MOV " + pila.get(pila.size() - 1) + ",R0    ; fin de la sentencia");
-        pw.println("; Mostrar el resultado de " + pila.get(pila.size() - 1));
+        pw.println("; Rutina para mostrar el resultado de " + pila.get(pila.size() - 1));
         } catch(Exception e) {
             e.printStackTrace();
         } finally {

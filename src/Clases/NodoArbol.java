@@ -22,7 +22,7 @@ public class NodoArbol {
     TokenType op;      /* Tipo de operador */
     int valor = 0;
     double valorDecimal = 0.0;
-    String nombre;
+    String nombre = null;
     ExpType type;         /* Para verificación de tipo de expresiones */
 
 }

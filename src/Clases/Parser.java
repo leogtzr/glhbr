@@ -26,7 +26,7 @@ public class Parser {
     String errorString = "";
     ExpType asignacionTipo = ExpType.Void;
     String programName = null;
-    String arbolString = "";
+    static public String arbolString = "";
     private ArrayList<Lexema> palabras = null;   
     public static final int MAXCHILDREN = 3;
     public static int indentno = 0;
@@ -131,6 +131,11 @@ public class Parser {
     public static void imprimirEspacios() {
         for(int i = 0; i < indentno; i++)
             System.out.print(" ");
+    }
+    
+    public static void imprimirEspaciosArchivo() {
+        for(int i = 0; i < indentno; i++)
+            arbolString += " ";
     }
     
     public static void imprimirArbol(NodoArbol arbol) {
@@ -248,119 +253,120 @@ public class Parser {
             arbol = arbol.hermano;
             
         }
-        
-        unindent();
-        
+        unindent();    
     }
     
+    
     // PENDIENTE Método para imprimir archivo.
-        public static void imprimirArbolArchivo(NodoArbol arbol) {
+    public static void imprimirArbolArchivo(NodoArbol arbol) {
         
         indentar();
         while(arbol != null) {
-            imprimirEspacios();
+            imprimirEspaciosArchivo();
             if(arbol.nodeKind == NodeKind.StmtK) {
                 switch(arbol.stmt) {
                     case IfK:
-                        System.out.println("If");
+                        arbolString += "If\n";
                         break;
                     case RepeatK:
-                        System.out.println("Repetir");
+                        arbolString += "Repetir\n";
                         break;
                     case AssignK:
-                        System.out.println("Asignado a: " + arbol.nombre);
+                        arbolString += "Asignado a: " + arbol.nombre + "\n";
                         break;
                     case ReadK:
-                        System.out.println("Read: " + arbol.nombre);
+                        arbolString += "Read: " + arbol.nombre + "\n";
                         break;
                     case WriteK:
                         System.out.println("Write");
+                        arbolString += "Write\n";
                         break;
                     case WhileK:
-                        System.out.println("While");
+                        arbolString += "While\n";
                         break;
                     case InfinitumK:
-                        System.out.println("Infinito");
+                        arbolString += "Infinito\n";
                         break;
                     case PowK:
-                        System.out.println("Pow");
+                        arbolString += "Pow\n";
                         break;
                     case IncK:
-                        System.out.println("Inc");
+                        arbolString += "Inc\n";
                         break;             
                     case DecK:
-                        System.out.println("Dec");
+                        arbolString += "Dec\n";
                         break;
                     case SenoK:
-                        System.out.println("Seno");
+                        arbolString += "Seno\n";
                         break;
                     case CosenoK:
-                        System.out.println("Coseno");
+                        arbolString += "Coseno\n";
                         break;
                     case AbsK:
-                        System.out.println("Abs");
+                        arbolString += "Abs\n";
                         break;
                     case TanK:
-                        System.out.println("Tan");
+                        arbolString += "Tan\n";
                         break;
                     case LnK:
-                        System.out.println("Ln");
+                        arbolString += "Ln\n";
                         break;
                     case ClearK:
-                        System.out.println("Clear");
+                        arbolString += "Clear\n";
                         break;
                     case SalirK:
-                        System.out.println("Salir");
+                        arbolString += "Salir\n";
                         break;
                     case FactorialK:
-                        System.out.println("Factorial");
+                        arbolString += "Factorial\n";
                         break;
                     case RaizK:
-                        System.out.println("Raiz");
+                        arbolString += "Raiz\n";
                         break;
                     case HexK:
-                        System.out.println("Hex : [" + arbol.nombre + "]");
+                        arbolString += "Hex : [" + arbol.nombre + "]\n";
                         break;                        
                     case BooleanK:
-                        System.out.println("Asignado a: " + arbol.nombre);
+                        arbolString += "Asignado a: " + arbol.nombre + "\n";
                         break;    
                     case BinarioK:
-                        System.out.println("Asignado a: " + arbol.nombre);
+                        arbolString += "Asignado a: " + arbol.nombre + "\n";
                         break;
                     case EnteroK:
                         // Generador de código aquí.
-                        System.out.println("Asignado a: " + arbol.nombre);
+                        arbolString += "Asignado a: " + arbol.nombre + "\n";
                         break;
                     case DecimalK:
-                        System.out.println("Asignado a: " + arbol.nombre);
+                        arbolString += "Asignado a: " + arbol.nombre + "\n";
                         break;
                     default:
-                        System.out.println("Nodo desconocido");
+                        arbolString += "Nodo desconocido\n";
                 }
             } else if(arbol.nodeKind == NodeKind.ExpK) {
                 
                 switch(arbol.exp) {
                     case OpK:
-                        System.out.print("op: ");
-                        printToken(arbol.op, "\\0");
+                        arbolString += "op: ";
+                        printTokenArchivo(arbol.op, "\\0");
                         break;
                     case ConstK:
-                        if(arbol.type == ExpType.Entero || arbol.type == ExpType.Binario)
-                            System.out.println("const: " + arbol.valor);
-                        else
-                            System.out.println("const: " + arbol.valorDecimal);
+                        if(arbol.type == ExpType.Entero || arbol.type == ExpType.Binario) {
+                            arbolString += "const: " + arbol.valor + "\n";
+                        } else {
+                            arbolString += "const: " + arbol.valorDecimal + "\n";
+                        }
                         
                         break;
                     case IdK:
-                        System.out.println("id: " + arbol.nombre);
+                        arbolString += "id: " + arbol.nombre + "\n";
                         break;
                     default:
-                        System.out.println("Nodo desconocido");
+                        arbolString += "Nodo desconocido\n";
                         break;
                 }
                 
             } else {
-                System.out.println("Nodo desconocido");
+                arbolString += "Nodo desconocido\n";
             }
             
             for(int j = 0; j < MAXCHILDREN; j++)
@@ -369,9 +375,7 @@ public class Parser {
             arbol = arbol.hermano;
             
         }
-        
         unindent();
-        
     }
    
    public Parser() {
@@ -554,6 +558,88 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                System.out.println("Desconocido = " + token);
+               break;
+       }
+   } 
+   
+   public static void printTokenArchivo(TokenType token, String tokenString) {
+       switch(token) {
+           case IF:
+           case THEN:
+           case ELSE:
+           case END:
+           case REPETIR:
+           case HASTA:
+           case LEER:
+           case WRITE:
+           case WHILE:
+           case INFINITO:
+           case POW:
+           case INC:
+           case DEC:
+           case SENO:
+           case COSENO:
+           case ABS:
+           case TAN:
+           case LN:
+           case CLEAR:
+           case SALIR:
+           case FACTORIAL:
+           case RAIZ:
+           case HEX:
+           case BINARIO:
+           case ENTERO:
+           case DECIMAL:
+               // PENDIENTE Salida a un archivo?
+               arbolString += "palabra reservada: " + tokenString + "\n";
+               break;
+           case ASSIGN:
+               arbolString += ":=\n";
+               break;
+           case LT:
+               arbolString += "<\n";
+               break;
+           case GT:
+               arbolString += ">\n";
+               break;
+           case EQ:
+               arbolString += "==\n";
+               break;
+           case LPARENT:
+               arbolString += "(\n";
+               break;
+           case RPARENT:
+               arbolString += ")\n";
+               break;
+           case SEMI:
+               arbolString += ";\n";
+               break;
+           case PLUS:
+               arbolString += "+\n";
+               break;
+           case MINUS:
+               arbolString += "-\n";
+               break;
+           case TIMES:
+               arbolString += "*\n";
+               break;
+           case OVER:
+               arbolString += "/\n";
+               break;
+           case NUM:
+               arbolString += "Num, valor=" + tokenString + "\n";
+               break;
+           case ID:
+               arbolString += "Nombre=" + tokenString + "\n";
+               break;
+           case CADENA:
+               arbolString += "cadena=" + tokenString + "\n";
+               break;
+           case ERROR:
+               arbolString += "Error: " + tokenString + "\n";
+               break;
+           default:
+               arbolString += "Desconocido = " + token + "\n";
                break;
        }
    } 
