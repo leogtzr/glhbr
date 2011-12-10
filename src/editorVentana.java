@@ -382,7 +382,6 @@ public class editorVentana extends javax.swing.JFrame {
         cambiarColorMenuItem = new javax.swing.JMenuItem();
         compilarMenu = new javax.swing.JMenu();
         compilarMenuItem = new javax.swing.JMenuItem();
-        imprimirArbolMenuItem = new javax.swing.JMenuItem();
         configuracionMenu = new javax.swing.JMenu();
         idiomaMenuItem = new javax.swing.JMenu();
         espanolMenuItem = new javax.swing.JMenuItem();
@@ -818,16 +817,6 @@ public class editorVentana extends javax.swing.JFrame {
             }
         });
         compilarMenu.add(compilarMenuItem);
-
-        imprimirArbolMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/IcoArbol.png"))); // NOI18N
-        imprimirArbolMenuItem.setMnemonic('I');
-        imprimirArbolMenuItem.setText("Imprimir árbol a archivo");
-        imprimirArbolMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imprimirArbolMenuItemActionPerformed(evt);
-            }
-        });
-        compilarMenu.add(imprimirArbolMenuItem);
 
         menu.add(compilarMenu);
 
@@ -1405,6 +1394,7 @@ private void compilarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
         Parser.tokenString = "";
         Parser syntax = new Parser(palabras, archivoAbierto);
         Parser.lineno = 0;
+        
         NodoArbol arbolSintactico = syntax.parse();
         
         // TODO Avisar de los errores.
@@ -1524,16 +1514,6 @@ private void tabSizeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
    this.setVisible(true);
 }//GEN-LAST:event_tabSizeMenuItemActionPerformed
 
-private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirArbolMenuItemActionPerformed
-
-        Parser.indentno = 0;
-        Parser.tokenString = "";
-        Parser syntax = new Parser(palabras, archivoAbierto);
-        Parser.lineno = 0;
-        NodoArbol arbolSintactico = syntax.parse();
-        
-}//GEN-LAST:event_imprimirArbolMenuItemActionPerformed
-
 private void tabSizeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabSizeTxtActionPerformed
 
     if(!isNumeric(tabSizeTxt.getText()))
@@ -1605,7 +1585,6 @@ private void tabSizeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JMenuItem guardarMenuItem;
     private javax.swing.JCheckBox idiomaCheck;
     private javax.swing.JMenu idiomaMenuItem;
-    private javax.swing.JMenuItem imprimirArbolMenuItem;
     private javax.swing.JMenuItem imprimirMenuItem;
     private javax.swing.JMenuItem inglesMenuItem;
     private javax.swing.JMenuItem irAMenuItem;

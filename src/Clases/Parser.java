@@ -1,6 +1,5 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
-// PENDIENTE Agregar los archivos de código fuente al proyecto.
 
 package Clases;
 
@@ -17,7 +16,7 @@ public class Parser {
        LEER, WRITE, 
        ID, NUM, 
        ASSIGN, EQ, LT, PLUS, MINUS, TIMES, OVER, LPARENT, RPARENT, SEMI, POW, COMA, MOD, LEQ, GEQ, GT, NEQ, NOT, COMP, AND, 
-       OR, WHILE, INFINITO, INIBLOQUE, FINBLOQUE, INICIO, FINALIZAR, INC, DEC, SENO, COSENO, ABS, 
+       OR, WHILE, INFINITO,INIBLOQUE, FINBLOQUE, INICIO, FINALIZAR, INC, DEC, SENO, COSENO, ABS, 
        TAN, LN, CLEAR, SALIR,
        FACTORIAL, RAIZ,
        HEX, CADENA, BOOLEANO, BINARIO, ENTERO, DECIMAL
@@ -28,6 +27,15 @@ public class Parser {
     ExpType asignacionTipo = ExpType.Void;
     String programName = null;
     String arbolString = "";
+    private ArrayList<Lexema> palabras = null;   
+    public static final int MAXCHILDREN = 3;
+    public static int indentno = 0;
+    private int indice = 0;
+    public ArrayList<String> tokensPila = new ArrayList<String>();
+    public static TokenType token;
+    public static String tokenString;
+    public static int lineno = 0;
+
     
     public static enum NodeKind {
         StmtK, ExpK
@@ -121,7 +129,7 @@ public class Parser {
     }
     
     public static void imprimirEspacios() {
-        for(short i = 0; i < indentno; i++)
+        for(int i = 0; i < indentno; i++)
             System.out.print(" ");
     }
     
@@ -234,7 +242,7 @@ public class Parser {
                 System.out.println("Nodo desconocido");
             }
             
-            for(byte j = 0; j < MAXCHILDREN; j++)
+            for(int j = 0; j < MAXCHILDREN; j++)
                 imprimirArbol(arbol.hijos[j]);
             
             arbol = arbol.hermano;
@@ -255,7 +263,6 @@ public class Parser {
                 switch(arbol.stmt) {
                     case IfK:
                         System.out.println("If");
-                        
                         break;
                     case RepeatK:
                         System.out.println("Repetir");
@@ -356,7 +363,7 @@ public class Parser {
                 System.out.println("Nodo desconocido");
             }
             
-            for(byte j = 0; j < MAXCHILDREN; j++)
+            for(int j = 0; j < MAXCHILDREN; j++)
                 imprimirArbolArchivo(arbol.hijos[j]);
             
             arbol = arbol.hermano;
@@ -366,15 +373,6 @@ public class Parser {
         unindent();
         
     }
-
-    private ArrayList<Lexema> palabras = null;   
-    public static final int MAXCHILDREN = 3;
-    public static int indentno = 0;
-    private int indice = 0;
-    public ArrayList<String> tokensPila = new ArrayList<String>();
-    public static TokenType token;
-    public static String tokenString;
-    public static int lineno = 0;
    
    public Parser() {
        palabras = null;
@@ -382,6 +380,7 @@ public class Parser {
        tabla = new TablaSimbolos();   
        errorString = "";
        arbolString = "";
+       lineno = 0;
    }
     
    public Parser(ArrayList<Lexema> palabras, String programName) {
@@ -390,6 +389,8 @@ public class Parser {
        tabla = new TablaSimbolos();
        errorString = "";
        this.programName = programName;
+       arbolString = "";
+       lineno = 0;
    }
    
    private static void postorden(NodoArbol a) {
@@ -563,7 +564,7 @@ public static void recorrerArbol(NodoArbol a) {
            System.out.println("Error, no hay memoria");
            // Código para salir del método o el programa
        } else {
-           for(byte i = 0; i < MAXCHILDREN; i++)
+           for(int i = 0; i < MAXCHILDREN; i++)
                t.hijos[i] = null;
            t.hermano = null;
            
@@ -581,7 +582,7 @@ public static void recorrerArbol(NodoArbol a) {
            System.out.println("Error, no hay memoria");
            // Código para salir del método o el programa
        } else {
-           for(byte i = 0; i < MAXCHILDREN; i++)
+           for(int i = 0; i < MAXCHILDREN; i++)
                t.hijos[i] = null;
            
            t.hermano = null;
@@ -1228,7 +1229,8 @@ public static void recorrerArbol(NodoArbol a) {
        System.out.println();
        System.out.println("---------------------------------------------------------------");
        
-       JOptionPane.showMessageDialog(null, "Elementos de la pila: " + generarPila(t).size());
+       // PENDIENTE Automatizar esto, no borrarlo!
+       generarPila(t);
        
        Generador generador = new Generador(tokensPila, programName);
        // PENDIENTE Juntar los lexemas relaciones con la asignación de enteros y crear un método

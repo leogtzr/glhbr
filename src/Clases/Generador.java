@@ -50,7 +50,7 @@ public class Generador {
             pw.println("; Assembly code para el programa \"" + programName + "\"");
             pw.println();
             
-        for(short i = 0; i < pila.size() - 1; i++) {
+        for(int i = 0; i < pila.size() - 1; i++) {
             
             if(isOperator(pila.get(i)) == false) {
                 pw.println("MOV " + ("R" + tope) + ",#" + pila.get(i) + " ; Cargamos la constante " + pila.get(i));
