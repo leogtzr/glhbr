@@ -1,4 +1,5 @@
 // PENDIENTE Ver si podría generar triplos o cuadruplos con el algoritmo, o quizás código p.
+// PENDIENTE Opción para ir evaluando expresiones?
 package Clases;
 
 import java.io.FileWriter;
@@ -12,7 +13,7 @@ public class Generador {
     
     private int tope = 0;
     private ArrayList<String> pila = null;
-    String programName = null;
+    private String programName = null;
     
     public String getProgramName() {
         return programName;
@@ -93,8 +94,36 @@ public class Generador {
         
     }
     
-    // PENDIENTE Generar código P para asignaciones.
+    // PENDIENTE Generar código P para asignaciones enteras sencillas sin variables.
     public void generarCodigoP() {
+        
+        for(int i = 0; i < pila.size() - 1; i++) {
+            
+            if(isOperator(pila.get(i)) == false) {
+                System.out.println("ldc " + pila.get(i));
+                tope++;
+            } else {
+                switch(pila.get(i).charAt(0)) {
+                    case '+':
+                        System.out.println("adi");
+                        tope--;
+                        break;
+                    case '-':
+                        System.out.println("sbi");
+                        tope--;
+                        break;
+                    case '*':
+                        System.out.println("mpi");
+                        tope--;
+                        break;    
+                    case '/':
+                        System.out.println("dvi");
+                        tope--;
+                        break;
+                }
+            }
+        }
+
         
     }
     

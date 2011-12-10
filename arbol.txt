@@ -2,4 +2,4 @@ shit.glhbr
     Asignado a: a
         op: +
             const: 3
-            const: 26
+            const: 2

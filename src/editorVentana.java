@@ -1,6 +1,7 @@
 // PENDIENTE Expresiones de resaltado.
 // PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?, probar si falla en Windows.
 // PENDIENTE Crear documentación.
+
 import java.io.PrintWriter;
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;

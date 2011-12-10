@@ -1,3 +1,4 @@
+// PENDIENTE Aplicar bloques static para inicializar atributos de clase.
 package Clases;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,12 +9,22 @@ import Clases.Parser.*;
 
 public class Analizador {
     
-    private static int c;
-    private static FileReader fr = null;
-    private static String lexema = "";
-    private static String operador = "";
-    private static String asignacionCadena = "";
-    private static int nLineas = 1;
+    // GIT Bloque static aplicado.
+    static {
+        fr = null;
+        lexema = "";
+        operador = "";
+        asignacionCadena = "";
+        nLineas = 1;
+        c = 0;
+    }
+    
+    private static int c = 0;
+    private static FileReader fr;
+    private static String lexema;
+    private static String operador;
+    private static String asignacionCadena;
+    private static int nLineas;
     
     public static void AnalizadorLexico(File f, ArrayList<Lexema> palabras, boolean idioma) throws FileNotFoundException, IOException {
         int indice = 1;

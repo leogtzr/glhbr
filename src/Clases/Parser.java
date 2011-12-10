@@ -1,4 +1,7 @@
 // PENDIENTE El compilador detecta como error si ponemos un 1 o un 0.
+// PENDIENTE Aplicar bloques static para inicializar atributos de clase.
+// PENDIENTE Organizar los programas de ejemplo a entregar.
+// PENDIENTE Quitar lo de "constante"
 
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
@@ -23,6 +26,13 @@ public class Parser {
        FACTORIAL, RAIZ,
        HEX, CADENA, BOOLEANO, BINARIO, ENTERO, DECIMAL
     };
+    
+    static {
+        arbolString = "";
+        indentno = 0;
+        tokenString = "";
+        lineno = 0;
+    }
    
     TablaSimbolos tabla = new TablaSimbolos();
     String errorString = "";
@@ -1319,6 +1329,7 @@ public static void recorrerArbol(NodoArbol a) {
        Generador generador = new Generador(tokensPila, programName);
        // PENDIENTE Juntar los lexemas relaciones con la asignación de enteros y crear un método
        generador.generar();
+       generador.generarCodigoP();
        
        postorden(t);
        
