@@ -1,5 +1,6 @@
 // PENDIENTE Ver si podría generar triplos o cuadruplos con el algoritmo, o quizás código p.
 // PENDIENTE Opción para ir evaluando expresiones?
+// PENDIENTE Enviar Código P a archivo.
 package Clases;
 
 import java.io.FileWriter;
@@ -54,7 +55,7 @@ public class Generador {
         for(int i = 0; i < pila.size() - 1; i++) {
             
             if(isOperator(pila.get(i)) == false) {
-                pw.println("MOV " + ("R" + tope) + ",#" + pila.get(i) + " ; Cargamos la constante " + pila.get(i));
+                pw.println("MOV " + ("R" + tope) + ",#" + pila.get(i) + " ; Cargamos " + pila.get(i));
                 tope++;
             } else {
                 switch(pila.get(i).charAt(0)) {
@@ -94,7 +95,6 @@ public class Generador {
         
     }
     
-    // PENDIENTE Generar código P para asignaciones enteras sencillas sin variables.
     public void generarCodigoP() {
         
         for(int i = 0; i < pila.size() - 1; i++) {

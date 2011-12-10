@@ -1,7 +1,6 @@
 // PENDIENTE El compilador detecta como error si ponemos un 1 o un 0.
 // PENDIENTE Aplicar bloques static para inicializar atributos de clase.
 // PENDIENTE Organizar los programas de ejemplo a entregar.
-// PENDIENTE Quitar lo de "constante"
 
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
