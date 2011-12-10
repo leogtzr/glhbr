@@ -1,3 +1,5 @@
+// PENDIENTE El compilador detecta como error si ponemos un 1 o un 0.
+
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
 
@@ -256,8 +258,6 @@ public class Parser {
         unindent();    
     }
     
-    
-    // PENDIENTE Método para imprimir archivo.
     public static void imprimirArbolArchivo(NodoArbol arbol) {
         
         indentar();
@@ -508,7 +508,6 @@ public static void recorrerArbol(NodoArbol a) {
            case BINARIO:
            case ENTERO:
            case DECIMAL:
-               // PENDIENTE Salida a un archivo?
                System.out.println("palabra reservada: " + tokenString);
                break;
            case ASSIGN:
@@ -590,7 +589,6 @@ public static void recorrerArbol(NodoArbol a) {
            case BINARIO:
            case ENTERO:
            case DECIMAL:
-               // PENDIENTE Salida a un archivo?
                arbolString += "palabra reservada: " + tokenString + "\n";
                break;
            case ASSIGN:

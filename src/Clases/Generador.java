@@ -1,4 +1,4 @@
-// PENDIENTE Ver si podría generar triplos o cuadruplos con el algoritmo
+// PENDIENTE Ver si podría generar triplos o cuadruplos con el algoritmo, o quizás código p.
 package Clases;
 
 import java.io.FileWriter;
@@ -88,6 +88,14 @@ public class Generador {
               e2.printStackTrace();
            }
         }
+        
+        tope = 0;
+        
+    }
+    
+    // PENDIENTE Generar código P para asignaciones.
+    public void generarCodigoP() {
+        
     }
     
 }

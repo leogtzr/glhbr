@@ -1,3 +1,4 @@
+// PENDIENTE Método para imprimir la tabla de simbolos en archivo?
 package Clases;
 import java.util.Enumeration;
 import java.util.Hashtable;
