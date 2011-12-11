@@ -33,7 +33,7 @@ public class Parser {
    
     TablaSimbolos tabla = new TablaSimbolos();
     String errorString = "";
-    ExpType asignacionTipo = ExpType.Void;
+    ExpType asignacionTipo = ExpType.Entero;
     String programName = null;
     static public String arbolString = "";
     private ArrayList<Lexema> palabras = null;   
@@ -706,7 +706,7 @@ public static void recorrerArbol(NodoArbol a) {
            token = getToken();
        } else {
            syntaxError("Nodo no esperado --> ");
-           errorString += "Nodo no esperado --> " + tokenString;
+           errorString += "Nodo no esperado --> " + tokenString + "\n";
            printToken(expected, tokenString);
            System.out.print("      ");
        }
@@ -810,7 +810,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado --> ");
-               errorString += "Token inesperado --> " + tokenString; 
+               errorString += "Token inesperado --> " + tokenString + "\n";
                printToken(token, tokenString);
                token = getToken();
                break;
@@ -1025,7 +1025,7 @@ public static void recorrerArbol(NodoArbol a) {
            t.nombre = tokenString;
        
        if(tabla.tabla.containsKey(tokenString) == false) {
-           errorString += "La variable o función " + tokenString + " no existe, línea" + lineno + "\n";
+           errorString += "La variable o función " + tokenString + " no existe, línea " + lineno + "\n";
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
        } else { // Sí existe y obtenemos su tipo...
            NodoArbol temporal = null;
@@ -1196,7 +1196,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado ---> ");
-               errorString += "Token inesperado ---> " + tokenString;
+               errorString += "Token inesperado ---> " + tokenString + "\n";
                printToken(token, tokenString);
                token = getToken();
                break;
