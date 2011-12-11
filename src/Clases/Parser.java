@@ -823,8 +823,10 @@ public static void recorrerArbol(NodoArbol a) {
    NodoArbol if_stmt() {
        NodoArbol t = newStmtNode(StmtKind.IfK);
        coincidir(TokenType.IF);
+       coincidir(TokenType.LPARENT);
        if(t != null)
            t.hijos[0] = expresion();
+       coincidir(TokenType.RPARENT);
        coincidir(TokenType.THEN);
        if(t != null)
            t.hijos[1] = stmt_sequence();
