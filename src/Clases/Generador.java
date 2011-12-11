@@ -15,9 +15,22 @@ public class Generador {
     private int tope = 0;
     private ArrayList<String> pila = null;
     private String programName = null;
+    private TablaSimbolos tablaSimbolosGenerador = null;
     
     public String getProgramName() {
         return programName;
+    }
+    
+    public void setProgramName(String programName) {
+        this.programName = programName;
+    }
+    
+    public TablaSimbolos getTablaSimbolosGenerador() {
+        return tablaSimbolosGenerador;
+    }
+    
+    public void setTablaSimbolosGenerador(TablaSimbolos table) {
+        tablaSimbolosGenerador = table;
     }
     
     public Generador(ArrayList<String> pila_2, String programName) {
@@ -41,6 +54,7 @@ public class Generador {
     	}
     }
     
+    // PENDIENTE Correcto formateado con %s.
     public void generar() {
         
         FileWriter fichero = null;
@@ -97,34 +111,53 @@ public class Generador {
     
     public void generarCodigoP() {
         
-        for(int i = 0; i < pila.size() - 1; i++) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        
+        try {
+            
+            fichero = new FileWriter("CodigoPSentencia.txt");
+            pw = new PrintWriter(fichero);
+            
+            pw.print(";Código P para las sentencias enteras sencilla para el programa " + programName + "\n");
+            
+            for(int i = 0; i < pila.size() - 1; i++) {
             
             if(isOperator(pila.get(i)) == false) {
-                System.out.println("ldc " + pila.get(i));
+                pw.print("ldc " + pila.get(i) + "\n");
                 tope++;
             } else {
                 switch(pila.get(i).charAt(0)) {
                     case '+':
-                        System.out.println("adi");
+                        pw.print("adi " + "\n");
                         tope--;
                         break;
                     case '-':
-                        System.out.println("sbi");
+                        pw.print("sbi" + "\n");
                         tope--;
                         break;
                     case '*':
-                        System.out.println("mpi");
+                        pw.print("mpi " +  "\n");
                         tope--;
                         break;    
                     case '/':
-                        System.out.println("dvi");
+                        pw.print("dvi" + "\n");
                         tope--;
                         break;
                 }
             }
         }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
 
-        
     }
     
 }

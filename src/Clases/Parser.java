@@ -440,6 +440,7 @@ public class Parser {
    // PENDIENTE Aquí está el problema
    // TODO El problema es que se está aumentando la pila cada vez que hay un 
    // nueva asignación de entero...
+   // TODO Poner un delimitador.
    public ArrayList<String> generarPila(NodoArbol a) {
 	if(a != null) {
 		generarPila(a.hijos[0]);
@@ -1067,13 +1068,19 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
-   // PENDIENTE Checar que exista la variable.
    public NodoArbol read_stmt() {
        NodoArbol t = newStmtNode(StmtKind.ReadK);
        coincidir(TokenType.LEER);
        coincidir(TokenType.LPARENT);
        if((t != null) && (token == TokenType.ID))
            t.nombre = tokenString;
+       JOptionPane.showMessageDialog(null, tokenString);
+       
+       if(tabla.tabla.containsKey(tokenString) == false) {
+           errorString += "La variable o función " + tokenString + " no existe, línea " + lineno + "\n";
+           syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
+       }
+       
        coincidir(TokenType.ID);
        coincidir(TokenType.RPARENT);
        return t;
@@ -1337,9 +1344,10 @@ public static void recorrerArbol(NodoArbol a) {
        generarPila(t);
        
        Generador generador = new Generador(tokensPila, programName);
+       
        // PENDIENTE Juntar los lexemas relaciones con la asignación de enteros y crear un método
        generador.generar();
-       //generador.generarCodigoP();
+       generador.generarCodigoP();
        
        postorden(t);
        
