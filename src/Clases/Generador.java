@@ -49,7 +49,7 @@ public class Generador {
         try {
             fichero = new FileWriter("source.asm");
             pw = new PrintWriter(fichero);
-            pw.println("; Assembly code para el programa \"" + programName + "\"");
+            pw.print("; Assembly code para el programa \"" + programName + "\"");
             pw.println();
             
         for(int i = 0; i < pila.size() - 1; i++) {

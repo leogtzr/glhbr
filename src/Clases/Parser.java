@@ -1,5 +1,3 @@
-// PENDIENTE El compilador detecta como error si ponemos un 1 o un 0.
-// PENDIENTE Aplicar bloques static para inicializar atributos de clase.
 // PENDIENTE Organizar los programas de ejemplo a entregar.
 
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
@@ -49,8 +47,14 @@ public class Parser {
 
     
     public static enum NodeKind {
-        StmtK, ExpK
+        StmtK, ExpK, OpKind, ConstKind, IdKind // CUIDADO
      };
+    
+    // TODO Agregado para la generación de código P.
+    public static enum Optype {
+        Plus, Assign
+    };
+    
     
     public static enum StmtKind {
         IfK, 
@@ -433,6 +437,9 @@ public class Parser {
 	}
     }
    
+   // PENDIENTE Aquí está el problema
+   // TODO El problema es que se está aumentando la pila cada vez que hay un 
+   // nueva asignación de entero...
    public ArrayList<String> generarPila(NodoArbol a) {
 	if(a != null) {
 		generarPila(a.hijos[0]);
@@ -811,6 +818,7 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
+   // PENDIENTE Quizás poner '(' para delimitar la expresión?
    NodoArbol if_stmt() {
        NodoArbol t = newStmtNode(StmtKind.IfK);
        coincidir(TokenType.IF);
@@ -869,6 +877,7 @@ public static void recorrerArbol(NodoArbol a) {
        
    }
    
+   // PENDIENTE Checar si existe ID.
    public NodoArbol pow_stmt() {
        NodoArbol t = newStmtNode(StmtKind.PowK);
        coincidir(TokenType.POW);
@@ -895,6 +904,7 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
+   // PENDIENTE Checar si existe el ID
    public NodoArbol dec_stmt() {
        NodoArbol t = newStmtNode(StmtKind.IncK);
        coincidir(TokenType.DEC);
@@ -1057,6 +1067,7 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
+   // PENDIENTE Checar que exista la variable.
    public NodoArbol read_stmt() {
        NodoArbol t = newStmtNode(StmtKind.ReadK);
        coincidir(TokenType.LEER);
@@ -1328,7 +1339,7 @@ public static void recorrerArbol(NodoArbol a) {
        Generador generador = new Generador(tokensPila, programName);
        // PENDIENTE Juntar los lexemas relaciones con la asignación de enteros y crear un método
        generador.generar();
-       generador.generarCodigoP();
+       //generador.generarCodigoP();
        
        postorden(t);
        
@@ -1400,10 +1411,7 @@ public static void recorrerArbol(NodoArbol a) {
                            t.type = ExpType.Entero;
                            t.valor = (int)Float.parseFloat(tokenString);
                        } else {             // Entonces es binario ...
-                           // PENDIENTE Corregir aquí el problema de los tipos con 0 y 1.
-                           /*JOptionPane.showMessageDialog(null, tokenString.length());
-                           errorString += "Error de tipos, binario encontrado, línea " + lineno + "\n";
-                           syntaxError("Error de tipos, binario encontrado, línea " + lineno + "\n");*/
+                           
                            if(!tokenString.equals("0") && tokenString.length() != 1) {
                                errorString += "Error de tipos, binario encontrado, línea " + lineno + "\n";
                                 syntaxError("Error de tipos, binario encontrado, línea " + lineno + "\n");
