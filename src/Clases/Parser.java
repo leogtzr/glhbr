@@ -1400,8 +1400,15 @@ public static void recorrerArbol(NodoArbol a) {
                            t.type = ExpType.Entero;
                            t.valor = (int)Float.parseFloat(tokenString);
                        } else {             // Entonces es binario ...
+                           // PENDIENTE Corregir aquí el problema de los tipos con 0 y 1.
+                           /*JOptionPane.showMessageDialog(null, tokenString.length());
                            errorString += "Error de tipos, binario encontrado, línea " + lineno + "\n";
-                           syntaxError("Error de tipos, binario encontrado, línea " + lineno + "\n");
+                           syntaxError("Error de tipos, binario encontrado, línea " + lineno + "\n");*/
+                           if(!tokenString.equals("0") && tokenString.length() != 1) {
+                               errorString += "Error de tipos, binario encontrado, línea " + lineno + "\n";
+                                syntaxError("Error de tipos, binario encontrado, línea " + lineno + "\n");
+                           }
+                           
                        }
                    } else {
                                     // Sino convertimos a entero y almacenamos en el miembro "valor".

@@ -1,11 +1,7 @@
-; Assembly code para el programa "shit_3.glhbr"
+; Assembly code para el programa "shit.glhbr"
 
-MOV R0,#2 ; Cargamos 2
-MOV R1,#10 ; Cargamos 10
-MUL R0,R1     ;  Multiplicamos
-MOV R1,#6 ; Cargamos 6
-MOV R2,#3 ; Cargamos 3
-SUB R1,R2        ; Restamos
+MOV R0,#0 ; Cargamos 0
+MOV R1,#1 ; Cargamos 1
 ADD R0,R1 ; Sumamos
-MOV b,R0    ; fin de la sentencia
-; Rutina para mostrar el resultado de b
+MOV a,R0    ; fin de la sentencia
+; Rutina para mostrar el resultado de a
