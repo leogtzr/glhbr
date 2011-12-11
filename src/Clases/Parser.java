@@ -916,6 +916,12 @@ public static void recorrerArbol(NodoArbol a) {
        NodoArbol t = newStmtNode(StmtKind.IncK);
        coincidir(TokenType.DEC);
        coincidir(TokenType.LPARENT);
+       
+       if(tabla.tabla.containsKey(tokenString) == false) {
+           errorString += "La variable o función " + tokenString + " no existe, línea " + lineno + "\n";
+           syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
+       }
+       
        coincidir(TokenType.ID);
        coincidir(TokenType.COMA);
        if(t != null)
