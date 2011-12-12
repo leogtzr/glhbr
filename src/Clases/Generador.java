@@ -1,11 +1,10 @@
-// PENDIENTE Ver si podría generar triplos o cuadruplos con el algoritmo, o quizás código p.
-// PENDIENTE Opción para ir evaluando expresiones?
-// PENDIENTE Enviar Código P a archivo.
 package Clases;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Stack;
+import javax.swing.JOptionPane;
 
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Dec 5, 2011 */
@@ -16,6 +15,9 @@ public class Generador {
     private ArrayList<String> pila = null;
     private String programName = null;
     private TablaSimbolos tablaSimbolosGenerador = null;
+    private Stack<Double> pilaEvaluacion = null;
+    double a = 0.0;
+    double b = 0.0;
     
     public String getProgramName() {
         return programName;
@@ -38,6 +40,7 @@ public class Generador {
         pila = null;
         pila = (ArrayList<String>)pila_2.clone();
         this.programName = programName;
+        pilaEvaluacion = new Stack<Double>();
     }
     
         public static boolean isOperator(String op) {
@@ -68,25 +71,44 @@ public class Generador {
             
         for(int i = 0; i < pila.size() - 1; i++) {
             
-            if(isOperator(pila.get(i)) == false) {
+            if(!isOperator(pila.get(i))) {      // Si es falso, entonces es un operando.
                 pw.println("MOV " + ("R" + tope) + ",#" + pila.get(i) + " ; Cargamos " + pila.get(i));
+                pilaEvaluacion.push(Double.parseDouble(pila.get(i)));
                 tope++;
             } else {
                 switch(pila.get(i).charAt(0)) {
                     case '+':
                         pw.println("ADD R" + (tope - 2) + ",R" + (tope - 1) + " ; Sumamos");
+                        
+                        a = pilaEvaluacion.pop();
+                        b = pilaEvaluacion.pop();
+                        pilaEvaluacion.push(b + a);
+                        
                         tope--;
                         break;
                     case '-':
                         pw.println("SUB R" + (tope - 2) + ",R" + (tope - 1) + "        ; Restamos");
+                        a = pilaEvaluacion.pop();
+                        b = pilaEvaluacion.pop();
+                        pilaEvaluacion.push(b - a);
                         tope--;
                         break;
+                        
                     case '*':
                         pw.println("MUL R" + (tope - 2) + ",R" + (tope - 1) + "     ;  Multiplicamos");
+                        
+                        a = pilaEvaluacion.pop();
+                        b = pilaEvaluacion.pop();
+                        pilaEvaluacion.push(b * a);
+                        
                         tope--;
                         break;    
                     case '/':
                         pw.println("DIV R" + (tope - 2) + ",R" + (tope - 1) + "     ; Dividimos");
+                        a = pilaEvaluacion.pop();
+                        b = pilaEvaluacion.pop();
+                        pilaEvaluacion.push(b / a);
+                        
                         tope--;
                         break;
                 }
@@ -94,6 +116,11 @@ public class Generador {
         }
         pw.println("MOV " + pila.get(pila.size() - 1) + ",R0    ; fin de la sentencia");
         pw.println("; Rutina para mostrar el resultado de " + pila.get(pila.size() - 1));
+        
+        // PENDIENTE Volcar la salida como comentario al ejecutable.
+        for(int k = 0; k < pilaEvaluacion.size(); k++)
+            JOptionPane.showMessageDialog(null, pilaEvaluacion.get(k));
+        
         } catch(Exception e) {
             e.printStackTrace();
         } finally {

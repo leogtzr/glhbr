@@ -1,5 +1,9 @@
-shit.glhbr
-    Asignado a: a
-        op: +
-            const: 3
-            const: 2
+simple.glhbr
+    Asignado a: x
+        op: -
+            op: +
+                const: 1
+                op: *
+                    const: 2
+                    const: 3
+            const: 1

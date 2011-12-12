@@ -1,2 +1,6 @@
-;Código P para las sentencias enteras sencilla para el programa if_parentesis.glhbr
-ldc 12
+;Código P para las sentencias enteras sencilla para el programa simple.glhbr
+ldc 18
+ldc 2
+ldc 4
+adi 
+dvi

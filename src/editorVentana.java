@@ -1126,7 +1126,13 @@ private void abrirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         ImageIcon icono = new ImageIcon(getClass().getResource("/icons/tp_new.png"));
         compilarMenuItem.setIcon(icono);
         areaTexto.setComponentPopupMenu(popup);
-        negro.start();
+        
+        // GIT Corregida excepción al lanzar hilo.
+        try {
+            negro.start();
+        } catch(IllegalThreadStateException e) {
+            
+        }
         //////////////////////////// fin código de prueba para autocompletado //////////////////////////////
     
 }//GEN-LAST:event_abrirMenuItemActionPerformed
