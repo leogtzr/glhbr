@@ -1363,7 +1363,9 @@ public static void recorrerArbol(NodoArbol a) {
        generador.generar();
        generador.generarCodigoP();
        
-       postorden(t);
+       JOptionPane.showMessageDialog(null, "Resultado de la operación: " + generador.getResultado());
+       
+       //postorden(t);
        
        System.out.println("---------------------------------------------------------------");
        tabla.mostrarTabla();

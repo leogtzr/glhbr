@@ -16,8 +16,9 @@ public class Generador {
     private String programName = null;
     private TablaSimbolos tablaSimbolosGenerador = null;
     private Stack<Double> pilaEvaluacion = null;
-    double a = 0.0;
-    double b = 0.0;
+    private double a = 0.0;
+    private double b = 0.0;
+    private double resultado = 0.0;
     
     public String getProgramName() {
         return programName;
@@ -118,8 +119,10 @@ public class Generador {
         pw.println("; Rutina para mostrar el resultado de " + pila.get(pila.size() - 1));
         
         // PENDIENTE Volcar la salida como comentario al ejecutable.
+        // PENDIENTE Set a la variable resultado
         for(int k = 0; k < pilaEvaluacion.size(); k++)
-            JOptionPane.showMessageDialog(null, pilaEvaluacion.get(k));
+        //    JOptionPane.showMessageDialog(null, "Resultado de la operación: " + pilaEvaluacion.get(k) + " : " + pilaEvaluacion.size());
+        setResultado(pilaEvaluacion.pop());
         
         } catch(Exception e) {
             e.printStackTrace();
@@ -134,6 +137,14 @@ public class Generador {
         
         tope = 0;
         
+    }
+    
+    public double getResultado() {
+        return resultado;
+    }
+    
+    public void setResultado(double resultado) {
+        this.resultado = resultado;
     }
     
     public void generarCodigoP() {
