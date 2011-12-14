@@ -1,4 +1,6 @@
 ;Código P para las sentencias enteras sencilla para el programa simple.glhbr
 ldc 18
+ldc 3
+dvi
 ldc 1
-sbi
+adi 

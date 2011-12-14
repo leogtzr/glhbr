@@ -67,7 +67,7 @@ public class Generador {
         try {
             fichero = new FileWriter("source.asm");
             pw = new PrintWriter(fichero);
-            pw.print("; Assembly code para el programa \"" + programName + "\"");
+            pw.print("; Código ensamblador para el programa \"" + programName + "\"");
             pw.println();
             
         for(int i = 0; i < pila.size() - 1; i++) {
@@ -118,11 +118,8 @@ public class Generador {
         pw.println("MOV " + pila.get(pila.size() - 1) + ",R0    ; fin de la sentencia");
         pw.println("; Rutina para mostrar el resultado de " + pila.get(pila.size() - 1));
         
-        // PENDIENTE Volcar la salida como comentario al ejecutable.
-        // PENDIENTE Set a la variable resultado
-        for(int k = 0; k < pilaEvaluacion.size(); k++)
-        //    JOptionPane.showMessageDialog(null, "Resultado de la operación: " + pilaEvaluacion.get(k) + " : " + pilaEvaluacion.size());
         setResultado(pilaEvaluacion.pop());
+        pw.println(";        R = " + getResultado());
         
         } catch(Exception e) {
             e.printStackTrace();
