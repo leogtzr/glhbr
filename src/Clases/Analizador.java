@@ -1,4 +1,3 @@
-// PENDIENTE Aplicar bloques static para inicializar atributos de clase.
 package Clases;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +8,6 @@ import Clases.Parser.*;
 
 public class Analizador {
     
-    // GIT Bloque static aplicado.
     static {
         fr = null;
         lexema = "";
