@@ -196,18 +196,6 @@ public class editorVentana extends javax.swing.JFrame {
         }
     }
     
-    /*
-    public void verTablaDeSimbolos() {
-        texto = "";
-        for(int i = 0; i < palabras.size(); i++)
-            texto += areaTablaSimbolos.getText() + "{" + "\n" + "\tLexema: [" + 
-                    palabras.get(i).getValor() + "]\n\tTipo: " + 
-                    "\n\tReservado : " + Reservadas.esReservada(palabras.get(i).getValor(), idiomaCheck.isSelected() ? true : false) + "\n}\n";
-        
-        areaTablaSimbolos.setText(texto);
-        
-    }*/
-    
     public void resaltarEstructuras() {
         if(idiomaCheck.isSelected()) // Español
             pattern = Pattern.compile("\\b(si|entonces|mientras|caracter|cadena|booleano|decimal|binario|romper|siguiente|analizar|caso|salir|inicio|fin|funcion|regresar|cierto|verdadero|imprimir)\\b"); 
