@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 file=$(find . -maxdepth 1 | dmenu -l 30 -b)
 Xdialog --title "EDIT BOX" --fixed-font --print "" --editbox ~/temp.txt 24 75 2 >> ~/temp_2.txt
 exit 0;
+
 
 
 
