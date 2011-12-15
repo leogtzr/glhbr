@@ -1,0 +1,11 @@
+read x;
+if x < 0 then
+	factorial = 1;
+	repeat
+		factorial = factorial * x;
+		x = x - 1
+	until x < 0;
+	write factorial
+end
+
+

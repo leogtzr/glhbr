@@ -1,0 +1,3 @@
+inicio X
+	ln(x * 12 - 3)
+fin;

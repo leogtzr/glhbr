@@ -1,0 +1,4 @@
+inicio X
+	entero z = 1;
+	entero y = 2
+fin;

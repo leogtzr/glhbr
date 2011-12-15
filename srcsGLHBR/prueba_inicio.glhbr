@@ -1,0 +1,5 @@
+inicio HolaMundo
+	write(1 + 2 * 3);
+	read(x);
+	x = 12
+fin;

@@ -1,5 +1,3 @@
-// PENDIENTE Organizar los programas de ejemplo a entregar.
-
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
 
@@ -62,7 +60,7 @@ public class Parser {
         AssignK,
         ReadK,
         WriteK, 
-        WhileK, 
+        WhileK,
         InfinitumK, 
         PowK,
         IncK,
@@ -880,7 +878,6 @@ public static void recorrerArbol(NodoArbol a) {
        
    }
    
-   // PENDIENTE Checar si existe ID.
    public NodoArbol pow_stmt() {
        NodoArbol t = newStmtNode(StmtKind.PowK);
        coincidir(TokenType.POW);
@@ -913,8 +910,7 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
-   // PENDIENTE Checar si existe el ID
-   public NodoArbol dec_stmt() {
+     public NodoArbol dec_stmt() {
        NodoArbol t = newStmtNode(StmtKind.IncK);
        coincidir(TokenType.DEC);
        coincidir(TokenType.LPARENT);
@@ -1371,7 +1367,6 @@ public static void recorrerArbol(NodoArbol a) {
        tabla.mostrarTabla();
        return t;
    }
-   
    
     /////////////// Código de prueba /////////////////////////////////////////////////////////////////
       public NodoArbol expresion_entera() {

@@ -1,0 +1,4 @@
+inicio X
+	abs(x * 1234 / 2);
+	clear
+fin;

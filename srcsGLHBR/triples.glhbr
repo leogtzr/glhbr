@@ -1,0 +1,4 @@
+inicio triplesTest
+	myVar = (b + c) * d - e / (b + c)
+fin;
+

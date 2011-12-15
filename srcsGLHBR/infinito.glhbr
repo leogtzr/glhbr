@@ -1,0 +1,14 @@
+infinito hacer
+	x = x + 1
+porsiempre;
+
+x = x + 1;
+
+read x;
+
+write(y);
+
+infinito hacer
+	write(x);
+	write(y)
+porsiempre;

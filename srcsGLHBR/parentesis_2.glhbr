@@ -1,0 +1,3 @@
+inicio parentTest
+	x = x + y
+fin;

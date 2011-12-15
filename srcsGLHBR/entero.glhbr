@@ -1,0 +1,3 @@
+inicio X
+	entero x = 1 + 2
+fin;

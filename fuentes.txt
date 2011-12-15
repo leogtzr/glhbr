@@ -1,0 +1,196 @@
+// Binario no genera código ensamblador... Arreglar.
+
+inicio askjdhakjshdkajs
+	entero x = 112 + 232;
+	if(x == 23)
+	then
+		x = x + 1
+	end;
+	write(x)
+fin;
+
+/////////////////////
+
+inicio kkajshdk
+	entero x = 4 + 32;
+	while x == 36
+	then
+		x = x + 1
+	end
+fin;
+
+
+
+inicio X
+	coseno(123)
+fin;
+
+// Checa que las variables estén declaradas:
+
+inicio X
+	tangente(x * 12 - 3)
+fin;
+
+
+
+
+
+/// 
+
+inicio X
+	entero x = 12;
+	tangente(x * 12 - 3)
+fin;
+
+
+
+//// Infinito
+
+inicio X # Comentario #
+	entero x = 12;
+	infinito hacer
+		write(x);
+		write(1 * 2 - 34)
+	porsiempre
+fin;
+
+///// ciclos anidados.
+
+
+
+
+
+inicio X # Comentario #
+	decimal x = 12.34 + 1.23 + 455.0
+fin;
+
+
+inicio X # Comentario #
+	decimal x = 1.2 + 23.34
+fin;
+
+
+
+inicio X
+	binario Ok = (101) + (5)
+fin;
+
+
+
+
+// Checar variable del programa
+
+inicio X
+	entero X = 18 / 3 + 1
+fin;
+
+
+
+
+inicio X
+	entero x = 18 / 3 + 1
+fin;
+
+
+source.asm
+arbol.txt
+CodigoPSentencia.txt
+
+
+
+inicio Hello_Shit
+	entero x = 123;
+	inc(x, 2 * 3)
+fin;
+
+
+
+// inc y dec
+
+
+
+inicio Hello_Shit
+	entero x = 123;
+	dec(z, 2 * 3)
+fin;
+
+
+
+// inicio X
+	entero b = 2 * 10 + (6 - 3)
+fin;
+
+
+// Paréntesis anidados.
+inicio X
+	entero b = 2 * 10 - ((6 + 2) * 3)
+fin;
+
+
+// pow
+
+
+
+inicio Hola
+	entero x = 12;
+	if(x == 12) then
+		x = x + 1
+	else
+		x = x - 1;
+		write(x)
+	end
+fin;
+
+
+
+inicio X
+	entero z = 1;
+	entero y = 2
+fin;
+
+
+inicio jahsjkdk
+	entero x = 1;
+	repetir
+		x = x + 1
+	hasta x == 5
+fin;
+
+
+
+inicio jahsjkdk
+	entero x = 1;
+	repetir
+		x = x + 1;
+		write(x)
+	hasta x == 5
+fin;
+
+
+// Ciclos anidados.
+
+inicio jahsjkdk
+	entero x = 1;
+	repetir
+		x = x + 1;
+		write(x);
+		infinito hacer x = x - 1 porsiempre
+	hasta x == 5
+fin;
+
+// Checar si las variables ya están declaradas
+
+
+
+
+inicio X
+	entero a = 1 + 2 + 3 + 4
+fin;
+
+
+inicio K
+	entero x = 12 * 3
+fin;
+
+
+// Tipos mezclados.

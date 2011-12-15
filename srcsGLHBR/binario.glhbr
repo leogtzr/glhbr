@@ -1,0 +1,4 @@
+inicio myProgram
+	binario x = 101;
+	x = 110 + 0101 + x
+fin;

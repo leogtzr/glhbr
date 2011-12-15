@@ -1,0 +1,3 @@
+inicio X
+	entero b = 2 * 10 + (6 - 3)
+fin;

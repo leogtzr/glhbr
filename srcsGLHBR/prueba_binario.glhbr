@@ -1,0 +1,4 @@
+inicio X
+	binario Ok = (101) + (5);
+	Ok = 1 - 2
+fin;
