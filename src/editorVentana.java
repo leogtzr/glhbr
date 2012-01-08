@@ -1,6 +1,4 @@
 // PENDIENTE Expresiones de resaltado.
-// PENDIENTE Problemas con UNDO al abrir un archivo. Falla sólo en Linux?, probar si falla en Windows.
-// PENDIENTE Crear documentación.
 
 import java.io.PrintWriter;
 import javax.swing.SwingUtilities;
@@ -325,12 +323,7 @@ public class editorVentana extends javax.swing.JFrame {
         aboutDialog = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         cerrarBtnDialog = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         popup = new javax.swing.JPopupMenu();
         seleccionarTodo = new javax.swing.JMenuItem();
         verDatosMenuItem = new javax.swing.JMenuItem();
@@ -391,14 +384,6 @@ public class editorVentana extends javax.swing.JFrame {
 
         jLabel2.setText("Leonardo Gutiérrez Ramírez - leogutierrezramirez@gmail.com");
 
-        jLabel3.setText("Yareli Adriana Beltrán Maldonado - yareliitha_beltran01@hotmail.com");
-
-        jLabel4.setText("Edgar Gerardo Hernández Altamirano - edgar-371@hotmail.com");
-
-        jLabel5.setText("Mariela Carolina Lozoya Armendariz - pink_campante@hotmail.com ");
-
-        jLabel6.setText("Manuel Alejandro Ramírez Hernández - gaara_alex@hotmail.com");
-
         cerrarBtnDialog.setMnemonic('C');
         cerrarBtnDialog.setText("Cerrar");
         cerrarBtnDialog.addActionListener(new java.awt.event.ActionListener() {
@@ -407,31 +392,18 @@ public class editorVentana extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel7.setText("Instituto Tecnológico de Chihuahua II");
-
         javax.swing.GroupLayout aboutDialogLayout = new javax.swing.GroupLayout(aboutDialog.getContentPane());
         aboutDialog.getContentPane().setLayout(aboutDialogLayout);
         aboutDialogLayout.setHorizontalGroup(
             aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aboutDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(aboutDialogLayout.createSequentialGroup()
-                        .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(aboutDialogLayout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cerrarBtnDialog)
-                        .addGap(66, 66, 66)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cerrarBtnDialog)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         aboutDialogLayout.setVerticalGroup(
             aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,17 +413,7 @@ public class editorVentana extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(aboutDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(cerrarBtnDialog))
+                .addComponent(cerrarBtnDialog)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -556,7 +518,7 @@ public class editorVentana extends javax.swing.JFrame {
         estadoDeLinea.setText("Abra o cree un nuevo archivo");
 
         areaTexto.setColumns(20);
-        areaTexto.setFont(new java.awt.Font("FreeMono", 1, 13)); // NOI18N
+        areaTexto.setFont(new java.awt.Font("FreeMono", 1, 13));
         areaTexto.setRows(5);
         areaTexto.setTabSize(2);
         areaTexto.setToolTipText("Ingrese su texto");
@@ -878,10 +840,10 @@ public class editorVentana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(estadoDeLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(replaceBtn)
@@ -890,7 +852,7 @@ public class editorVentana extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1171,7 +1133,7 @@ private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
    aboutDialog.setIconImage(icon);
    this.setVisible(false);
    aboutDialog.setModal(true);
-   aboutDialog.setSize(450, 220);
+   aboutDialog.setSize(410, 110);
    aboutDialog.setResizable(false);
    aboutDialog.setVisible(true);
    this.setVisible(true);
@@ -1643,11 +1605,6 @@ private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JMenuItem irAMenuItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;

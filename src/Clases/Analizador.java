@@ -1,4 +1,5 @@
 // PENDIENTE Cambiar String's y concatenaciones por operaciones con StringBuilder.
+
 package Clases;
 import java.io.File;
 import java.io.FileNotFoundException;

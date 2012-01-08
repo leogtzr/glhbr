@@ -1,39 +1,42 @@
 package Clases;
 
 public class Alfabeto {
-    public static final char SEMI = ';'; //59		/* Punto y coma (semicolon) */
-    public static final char SPACE = ' '; //	   	    32		/*  Espacio  ' ' */
-    public static final char TAB = '\t'; //			    9  		/*  Tabulador  \t */
-    public static final char NEWLINE = '\n'; //		    10		/*  Nueva Línea \n */
-    public static final char GUION_BAJO = '_' ; //95      /* _ */  
-    public static final char COMA = ',';  //            44      /* , */
-    public static final char L_PARENTESIS = '('; //    40      /* ( */
-    public static final char R_PARENTESIS = ')'; //    41      /* ) */
+    public static final char SEMI = ';';
+    public static final char SPACE = ' ';
+    public static final char TAB = '\t';
+    public static final char NEWLINE = '\n';
+    public static final char GUION_BAJO = '_' ;
+    public static final char COMA = ',';
+    public static final char L_PARENTESIS = '(';
+    public static final char R_PARENTESIS = ')';
+    
     /* Operadores aritméticos */
-    public static final char PLUS_OP = '+';  //43      /* + */
-    public static final char MINUS_OP = '-';        //45      /* - */
-    public static final char DIVISION = '/'; //        47      /* / */
-    public static final char MULTIPLICACION  = '*'; // 42      /* * */
-    public static final char MOD = '%'; //             37      /* % */
+    public static final char PLUS_OP = '+';
+    public static final char MINUS_OP = '-';
+    public static final char DIVISION = '/';
+    public static final char MULTIPLICACION  = '*';
+    public static final char MOD = '%';
 
     /* Operadores relacionales */
-    public static final char MENOR = '<'; //           60      /* < */
-    public static final char MAYOR = '>'; //           62      /* > */
+    public static final char MENOR = '<';
+    public static final char MAYOR = '>';
+    
     /* Operadores de asignación */
-    public static final char ASIGN_OP = '='; //        61      /* = */
+    public static final char ASIGN_OP = '=';
+    
     /* Operador lógicos */
-    public static final char AMPERSAND = '&'; //       38      /* & */
-    public static final char OR = '|'; //              124     /* | */
+    public static final char AMPERSAND = '&';
+    public static final char OR = '|';
 
-    public static final char MATCH = '?'; //           63     /* ~ */
-    public static final char DOBLEQUOTE = '"'; //      34      /* " */
-    public static final char DOT = '.'; //				46		/* .  */
-    public static final char EXPONENCIAL = 'E';     //69      /* E */
-    public static final char EXP = '^'; //             94      /* ^ */
-    public static final char IGUAL = '=';           //61      /* = */
-    public static final char GATO = '#'; //            35      /* # */
-    public static final char NOT = '!'; //             33      /* ! */
-    public static final char ESCAPE = '\\'; //          92      /* \ */
+    public static final char MATCH = '?';
+    public static final char DOBLEQUOTE = '"';
+    public static final char DOT = '.';
+    public static final char EXPONENCIAL = 'E';
+    public static final char EXP = '^';
+    public static final char IGUAL = '=';
+    public static final char GATO = '#';
+    public static final char NOT = '!';
+    public static final char ESCAPE = '\\';
     public static final char INICIOBLOQUE = '{';
     public static final char FINALBLOQUE = '}';
 }
