@@ -1,2 +1,0 @@
-;Código P para las sentencias enteras sencilla para el programa simple.glhbr
-ldc 12
