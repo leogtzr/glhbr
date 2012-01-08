@@ -435,10 +435,6 @@ public class Parser {
 	}
     }
    
-   // PENDIENTE Aquí está el problema
-   // TODO El problema es que se está aumentando la pila cada vez que hay un 
-   // nueva asignación de entero...
-   // TODO Poner un delimitador.
    public ArrayList<String> generarPila(NodoArbol a) {
 	if(a != null) {
 		generarPila(a.hijos[0]);
@@ -817,7 +813,6 @@ public static void recorrerArbol(NodoArbol a) {
        return t;
    }
    
-   // PENDIENTE Quizás poner '(' para delimitar la expresión?
    NodoArbol if_stmt() {
        NodoArbol t = newStmtNode(StmtKind.IfK);
        coincidir(TokenType.IF);

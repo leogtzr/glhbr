@@ -5,9 +5,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Stack;
 
-/* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
-/* Dec 5, 2011 */
-
 public class Generador {
     
     private int tope = 0;
@@ -44,18 +41,18 @@ public class Generador {
     }
     
         public static boolean isOperator(String op) {
-    	if(op.equals("+")) {
-    		return true;
-    	} else if(op.equals("-")) {
-    		return true;
-    	} else if(op.equals("*")) {
-    		return true;
-    	} else if(op.equals("/")) {
-    		return true;
-    	} else {
-    		return false;
-    	}
-    }
+            if(op.equals("+")) {
+                return true;
+            } else if(op.equals("-")) {
+                return true;
+            } else if(op.equals("*")) {
+                return true;
+            } else if(op.equals("/")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     
     public void generar() {
         
