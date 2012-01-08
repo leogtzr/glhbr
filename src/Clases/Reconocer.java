@@ -12,6 +12,5 @@ public class Reconocer {
         } catch (NumberFormatException nfe){
             return false;
         }
-    }
-    
+    }    
 }
