@@ -1,7 +1,0 @@
-simple.glhbr
-    Asignado a: x
-        op: +
-            op: /
-                const: 18
-                const: 3
-            const: 1
