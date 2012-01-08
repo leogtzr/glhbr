@@ -1,3 +1,4 @@
+// PENDIENTE Cambiar String's y concatenaciones por operaciones con StringBuilder.
 package Clases;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,7 +47,7 @@ public class Analizador {
                     continue;
             }
             
-            /* A..Z | a..z Es probable que sea un identificador, comenzamos el scanner  */
+            /* A..Z | a..z Es probable que sea un identificador, comenzamos el escaneo  */
             if(Character.isLetter(c) || (c == '_')) {
                 while(Character.isLetter(c) || Character.isDigit(c) || (c == '_')) {
                     lexema += Character.toString((char)c);
