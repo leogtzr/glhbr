@@ -1515,7 +1515,7 @@ private void imprimirArbolMenuItemActionPerformed(java.awt.event.ActionEvent evt
         Parser.tokenString = "";
         Parser syntax = new Parser(palabras, archivoAbierto);
         Parser.lineno = 0;
-        Parser.arbolString = "";
+        Parser.arbolString = new StringBuilder("");
         
         syntax.imprimirArbolArchivo(syntax.parse());
         JOptionPane.showMessageDialog(null, Parser.arbolString);
