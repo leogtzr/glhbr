@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Stack;
-import javax.swing.JOptionPane;
 
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Dec 5, 2011 */
@@ -58,7 +57,6 @@ public class Generador {
     	}
     }
     
-    // PENDIENTE Correcto formateado con %s.
     public void generar() {
         
         FileWriter fichero = null;
@@ -115,7 +113,7 @@ public class Generador {
                 }
             }
         }
-        pw.println("MOV " + pila.get(pila.size() - 1) + ",R0    ; fin de la sentencia");
+        pw.println("MOV " + pila.get(pila.size() - 1) + ",R0    ; fin de la sentencia de asignación");
         pw.println("; Rutina para mostrar el resultado de " + pila.get(pila.size() - 1));
         
         setResultado(pilaEvaluacion.pop());

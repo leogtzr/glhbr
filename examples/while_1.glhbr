@@ -1,0 +1,15 @@
+while x == 1
+then
+	x = 1 + 2 * 3;
+
+
+	infinito hacer
+		x = x + 1
+	porsiempre;
+
+
+	write x
+end;
+
+read x;
+

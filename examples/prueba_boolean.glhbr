@@ -1,0 +1,3 @@
+inicio X
+	booleano Ok = 1 + 2
+fin;

@@ -1,0 +1,7 @@
+int x = x # Veamos que poderoso es # + A * z / x ^ z;
+
+# Declarar variables de otro tipo #
+
+char c = 97;
+write(c == 3);
+

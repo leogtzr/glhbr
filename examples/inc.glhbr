@@ -1,0 +1,4 @@
+inicio Hello_Shit
+	entero x = 123;
+	inc(x, 2 * 3)
+fin;

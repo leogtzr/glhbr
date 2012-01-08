@@ -1,0 +1,4 @@
+inicio X
+	abs(12);
+	salir(8 - 23 * 456 / 43)
+fin;

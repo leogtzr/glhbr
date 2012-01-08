@@ -1,0 +1,5 @@
+inicio miPrimerSuperProgramaEnGLHBR
+	entero x = 3;
+
+	leer(x)
+fin;

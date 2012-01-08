@@ -9,7 +9,9 @@ write d;
 read x;
 
 if x < 12 then
-	y = y + 1
+	if y < 1 then
+		y = y + 1;
+	end
 end
 
-read x;
+myVariable = 1 + 2 * 3;

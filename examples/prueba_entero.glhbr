@@ -1,0 +1,5 @@
+inicio pruebaNumerosEnteros
+	entero y = 15 + 0.01;
+	decimal x = 1.20 + 7
+fin;
+

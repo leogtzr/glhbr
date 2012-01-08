@@ -1,0 +1,7 @@
+inicio MyProgram
+	decimal j_2 = 12345;
+	binario y_2 = 1001;
+	binario z = 11 + y_2;
+	decimal x = 3.1415 + j_2;
+	x = 4.5 + 0.33 + 10001.0 + j_2
+fin;

@@ -1,0 +1,4 @@
+inicio ProgramaDecimales
+	decimal x = 1.02 + 3;
+	entero y = 1 + 2 - 3
+fin;
