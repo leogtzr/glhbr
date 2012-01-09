@@ -165,6 +165,7 @@ public class Generador {
                 switch(pila.get(i).charAt(0)) {
                     
                     case '+':
+                        
                         pw.print("adi " + "\n");
                         tope--;
                         break;

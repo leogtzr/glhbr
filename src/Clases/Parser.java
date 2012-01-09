@@ -32,7 +32,7 @@ public class Parser {
     }
    
     TablaSimbolos tabla = new TablaSimbolos();
-    private String errorString = "";
+    private StringBuilder errorString = new StringBuilder("");
     ExpType asignacionTipo = ExpType.Entero;
     String programName = null;
     static public StringBuilder arbolString = new StringBuilder("");
@@ -49,7 +49,6 @@ public class Parser {
         StmtK, ExpK, OpKind, ConstKind, IdKind // CUIDADO
      };
     
-    // TODO Agregado para la generación de código P.
     public static enum Optype {
         Plus, Assign
     };
@@ -115,7 +114,7 @@ public class Parser {
     }
     
     public String getErrorString() {
-        return errorString;
+        return errorString.toString();
     }
     
     public ExpType getTipoDatoString(String s) {
@@ -129,7 +128,7 @@ public class Parser {
             return ExpType.Void;
     }
     
-    public TablaSimbolos getTablaSimbolos() {
+    public TablaSimbolos getSymbolTable() {
         return this.tabla;
     }
     
@@ -154,104 +153,163 @@ public class Parser {
     public static void imprimirArbol(NodoArbol arbol) {
         
         indentar();
+        
         while(arbol != null) {
+            
             imprimirEspacios();
+            
             if(arbol.nodeKind == NodeKind.StmtK) {
+                
                 switch(arbol.stmt) {
+                    
                     case IfK:
+                        
                         System.out.println("If");
                         break;
+                        
                     case RepeatK:
+                        
                         System.out.println("Repetir");
                         break;
                     case AssignK:
+                        
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;
+                        
                     case ReadK:
+                        
                         System.out.println("Read: " + arbol.nombre);
                         break;
+                        
                     case WriteK:
+                        
                         System.out.println("Write");
                         break;
+                        
                     case WhileK:
+                        
                         System.out.println("While");
                         break;
+                        
                     case InfinitumK:
+                        
                         System.out.println("Infinito");
                         break;
+                        
                     case PowK:
+                        
                         System.out.println("Pow");
                         break;
+                        
                     case IncK:
+                        
                         System.out.println("Inc");
                         break;             
+                        
                     case DecK:
+                        
                         System.out.println("Dec");
                         break;
+                        
                     case SenoK:
+                        
                         System.out.println("Seno");
                         break;
+                        
                     case CosenoK:
+                        
                         System.out.println("Coseno");
                         break;
+                        
                     case AbsK:
+                        
                         System.out.println("Abs");
                         break;
+                        
                     case TanK:
+                        
                         System.out.println("Tan");
                         break;
+                        
                     case LnK:
+                        
                         System.out.println("Ln");
                         break;
+                        
                     case ClearK:
+                        
                         System.out.println("Clear");
                         break;
+                        
                     case SalirK:
+                        
                         System.out.println("Salir");
                         break;
+                        
                     case FactorialK:
+                        
                         System.out.println("Factorial");
                         break;
+                        
                     case RaizK:
+                        
                         System.out.println("Raiz");
                         break;
+                        
                     case HexK:
+                        
                         System.out.println("Hex : [" + arbol.nombre + "]");
                         break;                        
+                        
                     case BooleanK:
+                        
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;    
+                        
                     case BinarioK:
+                        
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;
+                        
                     case EnteroK:
-                        // Generador de código aquí.
+                        
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;
+                        
                     case DecimalK:
+                        
                         System.out.println("Asignado a: " + arbol.nombre);
                         break;
+                        
                     default:
                         System.out.println("Nodo desconocido");
                 }
             } else if(arbol.nodeKind == NodeKind.ExpK) {
                 
                 switch(arbol.exp) {
+                    
                     case OpK:
+                        
                         System.out.print("op: ");
                         printToken(arbol.op, "\\0");
                         break;
+                        
                     case ConstK:
+                        
                         if(arbol.type == ExpType.Entero || arbol.type == ExpType.Binario)
                             System.out.println("const: " + arbol.valor);
                         else
                             System.out.println("const: " + arbol.valorDecimal);
                         
                         break;
+                        
                     case IdK:
+                        
                         System.out.println("id: " + arbol.nombre);
                         break;
+                        
                     default:
+                        
                         System.out.println("Nodo desconocido");
                         break;
                 }
@@ -272,106 +330,166 @@ public class Parser {
     public static void imprimirArbolArchivo(NodoArbol arbol) {
         
         indentar();
+        
         while(arbol != null) {
+            
             imprimirEspaciosArchivo();
+            
             if(arbol.nodeKind == NodeKind.StmtK) {
+                
                 switch(arbol.stmt) {
+                    
                     case IfK:
+                        
                         arbolString.append("If\n");
                         break;
+                        
                     case RepeatK:
+                        
                         arbolString.append("Repetir\n");
                         break;
+                        
                     case AssignK:
+                        
                         arbolString.append("Asignado a: ").append(arbol.nombre).append("\n");
                         break;
+                        
                     case ReadK:
+                        
                         arbolString.append("Read: ").append(arbol.nombre).append("\n");
                         break;
+                        
                     case WriteK:
+                        
                         System.out.println("Write");
                         arbolString.append("Write\n");
                         break;
+                        
                     case WhileK:
+                        
                         arbolString.append("While\n");
                         break;
+                        
                     case InfinitumK:
+                        
                         arbolString.append("Infinito\n");
                         break;
+                        
                     case PowK:
+                        
                         arbolString.append("Pow\n");
                         break;
+                        
                     case IncK:
+                        
                         arbolString.append("Inc\n");
                         break;             
+                        
                     case DecK:
+                        
                         arbolString.append("Dec\n");
                         break;
+                        
                     case SenoK:
+                        
                         arbolString.append("Seno\n");
                         break;
+                        
                     case CosenoK:
+                        
                         arbolString.append("Coseno\n");
                         break;
+                        
                     case AbsK:
+                        
                         arbolString.append("Abs\n");
                         break;
+                        
                     case TanK:
+                        
                         arbolString.append("Tan\n");
                         break;
+                        
                     case LnK:
+                        
                         arbolString.append("Ln\n");
                         break;
+                        
                     case ClearK:
+                        
                         arbolString.append("Clear\n");
                         break;
+                        
                     case SalirK:
+                        
                         arbolString.append("Salir\n");
                         break;
+                        
                     case FactorialK:
+                        
                         arbolString.append("Factorial\n");
                         break;
+                        
                     case RaizK:
+                        
                         arbolString.append("Raiz\n");
                         break;
+                        
                     case HexK:
+                        
                         arbolString.append("Hex : [").append(arbol.nombre).append("]\n");
                         break;                        
+                        
                     case BooleanK:
+                        
                         arbolString.append("Asignado a: ").append(arbol.nombre).append("\n");
                         break;    
+                        
                     case BinarioK:
+                        
                         arbolString.append("Asignado a: ").append(arbol.nombre).append("\n");
                         break;
+                        
                     case EnteroK:
-                        // Generador de código aquí.
+                        
                         arbolString.append("Asignado a: ").append(arbol.nombre).append("\n");
                         break;
+                        
                     case DecimalK:
+                        
                         arbolString.append("Asignado a: ").append(arbol.nombre).append("\n");
                         break;
+                        
                     default:
+                        
                         arbolString.append("Nodo desconocido\n");
                 }
             } else if(arbol.nodeKind == NodeKind.ExpK) {
                 
                 switch(arbol.exp) {
+                    
                     case OpK:
+                        
                         arbolString.append("op: ");
                         printTokenArchivo(arbol.op, "\\0");
                         break;
+                        
                     case ConstK:
+                        
                         if(arbol.type == ExpType.Entero || arbol.type == ExpType.Binario) {
                             arbolString.append("const: ").append(arbol.valor).append("\n");
                         } else {
                             arbolString.append("const: ").append(arbol.valorDecimal).append("\n");
                         }
-                        
                         break;
+                        
                     case IdK:
+                        
                         arbolString.append("id: ").append(arbol.nombre).append("\n");
                         break;
+                        
                     default:
+                        
                         arbolString.append("Nodo desconocido\n");
                         break;
                 }
@@ -393,7 +511,7 @@ public class Parser {
        palabras = null;
        indice = 0;
        tabla = new TablaSimbolos();   
-       errorString = "";
+       errorString = new StringBuilder("");
        arbolString = new StringBuilder("");
        lineno = 0;
    }
@@ -402,7 +520,7 @@ public class Parser {
        this.palabras = palabras;
        indice = 0;
        tabla = new TablaSimbolos();
-       errorString = "";
+       errorString = new StringBuilder("");
        this.programName = programName;
        arbolString = new StringBuilder("");
        lineno = 0;
@@ -701,7 +819,7 @@ public static void recorrerArbol(NodoArbol a) {
            token = getToken();
        } else {
            syntaxError("Nodo no esperado --> ");
-           errorString += "Nodo no esperado --> " + tokenString + "\n";
+           errorString.append("Nodo no esperado --> ").append(tokenString).append("\n");
            printToken(expected, tokenString);
            System.out.print("      ");
        }
@@ -805,7 +923,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado --> ");
-               errorString += "Token inesperado --> " + tokenString + "\n";
+               errorString.append("Token inesperado --> ").append(tokenString).append("\n");
                printToken(token, tokenString);
                token = getToken();
                break;
@@ -892,7 +1010,7 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.LPARENT);
        
        if(tabla.tabla.containsKey(tokenString) == false) {
-           errorString += "La variable o función " + tokenString + " no existe, línea " + lineno + "\n";
+           errorString.append("La variable o función ").append(tokenString).append(" no existe, línea ").append(lineno).append("\n");
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
        }
        
@@ -911,7 +1029,7 @@ public static void recorrerArbol(NodoArbol a) {
        coincidir(TokenType.LPARENT);
        
        if(tabla.tabla.containsKey(tokenString) == false) {
-           errorString += "La variable o función " + tokenString + " no existe, línea " + lineno + "\n";
+           errorString.append("La variable o función ").append(tokenString).append(" no existe, línea ").append(lineno).append("\n");
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
        }
        
@@ -1031,7 +1149,7 @@ public static void recorrerArbol(NodoArbol a) {
            t.nombre = tokenString;
        
        if(tabla.tabla.containsKey(tokenString) == false) {
-           errorString += "La variable o función " + tokenString + " no existe, línea " + lineno + "\n";
+           errorString.append("La variable o función ").append(tokenString).append(" no existe, línea ").append(lineno).append("\n");
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
        } else { // Sí existe y obtenemos su tipo...
            NodoArbol temporal = null;
@@ -1059,7 +1177,7 @@ public static void recorrerArbol(NodoArbol a) {
            
        } else {    
            syntaxError("La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n");
-           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
+           errorString.append("La variable ").append(tokenString).append(" ya se encuentra declarada, línea: ").append(lineno).append("\n");
        }
        
        coincidir(TokenType.ID);
@@ -1082,7 +1200,7 @@ public static void recorrerArbol(NodoArbol a) {
        //JOptionPane.showMessageDialog(null, tokenString);
        
        if(tabla.tabla.containsKey(tokenString) == false) {
-           errorString += "La variable o función " + tokenString + " no existe, línea " + lineno + "\n";
+           errorString.append("La variable o función ").append(tokenString).append(" no existe, línea ").append(lineno).append("\n");
            syntaxError("La variable o función " + tokenString + " no existe, línea " + lineno + "\n");
        }
        
@@ -1170,7 +1288,7 @@ public static void recorrerArbol(NodoArbol a) {
                        t.type = ExpType.Decimal;
                        t.valorDecimal = Double.parseDouble(tokenString);
                    } else {
-                       errorString += "Los tipos de datos no coinciden (" + tokenString + "), deben ser " + asignacionTipo + ", línea " + lineno + "\n";
+                       errorString.append("Los tipos de datos no coinciden (").append(tokenString).append("), deben ser ").append(asignacionTipo).append(", línea ").append(lineno).append("\n");
                        syntaxError("Los tipos de datos no coinciden, deben ser " + asignacionTipo + ", línea " + lineno + "\n");
                        if((asignacionTipo == ExpType.Entero) && isFloat(tokenString)) {
                            t.type = ExpType.Entero;
@@ -1188,13 +1306,14 @@ public static void recorrerArbol(NodoArbol a) {
                    t.nombre = tokenString;
                
                if(tabla.tabla.containsKey(tokenString) == false) {
-                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+                   errorString.append("Variable o función no encontrada: ").append(tokenString).append(" ,línea: ").append(lineno).append("\n");
                    syntaxError("Variable o función no encontrada: " + tokenString + " ,línea: " + lineno);
                } else {         // Si existe...
                    NodoArbol temporal = null;
                    temporal = (NodoArbol) tabla.tabla.get(tokenString);
                    if(temporal.type != asignacionTipo) {
-                       errorString += "Error de tipos con " + tokenString + " , línea " + lineno + "\n";
+                       //errorString += "Error de tipos con " + tokenString + " , línea " + lineno + "\n";
+                       errorString.append("Error de tipos con ").append(tokenString).append(" , línea ").append(lineno).append("\n");
                        syntaxError("Error de tipos con " + tokenString + " , línea " + lineno + "\n");
                    }
                }
@@ -1208,7 +1327,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado ---> ");
-               errorString += "Token inesperado ---> " + tokenString + "\n";
+               errorString.append("Token inesperado ---> ").append(tokenString).append("\n");
                printToken(token, tokenString);
                token = getToken();
                break;
@@ -1273,7 +1392,7 @@ public static void recorrerArbol(NodoArbol a) {
                t = newExpNode(ExpKind.ConstK);
                if((t != null) && (token == TokenType.NUM)) {
                    if(isBinary(tokenString) == false) {
-                       errorString += "Debe especificar un número binario válido, línea: " + lineno + "\n";
+                       errorString.append("Debe especificar un número binario válido, línea: ").append(lineno).append("\n");
                        syntaxError("Debe especificar un número binario válido\n");  
                    } else {
                        t.type = ExpType.Binario;
@@ -1288,12 +1407,12 @@ public static void recorrerArbol(NodoArbol a) {
                NodoArbol temporal = null;
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
-                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+                   errorString.append("Variable o función no encontrada: ").append(tokenString).append(" ,línea: ").append(lineno).append("\n");
                    syntaxError("Variable o función no encontrada: " + tokenString + " ,línea: " + lineno);
                } else {
                    // Ya que si se encuentra en la tabla de símbolos, checar que sea de tipo binario, sino lanzar error.
                    if(temporal.type != ExpType.Binario) {
-                       errorString += "La variable " + tokenString + " no es de tipo Binario, corrija ese error, línea " + lineno + "\n";
+                       errorString.append("La variable ").append(tokenString).append(" no es de tipo Binario, corrija ese error, línea ").append(lineno).append("\n");
                        syntaxError("La variable " + tokenString + " no es de tipo Binario, corrija ese error, línea " + lineno);
                    }
                }
@@ -1312,7 +1431,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado ---> ");
-               errorString += "Token inesperado: " + tokenString + "\n";
+               errorString.append("Token inesperado: ").append(tokenString).append("\n");
                printToken(token, tokenString);
                token = getToken();
                break;
@@ -1334,7 +1453,7 @@ public static void recorrerArbol(NodoArbol a) {
            tabla.put(tokenString, t);
            
        } else {    
-           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
+           errorString.append("La variable ").append(tokenString).append(" ya se encuentra declarada, línea: ").append(lineno).append("\n");
        }
        // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
        // Es una asignación, entonces debemos asegurarnos que la variable no esté en la tabla de símbolos...
@@ -1427,7 +1546,7 @@ public static void recorrerArbol(NodoArbol a) {
                        } else {             // Entonces es binario ...
                            
                            if(!tokenString.equals("0") && tokenString.length() != 1) {
-                               errorString += "Error de tipos, binario encontrado, línea " + lineno + "\n";
+                               errorString.append("Error de tipos, binario encontrado, línea ").append(lineno).append("\n");
                                 syntaxError("Error de tipos, binario encontrado, línea " + lineno + "\n");
                            }
                            
@@ -1446,7 +1565,7 @@ public static void recorrerArbol(NodoArbol a) {
                NodoArbol temporal = null;
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
-                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+                   errorString.append("Variable o función no encontrada: ").append(tokenString).append(" ,línea: ").append(lineno).append("\n");
                    syntaxError("Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n");
                } else {
                    // Chequeo de tipos luego que sí está en la tabla de símbolos.
@@ -1457,7 +1576,7 @@ public static void recorrerArbol(NodoArbol a) {
                            t.type = ExpType.Entero;
                            t.valor = (int)temporal.valorDecimal;    // Convertimos a entero...
                        } else {
-                           errorString += "Tipos incompatibles entero y binario, línea " + lineno + "\n";
+                           errorString.append("Tipos incompatibles entero y binario, línea ").append(lineno).append("\n");
                            syntaxError("Tipos incompatibles entero y binario, línea " + lineno + "\n");
                        }
                        
@@ -1481,7 +1600,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado ---> ");
-               errorString += "Token inesperado: " + tokenString + "\n";
+               errorString.append("Token inesperado: ").append(tokenString).append("\n");
                printToken(token, tokenString);
                token = getToken();
                break;
@@ -1503,7 +1622,7 @@ public static void recorrerArbol(NodoArbol a) {
            tabla.put(tokenString, t);       // Agregar a la tabla de símbolos
            
        } else {    
-           errorString += "La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n";
+           errorString.append("La variable ").append(tokenString).append(" ya se encuentra declarada, línea: ").append(lineno).append("\n");
            syntaxError("La variable " + tokenString + " ya se encuentra declarada, línea: " + lineno + "\n");
        }
        // tokenString hasta este punto devuelve el ID, checar si está en la tabla de simbolos...
@@ -1579,7 +1698,7 @@ public static void recorrerArbol(NodoArbol a) {
                            t.valorDecimal = Double.parseDouble(tokenString);
                        } else {
                            // Un binario encontrado.
-                           errorString += "Error, tipos de datos incompatibles, " + tokenString + ", línea " + lineno + "\n";
+                           errorString.append("Error, tipos de datos incompatibles, ").append(tokenString).append(", línea ").append(lineno).append("\n");
                            syntaxError("Debe especificar un número flotante válido\n");  
                        }
                    } else {
@@ -1597,7 +1716,7 @@ public static void recorrerArbol(NodoArbol a) {
                NodoArbol temporal = null;
                temporal = (NodoArbol) tabla.tabla.get(tokenString);
                if(temporal == null) {
-                   errorString += "Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n";
+                   errorString.append("Variable o función no encontrada: ").append(tokenString).append(" ,línea: ").append(lineno).append("\n");
                    syntaxError("Variable o función no encontrada: " + tokenString + " ,línea: " + lineno + "\n");
                } else {
                    // Chequeo de tipos luego que sí está en la tabla de símbolos.
@@ -1607,7 +1726,7 @@ public static void recorrerArbol(NodoArbol a) {
                             JOptionPane.showMessageDialog(null, "Entero detectado:" + tokenString + " convirtiendo, línea " + lineno);
                            t.valorDecimal = (double)temporal.valor;    // Convertimos el valor entero a float.
                        } else {
-                           errorString += "Tipos incompatibles decimal y binario, línea " + lineno + "\n";
+                           errorString.append("Tipos incompatibles decimal y binario, línea ").append(lineno).append("\n");
                            syntaxError("Tipos incompatibles decimal y binario, línea " + lineno + "\n");
                        }
                        
@@ -1618,7 +1737,6 @@ public static void recorrerArbol(NodoArbol a) {
                    }
                }
                
-               //t = newExpNode(ExpKind.IdK);
                if((t != null) && (token == TokenType.ID)) {     
                    t.nombre = tokenString;
                }
@@ -1632,7 +1750,7 @@ public static void recorrerArbol(NodoArbol a) {
                break;
            default:
                syntaxError("Token inesperado ---> ");
-               errorString += "Token inesperado: " + tokenString + "\n";
+               errorString.append("Token inesperado: ").append(tokenString).append("\n");
                printToken(token, tokenString);
                token = getToken();
                break;
