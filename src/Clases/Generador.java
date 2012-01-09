@@ -71,18 +71,22 @@ public class Generador {
                 pw.println("MOV " + ("R" + tope) + ",#" + pila.get(i) + " ; Cargamos " + pila.get(i));
                 pilaEvaluacion.push(Double.parseDouble(pila.get(i)));
                 tope++;
+                
             } else {
+                
                 switch(pila.get(i).charAt(0)) {
+                
                     case '+':
-                        pw.println("ADD R" + (tope - 2) + ",R" + (tope - 1) + " ; Sumamos");
                         
+                        pw.println("ADD R" + (tope - 2) + ",R" + (tope - 1) + " ; Sumamos");    
                         a = pilaEvaluacion.pop();
                         b = pilaEvaluacion.pop();
                         pilaEvaluacion.push(b + a);
-                        
                         tope--;
                         break;
+                        
                     case '-':
+                        
                         pw.println("SUB R" + (tope - 2) + ",R" + (tope - 1) + "        ; Restamos");
                         a = pilaEvaluacion.pop();
                         b = pilaEvaluacion.pop();
@@ -91,8 +95,8 @@ public class Generador {
                         break;
                         
                     case '*':
-                        pw.println("MUL R" + (tope - 2) + ",R" + (tope - 1) + "     ;  Multiplicamos");
                         
+                        pw.println("MUL R" + (tope - 2) + ",R" + (tope - 1) + "     ;  Multiplicamos");
                         a = pilaEvaluacion.pop();
                         b = pilaEvaluacion.pop();
                         pilaEvaluacion.push(b * a);
@@ -100,11 +104,11 @@ public class Generador {
                         tope--;
                         break;    
                     case '/':
+                        
                         pw.println("DIV R" + (tope - 2) + ",R" + (tope - 1) + "     ; Dividimos");
                         a = pilaEvaluacion.pop();
                         b = pilaEvaluacion.pop();
                         pilaEvaluacion.push(b / a);
-                        
                         tope--;
                         break;
                 }
@@ -157,20 +161,28 @@ public class Generador {
                 pw.print("ldc " + pila.get(i) + "\n");
                 tope++;
             } else {
+                
                 switch(pila.get(i).charAt(0)) {
+                    
                     case '+':
                         pw.print("adi " + "\n");
                         tope--;
                         break;
+                        
                     case '-':
+                        
                         pw.print("sbi" + "\n");
                         tope--;
                         break;
+                        
                     case '*':
+                        
                         pw.print("mpi " +  "\n");
                         tope--;
                         break;    
+                        
                     case '/':
+                        
                         pw.print("dvi" + "\n");
                         tope--;
                         break;

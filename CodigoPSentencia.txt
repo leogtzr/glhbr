@@ -1,8 +1,0 @@
-;Código P para las sentencias enteras sencilla para el programa ejemplo.glhbr
-ldc 1
-ldc 2
-mpi 
-ldc 3
-adi 
-ldc 1023
-sbi
