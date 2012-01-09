@@ -6,8 +6,7 @@ public class Lexema
     private Parser.TokenType tipoTokenLexema;
     private int numeroLinea = 0;
     
-    public Lexema(String valor, Parser.TokenType etiqueta)
-    {
+    public Lexema(String valor, Parser.TokenType etiqueta) {
         this.valor = valor;
         this.tipoTokenLexema = etiqueta;
     }

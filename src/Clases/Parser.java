@@ -1,6 +1,8 @@
 /* @author Leonardo Gutiérrez Ramírez <leogutierrezramirez.gmail.com> */
 /* Nov 20, 2011 */
 
+// PENDIENTE Cambiar errorString a StringBuilder.
+
 package Clases;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class Parser {
     }
    
     TablaSimbolos tabla = new TablaSimbolos();
-    String errorString = "";
+    private String errorString = "";
     ExpType asignacionTipo = ExpType.Entero;
     String programName = null;
     static public StringBuilder arbolString = new StringBuilder("");
@@ -42,7 +44,6 @@ public class Parser {
     public static TokenType token;
     public static String tokenString;
     public static int lineno = 0;
-
     
     public static enum NodeKind {
         StmtK, ExpK, OpKind, ConstKind, IdKind // CUIDADO
