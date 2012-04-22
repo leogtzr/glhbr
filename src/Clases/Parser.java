@@ -1312,7 +1312,6 @@ public static void recorrerArbol(NodoArbol a) {
                    NodoArbol temporal = null;
                    temporal = (NodoArbol) tabla.tabla.get(tokenString);
                    if(temporal.type != asignacionTipo) {
-                       //errorString += "Error de tipos con " + tokenString + " , línea " + lineno + "\n";
                        errorString.append("Error de tipos con ").append(tokenString).append(" , línea ").append(lineno).append("\n");
                        syntaxError("Error de tipos con " + tokenString + " , línea " + lineno + "\n");
                    }

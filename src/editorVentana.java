@@ -141,16 +141,6 @@ public class editorVentana extends javax.swing.JFrame {
                 areaTexto.replaceSelection("\n");
         }
     }
-    
-//  replaceButton.addActionListener(new ActionListener() {
-//      public void actionPerformed(ActionEvent evt) {
-//        String from = fromField.getText();
-//        int start = textArea.getText().indexOf(from);
-//        if (start >= 0 && from.length() > 0)
-//          textArea.replaceRange(toField.getText(), start, start
-//              + from.length());
-//      }
-//    });
         
     public void agregar(String s) throws BadLocationException {
         areaTexto.insert(s, areaTexto.getCaretPosition());
